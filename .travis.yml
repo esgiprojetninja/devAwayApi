@@ -9,9 +9,6 @@ before_script:
   - php artisan config:cache
   - cp .env.travis .env
   - mysql -e 'create database homestead_test;'
-  - php artisan key:generate
-  - php artisan migrate --database="homestead_test" --no-interaction -vvv
-  - php artisan db:seed --no-interaction -vvv
 
 script:
   - vendor/bin/php-cs-fixer fix --config=.php_cs --verbose --dry-run --diff
