@@ -18,6 +18,6 @@ class ExampleTest extends TestCase
 
         $response->assertStatus(200);
 
-        $response->assertSee('Hello World test');
+        $response->assertSee('Hello World');
     }
 }
