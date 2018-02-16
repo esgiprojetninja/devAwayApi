@@ -3,7 +3,6 @@ language: php
 php: 7.1
 
 before_script:
-  - echo web: vendor/bin/heroku-php-apache2 public/ > Procfile
   - rm composer.lock
   - composer install --no-progress --no-interaction --prefer-dist --no-suggest --no-dev
   - composer update --no-scripts
@@ -13,6 +12,7 @@ before_script:
 
 script:
   - vendor/bin/phpunit
+  - echo web: vendor/bin/heroku-php-apache2 public/ > Procfile
 
 deploy:
   provider: heroku
