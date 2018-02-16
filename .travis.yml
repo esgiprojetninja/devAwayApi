@@ -5,7 +5,7 @@ php:
 
 before_script:
   - rm composer.lock
-  - composer install --no-progress --no-interaction --prefer-dist --no-suggest
+  - composer install --no-progress --no-interaction --prefer-dist --no-suggest --no-dev
   - composer update --no-scripts
   - php artisan config:cache
   - cp .env.travis .env
