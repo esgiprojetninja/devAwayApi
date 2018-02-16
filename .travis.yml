@@ -1,6 +1,5 @@
 language: php
 php: 7.1
-
 before_script:
 - rm composer.lock
 - composer install --no-progress --no-interaction --prefer-dist --no-suggest --no-dev
@@ -8,10 +7,14 @@ before_script:
 - php artisan config:cache
 - cp .env.travis .env
 - mysql -e 'create database homestead_test;'
-
 script:
 - vendor/bin/phpunit
-
+notifications:
+  email:
+    recipients:
+    - lambot.rom@gmail.com
+    on_success: never
+    on_failure: always
 deploy:
   provider: heroku
   api_key:
@@ -19,10 +22,3 @@ deploy:
   app: gorfyindus
   on:
     repo: esgiprojetninja/devAwayApi
-
-notifications:
-  email:
-    recipients:
-    - lambot.rom@gmail.com
-    on_success: never
-    on_failure: always
