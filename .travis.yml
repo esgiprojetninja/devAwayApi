@@ -1,27 +1,24 @@
 language: php
-
 php: 7.1
-
 before_script:
-  - rm composer.lock
-  - composer install --no-progress --no-interaction --prefer-dist --no-suggest --no-dev
-  - composer update --no-scripts
-  - php artisan config:cache
-  - cp .env.travis .env
-  - mysql -e 'create database homestead_test;'
-
+- rm composer.lock
+- composer install --no-progress --no-interaction --prefer-dist --no-suggest --no-dev
+- composer update --no-scripts
+- php artisan config:cache
+- cp .env.travis .env
+- mysql -e 'create database homestead_test;'
 script:
-  - vendor/bin/phpunit
-  
-deploy:
-  provider: heroku
-  api_key:
-    secure: Mn6LabWVyYwjGKThxVl4SSJkSGy89yPRrkDqD6RUlvwonYsIrgj9wPRDk4pFxahd9FGUgstnqoeix8IKkiryPDsTUW3AwoP+yNBYDZHbhVSeu8Q4dvUBFmcV4m8+9FrzqyB+0dmNKfFJm3rHA1MpBslV5bAVVhHkXe4nJyOKwmSvat8Iup+Jw2UPfb9d+B33ddTJ3A+ck6+e5tVhWvTW+te4KOKKFhLPJohVokAweBYyvdjMeCsbZ7rPyWBYrTPiwJ3VbDGMpa55jgq35QZhXDEkBvlPeMkom9xSjeuzOOj1r9p1WjH52bOH7NRXJqRQanR/G88OqDOAo9O3tp9p4K4/wizskfaSYqbGgLfhAs18op5EluuAc1nMoUGCayqPj4yLf7hg+ILXqHkwmDT7cnhaHLg34TK1KHlCIpAHXYiG3+9qo8wfrqQVW/Xi05LRdIwehOv7yMP+O4zSexBS3EDGoC0PB9aZ8By6OyWH2M1JvmEJhryWDtlRF4FqJXxmy2RNh0rZLqlXP5+Ba7T43LGHeZluh4MHfO98Rf/6F4QoIH6UAmat+3SD7w90LHDSv/uE+YdDa3T+VowY7k0roltw3dD+E+DHKvba2IBYK8nt6IFaiCT5RXwI3sPYPXj+j0f0fS1uSgtxmkhksCE34wauSVY/yuYbED0/xwPPk/4=
-  app: gorfyindus
-
+- vendor/bin/phpunit
 notifications:
   email:
     recipients:
-      - lambot.rom@gmail.com
+    - lambot.rom@gmail.com
     on_success: never
     on_failure: always
+deploy:
+  provider: heroku
+  api_key:
+    secure: TrWXHYNayQf7HJhKKSYva1fHcgiIkyxty1EKxG6n7t2whWnZRFmzTnbr8iCIKxX24u2l/L9rovxO+WX5C3oM98EeWN9TwR3PhIUrBrWuQu223+vkejwHkRRFDirlQnF3OWdMYXlJ0PHz10P8Ko48DIyFhXPeMF6Rr5ba6+C5Pm8V5qtR+N/AOCPhWfZZrlZMtwMuFa3ablW0c+yu0RPj1yyQZP6OD0rt/pJpyKWFri/g4BuQfMmgLSv/atW5DSIW8chGfQnm/oW+EYWUjgSRyHtiSny+l1f8GTaWmaLWn1Y6f2K5LdIGwYS2Oj3PmiGre3dJTrC8zalpQyxJuGXfom6N9aX7/oJ6vtgU0/RYrAfNwornHuM0OF1oJFpwIRhdAIUDRSIYUyg1Hia6ghrbHoxTXE/l/x1ZX4TFFLv3aNAXAx/kRulUvqJNYuTqFXNzFs7xvYRCBvoYmql0GW/ztKtdgVp9+Bi5vi8io5u91eVbmZMnNVn33DwHwGmImfE5sZV9T2D5NFowlObKssj8nhUMZM46Xe9PFORXNLWMWUpPlhc8P8UtZKlgogHFH/ts/ezKwR7PaydYIMKlEDvdqh4maEZdQ+dlvvqmvYtgrs4GYb7ztAp8CZjUdGSo0KzmHfQzcKfNT504k6huEBhT5NlaZuyEhJpZYioGs12J2s4=
+  app: gorfyindus
+  on:
+    repo: esgiprojetninja/devAwayApi
