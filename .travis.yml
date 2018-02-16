@@ -6,12 +6,12 @@ php:
 before_script:
   - rm composer.lock
   - composer install --no-progress --no-interaction --prefer-dist --no-suggest
+  - composer update --no-scripts 
   - php artisan config:cache
   - cp .env.travis .env
   - mysql -e 'create database homestead_test;'
 
 script:
-  - vendor/bin/php-cs-fixer fix --config=.php_cs --verbose --dry-run --diff
   - vendor/bin/phpunit
 
 deploy:
