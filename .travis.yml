@@ -10,7 +10,7 @@ before_script:
   - cp .env.travis .env
   - mysql -e 'create database homestead_test;'
   - php artisan key:generate
-  - php artisan migrate --database="homestead_test"
+  - php artisan migrate --database="homestead_test" --no-interaction -vvv
   - php artisan db:seed
 
 script:
