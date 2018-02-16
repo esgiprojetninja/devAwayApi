@@ -13,6 +13,10 @@ use Illuminate\Http\Request;
 |
 */
 
+Route::get('foo', function () {
+    return 'Hello World';
+});
+
 Route::group(['middleware' => ['api'], 'prefix' => '/v1'], function () {
     Route::resource('users', 'Api\v1\UserController');
 });

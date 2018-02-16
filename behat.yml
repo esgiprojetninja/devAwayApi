@@ -1,0 +1,11 @@
+default:
+    suites:
+        default:
+            # ...
+
+    extensions:
+        Imbo\BehatApiExtension:
+            apiClient:
+                base_uri: http://devaway.api
+                timeout: 5.0
+                verify: false
