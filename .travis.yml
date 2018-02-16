@@ -1,7 +1,6 @@
 language: php
 
-php:
-  7.1
+php: 7.1
 
 before_script:
   - rm composer.lock
@@ -19,9 +18,6 @@ deploy:
   api_key:
     secure: Mn6LabWVyYwjGKThxVl4SSJkSGy89yPRrkDqD6RUlvwonYsIrgj9wPRDk4pFxahd9FGUgstnqoeix8IKkiryPDsTUW3AwoP+yNBYDZHbhVSeu8Q4dvUBFmcV4m8+9FrzqyB+0dmNKfFJm3rHA1MpBslV5bAVVhHkXe4nJyOKwmSvat8Iup+Jw2UPfb9d+B33ddTJ3A+ck6+e5tVhWvTW+te4KOKKFhLPJohVokAweBYyvdjMeCsbZ7rPyWBYrTPiwJ3VbDGMpa55jgq35QZhXDEkBvlPeMkom9xSjeuzOOj1r9p1WjH52bOH7NRXJqRQanR/G88OqDOAo9O3tp9p4K4/wizskfaSYqbGgLfhAs18op5EluuAc1nMoUGCayqPj4yLf7hg+ILXqHkwmDT7cnhaHLg34TK1KHlCIpAHXYiG3+9qo8wfrqQVW/Xi05LRdIwehOv7yMP+O4zSexBS3EDGoC0PB9aZ8By6OyWH2M1JvmEJhryWDtlRF4FqJXxmy2RNh0rZLqlXP5+Ba7T43LGHeZluh4MHfO98Rf/6F4QoIH6UAmat+3SD7w90LHDSv/uE+YdDa3T+VowY7k0roltw3dD+E+DHKvba2IBYK8nt6IFaiCT5RXwI3sPYPXj+j0f0fS1uSgtxmkhksCE34wauSVY/yuYbED0/xwPPk/4=
   app: gorfyindus
-  on:
-    repo: esgiprojetninja/devAwayApi
-    branch: herokuIndex
 
 notifications:
   email:
