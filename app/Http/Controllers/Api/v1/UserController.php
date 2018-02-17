@@ -40,9 +40,7 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        $picture = new Picture;
-        $picture->url = Input::get('url');
-        $picture->save();
+        //
     }
 
     /**

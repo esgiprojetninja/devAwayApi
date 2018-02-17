@@ -40,7 +40,9 @@ class PictureController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $picture = new Picture;
+        $picture->url =  $request->input("url");
+        $picture->save();
     }
 
     /**
