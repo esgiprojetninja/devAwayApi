@@ -39,6 +39,39 @@ class PictureTest extends TestCase
             ->assertStatus(500);
     }
 
+    /**
+     * Test if retrieving all pictures is working.
+     *
+     * @return void
+     */
+    public function testPictureGetAllSuccess()
+    {
+        $response = $this->json('GET', '/api/v1/pictures');
 
+        $response
+            ->assertStatus(200)
+            ->assertJsonStructure([
+                '*' => ['id', 'url',' created_at', 'updated_at']
+            ]);
+    }
+
+    /**
+     * Test if retrieving one picture by id is working.
+     *
+     * @return void
+     */
+    public function testPictureGetByIdSuccess()
+    {
+        $response = $this->json('GET', '/api/v1/pictures/1');
+
+        $response
+            ->assertStatus(200)
+            ->assertJsonStructure([
+                'id',
+                'url',
+                'created_at',
+                'updated_at'
+            ]);
+    }
 
 }
