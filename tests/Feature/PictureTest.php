@@ -17,9 +17,7 @@ class PictureTest extends TestCase
      */
     public function testPictureInsertSuccess()
     {
-        $response = $this->withHeaders([
-            'X-Header' => 'Value',
-        ])->json('POST', '/api/v1/pictures', ['url' => 'testingUrl']);
+        $response = $this->json('POST', '/api/v1/pictures', ['url' => 'testingUrl']);
 
         $response
             ->assertStatus(200)
@@ -35,30 +33,12 @@ class PictureTest extends TestCase
      */
     public function testPictureInsertError()
     {
-        $response = $this->withHeaders([
-            'X-Header' => 'Value',
-        ])->json('POST', '/api/v1/pictures', ['notUrl' => 'nothing']);
+        $response = $this->json('POST', '/api/v1/pictures', ['notUrl' => 'foo']);
 
         $response
             ->assertStatus(500);
     }
 
-    /**
-     * Test if insert picture is working.
-     *
-     * @return void
-     */
-    public function testPictureGetByIdSuccess()
-    {
-        $response = $this->withHeaders([
-            'X-Header' => 'Value',
-        ])->json('POST', '/api/v1/pictures', ['url' => 'testingUrl']);
 
-        $response
-            ->assertStatus(200)
-            ->assertJson([
-                'created' => true,
-            ]);
-    }
 
 }
