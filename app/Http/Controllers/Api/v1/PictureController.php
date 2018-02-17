@@ -16,16 +16,10 @@ class PictureController extends Controller
      */
     public function index()
     {
-        if ($picture_list = Picture::all()) {
-            return response()->json([
-                'picture_list' => $picture_list
-            ]);
-        } else {
-            return response()->json([
-                'error' => true,
-                'error_msg' => 'Error while getting picture list'
-            ]);
-        }
+        $pictures = Picture::all();
+        return response()->json([
+            'pictures' => $pictures
+        ]);
     }
 
     /**

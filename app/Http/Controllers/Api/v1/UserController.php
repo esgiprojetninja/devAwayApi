@@ -16,16 +16,10 @@ class UserController extends Controller
      */
     public function index()
     {
-        if ($user_list = User::all()) {
-            return response()->json([
-                'user_list' => $user_list
-            ]);
-        } else {
-            return response()->json([
-                'error' => true,
-                'error_msg' => 'Error while getting user list'
-            ]);
-        }
+        $users = User::all();
+        return response()->json([
+            'users' => $users
+        ]);
     }
 
     /**
@@ -46,7 +40,9 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $picture = new Picture;
+        $picture->url = Input::get('url');
+        $picture->save();
     }
 
     /**
