@@ -16,10 +16,9 @@ class PictureController extends Controller
      */
     public function index()
     {
-        $pictures = Picture::all();
-        return response()->json([
-            'pictures' => $pictures
-        ]);
+        return response()->json(
+            Picture::all()->toJson()
+        );
     }
 
     /**
@@ -53,7 +52,9 @@ class PictureController extends Controller
      */
     public function show($id)
     {
-        //
+        return response()->json(
+            Picture::findOrFail($id)->toJson()
+        );
     }
 
     /**
@@ -87,6 +88,6 @@ class PictureController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Picture::find($id)->delete();
     }
 }
