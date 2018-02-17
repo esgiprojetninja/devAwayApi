@@ -39,9 +39,15 @@ class PictureController extends Controller
      */
     public function store(Request $request)
     {
+        $created = false;
         $picture = new Picture;
         $picture->url =  $request->input("url");
-        $picture->save();
+        if ( $picture->save() ) {
+            $created = true;
+        }
+        return response()->json(
+            ['created' => $created]
+        );
     }
 
     /**

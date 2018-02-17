@@ -19,7 +19,13 @@ class PictureTest extends TestCase
     {
         $response = $this->withHeaders([
             'X-Header' => 'Value',
-        ])->json('POST', '/api/v1/pictures', ['name' => 'Sally']);
+        ])->json('POST', '/api/v1/pictures', ['url' => 'testingUrl']);
+
+        $response
+            ->assertStatus(200)
+            ->assertJson([
+                'created' => true,
+            ]);
     }
 
 
