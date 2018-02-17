@@ -3,11 +3,12 @@
 namespace Tests\Feature;
 
 use Tests\TestCase;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class PictureTest extends TestCase
 {
+
     use RefreshDatabase;
 
     /**
@@ -46,13 +47,16 @@ class PictureTest extends TestCase
      */
     public function testPictureGetAllSuccess()
     {
+        $severalPictures = factory(\App\Picture::class, 2)->create();
+
         $response = $this->json('GET', '/api/v1/pictures');
 
         $response
             ->assertStatus(200)
             ->assertJsonStructure([
-                '*' => ['id', 'url',' created_at', 'updated_at']
-            ]);
+                '*' => ['id', 'url', 'created_at', 'updated_at']
+            ])
+            ->assertJsonCount(2);
     }
 
     /**
@@ -62,7 +66,9 @@ class PictureTest extends TestCase
      */
     public function testPictureGetByIdSuccess()
     {
-        $response = $this->json('GET', '/api/v1/pictures/1');
+        $onePicture = factory(\App\Picture::class)->create();
+
+        $response = $this->json('GET', '/api/v1/pictures/4');
 
         $response
             ->assertStatus(200)

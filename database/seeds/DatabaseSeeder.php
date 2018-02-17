@@ -12,5 +12,6 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         $user = factory(App\User::class, 20)->create();
+        $picture = factory(App\Picture::class, 20)->create();
     }
 }

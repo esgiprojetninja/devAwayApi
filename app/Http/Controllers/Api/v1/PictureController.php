@@ -17,7 +17,7 @@ class PictureController extends Controller
     public function index()
     {
         return response()->json(
-            Picture::all()->toJson()
+            Picture::all()
         );
     }
 
@@ -59,7 +59,7 @@ class PictureController extends Controller
     public function show($id)
     {
         return response()->json(
-            Picture::findOrFail($id)->toJson()
+            Picture::findOrFail($id)
         );
     }
 
