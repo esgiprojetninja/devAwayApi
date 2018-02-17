@@ -19,5 +19,5 @@ Route::get('foo', function () {
 
 Route::group(['middleware' => ['api'], 'prefix' => '/v1'], function () {
     Route::resource('users', 'Api\v1\UserController');
-    Route::resource('pictures', 'Api\v1\UserController');
+    Route::resource('pictures', 'Api\v1\PictureController');
 });
