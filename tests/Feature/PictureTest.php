@@ -11,11 +11,11 @@ class PictureTest extends TestCase
     use RefreshDatabase;
 
     /**
-     * A basic functional test example.
+     * Test if insert picture is working.
      *
      * @return void
      */
-    public function testPictureInsert()
+    public function testPictureInsertSuccess()
     {
         $response = $this->withHeaders([
             'X-Header' => 'Value',
@@ -28,6 +28,22 @@ class PictureTest extends TestCase
             ]);
     }
 
+    /**
+     * Test if insert picture is working well on error.
+     *
+     * @return void
+     */
+    public function testPictureInsertError()
+    {
+        $response = $this->withHeaders([
+            'X-Header' => 'Value',
+        ])->json('POST', '/api/v1/pictures', ['urlf' => 'testingUrl']);
 
+        $response
+            ->assertStatus(200)
+            ->assertJson([
+                'created' => true,
+            ]);
+    }
 
 }
