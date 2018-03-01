@@ -37,7 +37,8 @@ class PictureController extends Controller
      */
     public function store(Request $request)
     {
-        return Picture::create($request->all());
+        $picture = new Picture;
+        return $picture->create($request->all());
     }
 
     /**
@@ -48,7 +49,8 @@ class PictureController extends Controller
      */
     public function show($id)
     {
-        return Picture::findOrFail($id);
+        $picture = new Picture;
+        return $picture->findOrFail($id);
     }
 
     /**
@@ -71,7 +73,8 @@ class PictureController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $picture = Picture::findOrFail($id);
+        $picture = new Picture;
+        $picture = $picture->findOrFail($id);
         $picture->update($request->all());
 
         return $picture;
@@ -85,7 +88,8 @@ class PictureController extends Controller
      */
     public function destroy($id)
     {
-        Picture::findOrFail($id)->delete();
+        $picture = new Picture;
+        $picture->findOrFail($id)->delete();
 
         return response()->json(null, 204);
     }

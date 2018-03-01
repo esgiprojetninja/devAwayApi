@@ -37,7 +37,8 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        return User::create($request->all());
+        $user = new User;
+        return $user->create($request->all());
     }
 
     /**
@@ -48,7 +49,8 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        return User::findOrFail($id);
+        $user = new User;
+        return  $user->findOrFail($id);
     }
 
     /**
@@ -71,7 +73,8 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $user = User::findOrFail($id);
+        $user = new User;
+        $user = $user->findOrFail($id);
         $user->update($request->all());
 
         return $user;
@@ -85,7 +88,8 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        User::findOrFail($id)->delete();
+        $user = new User;
+        $user->findOrFail($id)->delete();
 
         return response()->json(null, 204);
     }

@@ -47,7 +47,7 @@ class PictureTest extends TestCase
      */
     public function testPictureGetAllSuccess()
     {
-        $severalPictures = factory(\App\Picture::class, 2)->create();
+        factory(\App\Picture::class, 2)->create();
 
         $response = $this->json('GET', '/api/v1/pictures');
 
@@ -66,7 +66,7 @@ class PictureTest extends TestCase
      */
     public function testPictureGetByIdSuccess()
     {
-        $onePicture = factory(\App\Picture::class)->create();
+        factory(\App\Picture::class)->create();
 
         $response = $this->json('GET', '/api/v1/pictures/4');
 
