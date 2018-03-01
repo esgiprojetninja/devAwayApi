@@ -16,9 +16,7 @@ class PictureController extends Controller
      */
     public function index()
     {
-        return response()->json(
-            Picture::all()
-        );
+        return Picture::all();
     }
 
     /**
@@ -39,15 +37,7 @@ class PictureController extends Controller
      */
     public function store(Request $request)
     {
-        $created = false;
-        $picture = new Picture;
-        $picture->url =  $request->input("url");
-        if ( $picture->save() ) {
-            $created = true;
-        }
-        return response()->json(
-            ['created' => $created]
-        );
+        return Picture::create($request->all());
     }
 
     /**
@@ -58,9 +48,7 @@ class PictureController extends Controller
      */
     public function show($id)
     {
-        return response()->json(
-            Picture::findOrFail($id)
-        );
+        return Picture::findOrFail($id);
     }
 
     /**
@@ -83,7 +71,10 @@ class PictureController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $picture = Picture::findOrFail($id);
+        $picture->update($request->all());
+
+        return $picture;
     }
 
     /**
@@ -94,6 +85,8 @@ class PictureController extends Controller
      */
     public function destroy($id)
     {
-        Picture::find($id)->delete();
+        Picture::findOrFail($id)->delete();
+
+        return response()->json(null, 204);
     }
 }
