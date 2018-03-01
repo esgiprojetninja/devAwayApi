@@ -16,7 +16,8 @@ class UserController extends Controller
      */
     public function index()
     {
-        return User::all();
+        $user = new User;
+        return $user->all();
     }
 
     /**
@@ -44,22 +45,22 @@ class UserController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  int  $userId
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($userId)
     {
         $user = new User;
-        return  $user->findOrFail($id);
+        return  $user->findOrFail($userId);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  int  $userId
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($userId)
     {
         //
     }
@@ -68,13 +69,13 @@ class UserController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  int  $userId
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $userId)
     {
         $user = new User;
-        $user = $user->findOrFail($id);
+        $user = $user->findOrFail($userId);
         $user->update($request->all());
 
         return $user;
@@ -83,13 +84,13 @@ class UserController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  int  $userId
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($userId)
     {
         $user = new User;
-        $user->findOrFail($id)->delete();
+        $user->findOrFail($userId)->delete();
 
         return response()->json(null, 204);
     }
