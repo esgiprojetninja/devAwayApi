@@ -21,9 +21,9 @@ class PictureTest extends TestCase
         $response = $this->json('POST', '/api/v1/pictures', ['url' => 'testingUrl']);
 
         $response
-            ->assertStatus(200)
-            ->assertJson([
-                'created' => true,
+            ->assertStatus(201)
+            ->assertJsonStructure([
+                '*' => ['url', 'created_at', 'updated_at']
             ]);
     }
 

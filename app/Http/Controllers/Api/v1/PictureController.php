@@ -16,7 +16,7 @@ class PictureController extends Controller
      */
     public function index()
     {
-        $picture = Picture;
+        $picture = new Picture;
         return $picture->all();
     }
 
