@@ -16,7 +16,7 @@ class AccommodationController extends Controller
      */
     public function index()
     {
-        $accommodation = Accommodation;
+        $accommodation = new Accommodation;
         return $accommodation->all();
     }
 

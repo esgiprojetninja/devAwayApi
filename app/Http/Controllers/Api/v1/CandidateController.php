@@ -16,7 +16,7 @@ class CandidateController extends Controller
      */
     public function index()
     {
-        $candidate = Candidate;
+        $candidate = new Candidate;
         return $candidate->all();
     }
 

@@ -16,7 +16,7 @@ class MissionController extends Controller
      */
     public function index()
     {
-        $mission = Mission;
+        $mission = new Mission;
         return $mission->all();
     }
 
