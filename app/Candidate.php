@@ -4,10 +4,10 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Picture extends Model
+class Candidate extends Model
 {
 
-    protected $table = "picture";
+    protected $table = "candidate";
 
     /**
      * The attributes that are mass assignable.
@@ -16,7 +16,11 @@ class Picture extends Model
      */
     protected $fillable = [
         'id',
-        'url'
+        'user',
+        'accommodation',
+        'fromDate',
+        'toDate',
+        'status'
     ];
 
     public function getId() {

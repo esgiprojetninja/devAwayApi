@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreatePictureTable extends Migration
+class CreateMessageTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,9 @@ class CreatePictureTable extends Migration
      */
     public function up()
     {
-        Schema::create('picture', function (Blueprint $table) {
+        Schema::create('message', function (Blueprint $table) {
             $table->increments('id');
-            $table->text('url')->nullable(false);
+            $table->text('content');
             $table->timestamps();
         });
     }
@@ -27,6 +27,6 @@ class CreatePictureTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('picture');
+        Schema::dropIfExists('message');
     }
 }

@@ -6,6 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Mission extends Model
 {
+
+    protected $table = "mission";
+
     /**
      * The attributes that are mass assignable.
      *
@@ -27,4 +30,9 @@ class Mission extends Model
         'description',
         'isActive'
     ];
+
+    public function getId() {
+        return $this->id;
+    }
+
 }

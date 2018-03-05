@@ -5,9 +5,9 @@ namespace App\Http\Controllers\Api\v1;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-use App\User;
+use App\Candidate;
 
-class UserController extends Controller
+class CandidateController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,8 +16,8 @@ class UserController extends Controller
      */
     public function index()
     {
-        $user = new User;
-        return $user->all();
+        $candidate = new Candidate;
+        return $candidate->all();
     }
 
     /**
@@ -28,48 +28,48 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        $user = new User;
-        return $user->create($request->all());
+        $candidate = new Candidate;
+        return $candidate->create($request->all());
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $userId
+     * @param  int  $candidateId
      * @return \Illuminate\Http\Response
      */
-    public function show($userId)
+    public function show($candidateId)
     {
-        $user = new User;
-        return  $user->findOrFail($userId);
+        $candidate = new Candidate;
+        return $candidate->findOrFail($candidateId);
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $userId
+     * @param  int  $candidateId
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $userId)
+    public function update(Request $request, $candidateId)
     {
-        $user = new User;
-        $user = $user->findOrFail($userId);
-        $user->update($request->all());
+        $candidate = new Candidate;
+        $candidate = $candidate->findOrFail($candidateId);
+        $candidate->update($request->all());
 
-        return $user;
+        return $candidate;
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $userId
+     * @param  int  $candidateId
      * @return \Illuminate\Http\Response
      */
-    public function destroy($userId)
+    public function destroy($candidateId)
     {
-        $user = new User;
-        $user->findOrFail($userId)->delete();
+        $candidate = new Candidate;
+        $candidate->findOrFail($candidateId)->delete();
 
         return response()->json(null, 204);
     }

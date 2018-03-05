@@ -22,6 +22,7 @@ class CreateAccommodationTable extends Migration
             $table->string('address');
             $table->float('longitude');
             $table->float('latitude');
+            $table->text('region');
             $table->integer('nbBedroom');
             $table->integer('nbBathroom');
             $table->integer('nbToilet');

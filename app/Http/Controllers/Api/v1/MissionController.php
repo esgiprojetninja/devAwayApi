@@ -5,9 +5,9 @@ namespace App\Http\Controllers\Api\v1;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-use App\User;
+use App\Mission;
 
-class UserController extends Controller
+class MissionController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,8 +16,8 @@ class UserController extends Controller
      */
     public function index()
     {
-        $user = new User;
-        return $user->all();
+        $mission = new Mission;
+        return $mission->all();
     }
 
     /**
@@ -28,48 +28,48 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        $user = new User;
-        return $user->create($request->all());
+        $mission = new Mission;
+        return $mission->create($request->all());
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $userId
+     * @param  int  $missionId
      * @return \Illuminate\Http\Response
      */
-    public function show($userId)
+    public function show($missionId)
     {
-        $user = new User;
-        return  $user->findOrFail($userId);
+        $mission = new Mission;
+        return $mission->findOrFail($missionId);
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $userId
+     * @param  int  $missionId
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $userId)
+    public function update(Request $request, $missionId)
     {
-        $user = new User;
-        $user = $user->findOrFail($userId);
-        $user->update($request->all());
+        $mission = new Mission;
+        $mission = $mission->findOrFail($missionId);
+        $mission->update($request->all());
 
-        return $user;
+        return $mission;
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $userId
+     * @param  int  $missionId
      * @return \Illuminate\Http\Response
      */
-    public function destroy($userId)
+    public function destroy($missionId)
     {
-        $user = new User;
-        $user->findOrFail($userId)->delete();
+        $mission = new Mission;
+        $mission->findOrFail($missionId)->delete();
 
         return response()->json(null, 204);
     }

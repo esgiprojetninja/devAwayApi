@@ -18,5 +18,10 @@ Route::get('foo', function () {
 });
 
 Route::group(['middleware' => ['api'], 'prefix' => '/v1'], function () {
+    Route::resource('accommodations', 'Api\v1\AccommodationController');
+    Route::resource('candidates', 'Api\v1\CandidateController');
+    Route::resource('messages', 'Api\v1\MessageController');
+    Route::resource('missions', 'Api\v1\MissionController');
+    Route::resource('pictures', 'Api\v1\PictureController');
     Route::resource('users', 'Api\v1\UserController');
 });

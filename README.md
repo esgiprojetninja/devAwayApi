@@ -15,3 +15,10 @@ Then, in another terminal, install the composer dependencies.
 Finally, your app needs a secret key.
 
 `docker exec devawayapi_app_1 php artisan key:generate`
+>>>>>>> f6831dc342d9ae8982c484214c2192e6dbc8be53
+
+#Set up
+
+`php artisan migrate`
+
+`php artisan db:seed`

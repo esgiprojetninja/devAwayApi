@@ -5,9 +5,9 @@ namespace App\Http\Controllers\Api\v1;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-use App\User;
+use App\Message;
 
-class UserController extends Controller
+class MessageController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,8 +16,8 @@ class UserController extends Controller
      */
     public function index()
     {
-        $user = new User;
-        return $user->all();
+        $message = new Message;
+        return $message->all();
     }
 
     /**
@@ -28,48 +28,48 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        $user = new User;
-        return $user->create($request->all());
+        $message = new Message;
+        return $message->create($request->all());
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $userId
+     * @param  int  $messageId
      * @return \Illuminate\Http\Response
      */
-    public function show($userId)
+    public function show($messageId)
     {
-        $user = new User;
-        return  $user->findOrFail($userId);
+        $message = new Message;
+        return $message->findOrFail($messageId);
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $userId
+     * @param  int  $messageId
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $userId)
+    public function update(Request $request, $messageId)
     {
-        $user = new User;
-        $user = $user->findOrFail($userId);
-        $user->update($request->all());
+        $message = new Message;
+        $message = $message->findOrFail($messageId);
+        $message->update($request->all());
 
-        return $user;
+        return $message;
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $userId
+     * @param  int  $messageId
      * @return \Illuminate\Http\Response
      */
-    public function destroy($userId)
+    public function destroy($messageId)
     {
-        $user = new User;
-        $user->findOrFail($userId)->delete();
+        $message = new Message;
+        $message->findOrFail($messageId)->delete();
 
         return response()->json(null, 204);
     }

@@ -6,6 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Accommodation extends Model
 {
+
+    protected $table = "accommodation";
+
     /**
      * The attributes that are mass assignable.
      *
@@ -41,5 +44,9 @@ class Accommodation extends Model
         'checkinHour',
         'checkoutHour'
     ];
+
+    public function getId() {
+        return $this->id;
+    }
 
 }

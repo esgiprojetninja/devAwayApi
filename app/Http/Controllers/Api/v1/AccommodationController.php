@@ -5,9 +5,9 @@ namespace App\Http\Controllers\Api\v1;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-use App\User;
+use App\Accommodation;
 
-class UserController extends Controller
+class AccommodationController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,8 +16,8 @@ class UserController extends Controller
      */
     public function index()
     {
-        $user = new User;
-        return $user->all();
+        $accommodation = new Accommodation;
+        return $accommodation->all();
     }
 
     /**
@@ -28,48 +28,48 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        $user = new User;
-        return $user->create($request->all());
+        $accommodation = new Accommodation;
+        return $accommodation->create($request->all());
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $userId
+     * @param  int  $accommodationId
      * @return \Illuminate\Http\Response
      */
-    public function show($userId)
+    public function show($accommodationId)
     {
-        $user = new User;
-        return  $user->findOrFail($userId);
+        $accommodation = new Accommodation;
+        return $accommodation->findOrFail($accommodationId);
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $userId
+     * @param  int  $accommodationId
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $userId)
+    public function update(Request $request, $accommodationId)
     {
-        $user = new User;
-        $user = $user->findOrFail($userId);
-        $user->update($request->all());
+        $accommodation = new Accommodation;
+        $accommodation = $accommodation->findOrFail($accommodationId);
+        $accommodation->update($request->all());
 
-        return $user;
+        return $accommodation;
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $userId
+     * @param  int  $accommodationId
      * @return \Illuminate\Http\Response
      */
-    public function destroy($userId)
+    public function destroy($accommodationId)
     {
-        $user = new User;
-        $user->findOrFail($userId)->delete();
+        $accommodation = new Accommodation;
+        $accommodation->findOrFail($accommodationId)->delete();
 
         return response()->json(null, 204);
     }

@@ -5,9 +5,9 @@ namespace App\Http\Controllers\Api\v1;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-use App\User;
+use App\Picture;
 
-class UserController extends Controller
+class PictureController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,8 +16,8 @@ class UserController extends Controller
      */
     public function index()
     {
-        $user = new User;
-        return $user->all();
+        $picture = new Picture;
+        return $picture->all();
     }
 
     /**
@@ -28,48 +28,48 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        $user = new User;
-        return $user->create($request->all());
+        $picture = new Picture;
+        return $picture->create($request->all());
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $userId
+     * @param  int  $pictureId
      * @return \Illuminate\Http\Response
      */
-    public function show($userId)
+    public function show($pictureId)
     {
-        $user = new User;
-        return  $user->findOrFail($userId);
+        $picture = new Picture;
+        return $picture->findOrFail($pictureId);
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $userId
+     * @param  int  $pictureId
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $userId)
+    public function update(Request $request, $pictureId)
     {
-        $user = new User;
-        $user = $user->findOrFail($userId);
-        $user->update($request->all());
+        $picture = new Picture;
+        $picture = $picture->findOrFail($pictureId);
+        $picture->update($request->all());
 
-        return $user;
+        return $picture;
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $userId
+     * @param  int  $pictureId
      * @return \Illuminate\Http\Response
      */
-    public function destroy($userId)
+    public function destroy($pictureId)
     {
-        $user = new User;
-        $user->findOrFail($userId)->delete();
+        $picture = new Picture;
+        $picture->findOrFail($pictureId)->delete();
 
         return response()->json(null, 204);
     }
