@@ -45,4 +45,8 @@ class Accommodation extends Model
         'checkoutHour'
     ];
 
+    public function getId() {
+        return $this->id;
+    }
+
 }

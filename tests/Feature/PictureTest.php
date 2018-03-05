@@ -9,7 +9,6 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 class PictureTest extends TestCase
 {
 
-    use RefreshDatabase;
 
     /**
      * Test if insert picture is working.
@@ -21,10 +20,7 @@ class PictureTest extends TestCase
         $response = $this->json('POST', '/api/v1/pictures', ['url' => 'testingUrl']);
 
         $response
-            ->assertStatus(201)
-            ->assertJsonStructure([
-                '*' => ['url', 'created_at', 'updated_at']
-            ]);
+            ->assertStatus(201);
     }
 
     /**
@@ -34,7 +30,7 @@ class PictureTest extends TestCase
      */
     public function testPictureInsertError()
     {
-        $response = $this->json('POST', '/api/v1/pictures', ['notUrl' => 'foo']);
+        $response = $this->json('POST', '/api/v1/pictures', ['error' => 'foo']);
 
         $response
             ->assertStatus(500);
@@ -68,7 +64,7 @@ class PictureTest extends TestCase
     {
         factory(\App\Picture::class)->create();
 
-        $response = $this->json('GET', '/api/v1/pictures/4');
+        $response = $this->json('GET', '/api/v1/pictures/5');
 
         $response
             ->assertStatus(200)

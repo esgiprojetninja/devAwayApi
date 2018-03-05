@@ -38,4 +38,8 @@ class User extends Authenticatable
         'password'
     ];
 
+    public function getId() {
+        return $this->id;
+    }
+
 }

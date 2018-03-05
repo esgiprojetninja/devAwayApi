@@ -30,4 +30,9 @@ class Mission extends Model
         'description',
         'isActive'
     ];
+
+    public function getId() {
+        return $this->id;
+    }
+
 }

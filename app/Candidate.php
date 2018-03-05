@@ -23,4 +23,8 @@ class Candidate extends Model
         'status'
     ];
 
+    public function getId() {
+        return $this->id;
+    }
+
 }

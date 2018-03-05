@@ -19,4 +19,8 @@ class Picture extends Model
         'url'
     ];
 
+    public function getId() {
+        return $this->id;
+    }
+
 }

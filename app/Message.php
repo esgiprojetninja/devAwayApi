@@ -21,4 +21,8 @@ class Message extends Model
         'candidate',
     ];
 
+    public function getId() {
+        return $this->id;
+    }
+
 }
