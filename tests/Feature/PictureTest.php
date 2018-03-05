@@ -109,6 +109,36 @@ class PictureTest extends TestCase
             ->assertStatus(404);
     }
 
+    /**
+     * Test if update picture is working well on success.
+     *
+     * @return void
+     */
+    public function testPictureUpdateSuccess()
+    {
+        factory(\App\Picture::class)->create();
 
+        $this->put("/api/v1/pictures/7", ["url" => "myNewUrl"])
+             ->assertStatus(200)
+             ->assertJsonStructure([
+                 'id',
+                 'url',
+                 'created_at',
+                 'updated_at'
+             ]);
+    }
+
+    /**
+     * Test if update picture is working well on error.
+     *
+     * @return void
+     */
+    public function testPictureUpdateError()
+    {
+        factory(\App\Picture::class)->create();
+
+        $this->put("/api/v1/pictures/9", ["url" => "myNewUrl"])
+            ->assertStatus(404);
+    }
 
 }
