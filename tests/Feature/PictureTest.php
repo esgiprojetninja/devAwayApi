@@ -72,4 +72,33 @@ class PictureTest extends TestCase
             ]);
     }
 
+
+    /**
+     * Test if insert picture is working well on error.
+     *
+     * @return void
+     */
+    public function testPictureDeleteSuccess()
+    {
+        factory(\App\Picture::class)->create();
+
+        $this->delete("/api/v1/pictures/5")
+            ->assertStatus(204);
+    }
+
+    /**
+     * Test if insert picture is working well on error.
+     *
+     * @return void
+     */
+    public function testPictureDeleteError()
+    {
+        factory(\App\Picture::class)->create();
+
+        $this->delete("/api/v1/pictures/7")
+            ->assertStatus(404);
+    }
+
+
+
 }
