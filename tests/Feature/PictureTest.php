@@ -72,9 +72,8 @@ class PictureTest extends TestCase
             ]);
     }
 
-
     /**
-     * Test if insert picture is working well on error.
+     * Test if delete picture is working well on success.
      *
      * @return void
      */
@@ -87,7 +86,7 @@ class PictureTest extends TestCase
     }
 
     /**
-     * Test if insert picture is working well on error.
+     * Test if delete picture is working well on error.
      *
      * @return void
      */
