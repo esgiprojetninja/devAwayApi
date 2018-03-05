@@ -17,6 +17,10 @@ Route::get('foo', function () {
     return 'Hello World';
 });
 
+Route::post('login', 'Api\v1\PassportController@login');
+
+Route::post('register', 'Api\v1\PassportController@register');
+
 Route::group(['middleware' => ['api'], 'prefix' => '/v1'], function () {
     Route::resource('accommodations', 'Api\v1\AccommodationController');
     Route::resource('candidates', 'Api\v1\CandidateController');
