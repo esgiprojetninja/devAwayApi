@@ -23,6 +23,7 @@ class CreateUserTable extends Migration
             $table->longText('languages');
             $table->longText('skills');
             $table->boolean('isActive');
+            $table->tinyInteger('roles');
             $table->rememberToken();
             $table->timestamps();
         });
