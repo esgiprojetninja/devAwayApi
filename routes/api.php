@@ -17,9 +17,7 @@ Route::get('foo', function () {
     return 'Hello World';
 });
 
-Route::post('login', 'Auth\LoginController@login');
-
-Route::group(['middleware' => ['api', 'auth'], 'prefix' => '/v1'], function () {
+Route::group(['middleware' => ['api'], 'prefix' => '/v1'], function () {
     Route::resource('accommodations', 'Api\v1\AccommodationController');
     Route::resource('candidates', 'Api\v1\CandidateController');
     Route::resource('messages', 'Api\v1\MessageController');
