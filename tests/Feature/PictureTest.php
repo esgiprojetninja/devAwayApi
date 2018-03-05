@@ -73,6 +73,17 @@ class PictureTest extends TestCase
     }
 
     /**
+     * Test if retrieving one picture by id is working well on error if not existing.
+     *
+     * @return void
+     */
+    public function testPictureGetByIdErrorNotFound()
+    {
+        $this->get("/api/v1/pictures/40")
+            ->assertStatus(404);
+    }
+
+    /**
      * Test if delete picture is working well on success.
      *
      * @return void
