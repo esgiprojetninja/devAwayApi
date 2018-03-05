@@ -3,12 +3,12 @@
 namespace Tests\Feature;
 
 use Tests\TestCase;
-use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class PictureTest extends TestCase
 {
 
+    use RefreshDatabase;
 
     /**
      * Test if insert picture is working.
@@ -17,10 +17,8 @@ class PictureTest extends TestCase
      */
     public function testPictureInsertSuccess()
     {
-        $response = $this->json('POST', '/api/v1/pictures', ['url' => 'testingUrl']);
-
-        $response
-            ->assertStatus(201);
+        $this->post("/api/v1/pictures", ['url' => 'testingUrl'])
+             ->assertStatus(201);
     }
 
     /**
@@ -30,10 +28,8 @@ class PictureTest extends TestCase
      */
     public function testPictureInsertError()
     {
-        $response = $this->json('POST', '/api/v1/pictures', ['error' => 'foo']);
-
-        $response
-            ->assertStatus(500);
+        $this->post("/api/v1/pictures", ['url' => ''])
+             ->assertStatus(500);
     }
 
     /**
@@ -64,7 +60,7 @@ class PictureTest extends TestCase
     {
         factory(\App\Picture::class)->create();
 
-        $response = $this->json('GET', '/api/v1/pictures/5');
+        $response = $this->json('GET', '/api/v1/pictures/4');
 
         $response
             ->assertStatus(200)
