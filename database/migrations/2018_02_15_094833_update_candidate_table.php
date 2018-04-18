@@ -29,6 +29,8 @@ class UpdateCandidateTable extends Migration
      */
     public function down()
     {
+        DB::statement('SET FOREIGN_KEY_CHECKS = 0');
         Schema::dropIfExists('candidate');
+        DB::statement('SET FOREIGN_KEY_CHECKS = 1');
     }
 }

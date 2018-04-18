@@ -37,6 +37,6 @@ class CreateMissionTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('mission');
+        //
     }
 }

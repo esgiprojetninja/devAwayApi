@@ -51,6 +51,6 @@ class CreateAccommodationTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('accommodation');
+        //
     }
 }

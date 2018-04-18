@@ -17,6 +17,13 @@ Route::get('foo', function () {
     return 'Hello World';
 });
 
+Route::get('ResetHardDb', function () {
+    foreach(\DB::select('SHOW TABLES') as $table) {
+        $table_array = get_object_vars($table);
+        \Schema::drop($table_array[key($table_array)]);
+    }
+});
+
 Route::post('login', [ 'as' => 'login', 'uses' => 'Api\v1\PassportController@login']);
 Route::post('register', 'Api\v1\PassportController@register');
 

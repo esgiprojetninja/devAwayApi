@@ -26,7 +26,7 @@ $factory->define(App\Accommodation::class, function (Faker $faker) {
         'host' => $user,
         'pictures' => $picture,
         'country' => $faker->country,
-        'region' => $faker->text,
+        'region' => $faker->text(40),
         'address' => $faker->address,
         'longitude' => $faker->longitude,
         'latitude' => $faker->latitude,
@@ -44,7 +44,7 @@ $factory->define(App\Accommodation::class, function (Faker $faker) {
         'floor' => $faker->numberBetween(1,5),
         'minStay' => $faker->numberBetween(1,7),
         'maxStay' => $faker->numberBetween(7,14),
-        'type' => $faker->text,
+        'type' => $faker->text(40),
         'checkinHour' => $faker->datetime,
         'checkoutHour' => $faker->datetime,
         'created_at' => Carbon::now()->format('Y-m-d H:i:s')
