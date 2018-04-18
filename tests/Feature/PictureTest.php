@@ -10,6 +10,25 @@ class PictureTest extends TestCase
 
     use RefreshDatabase;
 
+    public function setUp()
+    {
+        parent::setUp();
+
+        $clientRepository = new ClientRepository();
+        $this->client = $clientRepository->createPasswordGrantClient(
+            null, 'Test Personal Access Client', ''
+        );
+
+        $response = parent::postJson('/api/login', [
+            'email' => 'lambot.rom@gmail.com',
+            'password' => 'Rootroot9',
+        ]);
+
+        $this->token = $response->json()['token'];
+
+        Auth::login($this->user);
+    }
+
     /**
      * Test if insert picture is working.
      *

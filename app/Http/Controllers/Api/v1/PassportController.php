@@ -25,7 +25,7 @@ class PassportController extends Controller
             return response()->json(['success' => $success], $this->successStatus);
         }
         else{
-            return response()->json(['error'=>'Unauthorised'], 401);
+            return response()->json(['error'=>'Unauthorized'], 401);
         }
     }
 
@@ -56,15 +56,5 @@ class PassportController extends Controller
         return response()->json(['success'=>$success], $this->successStatus);
     }
 
-    /**
-     * details api
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function getDetails()
-    {
-        $user = Auth::user();
-        return response()->json(['success' => $user], $this->successStatus);
-    }
 }
 
