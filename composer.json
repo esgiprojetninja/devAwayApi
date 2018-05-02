@@ -50,6 +50,7 @@
         ],
         "post-autoload-dump": [
             "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
+            "App\\Providers\\Passport",
             "@php artisan package:discover"
         ],
         "post-install-cmd": [
