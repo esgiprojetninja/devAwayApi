@@ -4,29 +4,17 @@ namespace Tests\Feature;
 
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\Auth;
 
 class PictureTest extends TestCase
 {
 
     use RefreshDatabase;
 
-    public function setUp()
+    public function testLogin()
     {
-        parent::setUp();
-
-        $clientRepository = new ClientRepository();
-        $this->client = $clientRepository->createPasswordGrantClient(
-            null, 'Test Personal Access Client', ''
-        );
-
-        $response = parent::postJson('/api/login', [
-            'email' => 'lambot.rom@gmail.com',
-            'password' => 'Rootroot9',
-        ]);
-
-        $this->token = $response->json()['token'];
-
-        Auth::login($this->user);
+        $this->post('/api/login', ["email" => "lambot.rom@gmail.com", "password" => "Rootroot9"])
+             ->assertStatus(200);
     }
 
     /**
@@ -36,7 +24,12 @@ class PictureTest extends TestCase
      */
     public function testPictureInsertSuccess()
     {
-        $this->post("/api/v1/pictures", ['url' => 'testingUrl'])
+
+        $this->withHeaders([
+            'Accept' => 'application/json',
+            'Content-Type' => 'application/json',
+            'Authorization' => 'Bearer ' .'',
+            ])->post("/api/v1/pictures", ['url' => 'testingUrl'])
              ->assertStatus(201);
     }
 

@@ -4,8 +4,10 @@ namespace App\Http\Controllers\Api\v1;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 
 use App\User;
+use function PHPSTORM_META\type;
 
 class UserController extends Controller
 {
@@ -41,7 +43,12 @@ class UserController extends Controller
     public function show($userId)
     {
         $user = new User;
-        return  $user->findOrFail($userId);
+        if (Auth::user()->id == $userId || Auth::user()->roles == 1){
+            return  $user->findOrFail($userId);
+        } else {
+            return $user->select("username")->where('id', $userId)->get();
+        }
+        return response()->json(null, 404);
     }
 
     /**

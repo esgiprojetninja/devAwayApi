@@ -44,4 +44,8 @@ class User extends Authenticatable
         return $this->id;
     }
 
+    public function getRoles() {
+        return $this->roles;
+    }
+
 }
