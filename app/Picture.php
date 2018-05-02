@@ -16,7 +16,8 @@ class Picture extends Model
      */
     protected $fillable = [
         'id',
-        'url'
+        'url',
+        'accommodation'
     ];
 
     public function getId() {

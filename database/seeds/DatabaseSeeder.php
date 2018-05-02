@@ -26,8 +26,8 @@ class DatabaseSeeder extends Seeder
             'created_at' => Carbon::now()->format('Y-m-d H:i:s')
         ]);
         factory(App\User::class, 20)->create();
-        factory(App\Picture::class, 20)->create();
         factory(App\Accommodation::class, 20)->create();
+        factory(App\Picture::class, 20)->create();
         factory(App\Candidate::class, 20)->create();
         factory(App\Message::class, 20)->create();
         factory(App\Mission::class, 20)->create();

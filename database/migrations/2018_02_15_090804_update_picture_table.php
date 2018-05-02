@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class UpdateAccommodationTable extends Migration
+class UpdatePictureTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,9 @@ class UpdateAccommodationTable extends Migration
      */
     public function up()
     {
-        Schema::table('accommodation', function (Blueprint $table) {
-            $table->integer('host')->unsigned()->nullable();
-            $table->foreign('host')->references('id')->on('user')->onUpdate('cascade')->onDelete('set null');
+        Schema::table('picture', function (Blueprint $table) {
+            $table->integer('accommodation')->unsigned()->nullable();
+            $table->foreign('accommodation')->references('id')->on('accommodation')->onUpdate('cascade')->onDelete('cascade');
         });
     }
 
@@ -27,7 +27,7 @@ class UpdateAccommodationTable extends Migration
     public function down()
     {
         DB::statement('SET FOREIGN_KEY_CHECKS = 0');
-        Schema::dropIfExists('accommodation');
+        Schema::dropIfExists('picture');
         DB::statement('SET FOREIGN_KEY_CHECKS = 1');
     }
 }

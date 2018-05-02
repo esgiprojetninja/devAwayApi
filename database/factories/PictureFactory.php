@@ -15,8 +15,11 @@ use Carbon\Carbon;
 */
 
 $factory->define(App\Picture::class, function (Faker $faker) {
+    $accommodations = \App\Accommodation::all();
+    $accommodation = $accommodations[rand(0, count($accommodations)-1)]->getId();
     return [
         'url' => $faker->url,
+        'accommodation' => $accommodation,
         'created_at' => Carbon::now()->format('Y-m-d H:i:s')
     ];
 });

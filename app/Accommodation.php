@@ -24,7 +24,6 @@ class Accommodation extends Model
         'address',
         'longitude',
         'latitude',
-        'pictures',
         'host',
         'nbBedroom',
         'nbBathroom',

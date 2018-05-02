@@ -17,14 +17,11 @@ use Carbon\Carbon;
 $factory->define(App\Accommodation::class, function (Faker $faker) {
     $users = \App\User::all();
     $user = $users[rand(0, count($users)-1)]->getId();
-    $pictures = \App\Picture::all();
-    $picture = $pictures[rand(0, count($pictures)-1)]->getId();
     return [
         'title' => $faker->catchPhrase(),
         'description' => $faker->text,
         'city' => $faker->city,
         'host' => $user,
-        'pictures' => $picture,
         'country' => $faker->country,
         'region' => $faker->text(40),
         'address' => $faker->address,
