@@ -17,7 +17,7 @@ class AccommodationController extends Controller
     public function index()
     {
         $accommodation = new Accommodation;
-        return $accommodation->all();
+        return $accommodation->with('pictures')->get();
     }
 
     /**
@@ -41,7 +41,7 @@ class AccommodationController extends Controller
     public function show($accommodationId)
     {
         $accommodation = new Accommodation;
-        return $accommodation->findOrFail($accommodationId);
+        return $accommodation->with('pictures')->findOrFail($accommodationId);
     }
 
     /**
@@ -72,5 +72,11 @@ class AccommodationController extends Controller
         $accommodation->findOrFail($accommodationId)->delete();
 
         return response()->json(null, 204);
+    }
+
+    public function getPictures($accommodationId)
+    {
+        var_dump($accommodationId);
+        return Accommodation::find($accommodationId)->pictures;;
     }
 }

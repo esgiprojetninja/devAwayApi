@@ -27,4 +27,5 @@ Route::group(['middleware' => ['api', 'auth:api'], 'prefix' => '/v1'], function 
     Route::resource('missions', 'Api\v1\MissionController');
     Route::resource('pictures', 'Api\v1\PictureController');
     Route::resource('users', 'Api\v1\UserController');
+    Route::get('accommodations/{idAccommodation}/pictures', 'Api\v1\AccommodationController@getPictures');
 });

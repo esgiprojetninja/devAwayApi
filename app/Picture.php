@@ -17,11 +17,15 @@ class Picture extends Model
     protected $fillable = [
         'id',
         'url',
-        'accommodation'
+        'accommodation_id'
     ];
 
     public function getId() {
         return $this->id;
+    }
+
+    public function accommodations() {
+        return $this->belongsTo('Accommodation', 'picture_accommodation_id_foreign');
     }
 
 }

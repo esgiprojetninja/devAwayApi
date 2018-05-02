@@ -48,4 +48,12 @@ class Accommodation extends Model
         return $this->id;
     }
 
+    /**
+     * Get all of the posts for the country.
+     */
+    public function pictures()
+    {
+        return $this->hasMany('App\Picture');
+    }
+
 }

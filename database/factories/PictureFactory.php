@@ -19,7 +19,7 @@ $factory->define(App\Picture::class, function (Faker $faker) {
     $accommodation = $accommodations[rand(0, count($accommodations)-1)]->getId();
     return [
         'url' => $faker->url,
-        'accommodation' => $accommodation,
+        'accommodation_id' => $accommodation,
         'created_at' => Carbon::now()->format('Y-m-d H:i:s')
     ];
 });

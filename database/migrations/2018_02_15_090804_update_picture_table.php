@@ -14,8 +14,8 @@ class UpdatePictureTable extends Migration
     public function up()
     {
         Schema::table('picture', function (Blueprint $table) {
-            $table->integer('accommodation')->unsigned()->nullable();
-            $table->foreign('accommodation')->references('id')->on('accommodation')->onUpdate('cascade')->onDelete('cascade');
+            $table->integer('accommodation_id')->unsigned()->nullable();
+            $table->foreign('accommodation_id')->references('id')->on('accommodation')->onUpdate('cascade')->onDelete('cascade');
         });
     }
 
