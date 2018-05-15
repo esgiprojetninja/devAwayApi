@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers\Api\v1;
 
+use App\Candidate;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 
 use App\Mission;
 
@@ -72,5 +74,22 @@ class MissionController extends Controller
         $mission->findOrFail($missionId)->delete();
 
         return response()->json(null, 204);
+    }
+
+
+    public function apply(Request $request, $missionId)
+    {
+        $idUser = Auth::user()->id;
+
+        $candidate = new Candidate();
+        $candidate->setUser($idUser);
+        $candidate->setMission($missionId);
+        $candidate->setStatus(1);
+        $candidate->setFromDate($request->fromDate);
+        $candidate->setToDate($request->toDate);
+        if($candidate->save()){
+            return response()->json(null, 201);
+        }
+        return response()->json(null, 500);
     }
 }
