@@ -25,7 +25,7 @@ class Picture extends Model
     }
 
     public function accommodations() {
-        return $this->belongsTo('Accommodation', 'picture_accommodation_id_foreign');
+        return $this->belongsTo('App\Accommodation', 'picture_accommodation_id_foreign');
     }
 
 }

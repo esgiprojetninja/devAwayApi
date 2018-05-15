@@ -21,7 +21,7 @@ $factory->define(App\Accommodation::class, function (Faker $faker) {
         'title' => $faker->catchPhrase(),
         'description' => $faker->text,
         'city' => $faker->city,
-        'host' => $user,
+        'user_id' => $user,
         'country' => $faker->country,
         'region' => $faker->text(40),
         'address' => $faker->address,

@@ -14,8 +14,8 @@ class UpdateAccommodationTable extends Migration
     public function up()
     {
         Schema::table('accommodation', function (Blueprint $table) {
-            $table->integer('host')->unsigned()->nullable();
-            $table->foreign('host')->references('id')->on('user')->onUpdate('cascade')->onDelete('set null');
+            $table->integer('user_id')->unsigned()->unsigned();
+            $table->foreign('user_id')->references('id')->on('user')->onUpdate('cascade')->onDelete('cascade');
         });
     }
 
@@ -26,8 +26,8 @@ class UpdateAccommodationTable extends Migration
      */
     public function down()
     {
-        DB::statement('SET FOREIGN_KEY_CHECKS = 0');
-        Schema::dropIfExists('accommodation');
-        DB::statement('SET FOREIGN_KEY_CHECKS = 1');
+        Schema::table('accommodation', function (Blueprint $table) {
+            $table->dropForeign('accommodation_user_id_foreign');
+        });
     }
 }

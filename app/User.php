@@ -48,4 +48,8 @@ class User extends Authenticatable
         return $this->roles;
     }
 
+    public function accommodations()
+    {
+        return $this->hasMany('App\Accommodation');
+    }
 }

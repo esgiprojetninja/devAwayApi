@@ -24,7 +24,6 @@ class Accommodation extends Model
         'address',
         'longitude',
         'latitude',
-        'host',
         'nbBedroom',
         'nbBathroom',
         'nbToilet',
@@ -56,4 +55,7 @@ class Accommodation extends Model
         return $this->hasMany('App\Picture');
     }
 
+    public function host() {
+        return $this->belongsTo('App\User', 'user_id', 'id');
+    }
 }

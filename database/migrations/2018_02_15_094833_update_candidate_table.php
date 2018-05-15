@@ -29,8 +29,9 @@ class UpdateCandidateTable extends Migration
      */
     public function down()
     {
-        DB::statement('SET FOREIGN_KEY_CHECKS = 0');
-        Schema::dropIfExists('candidate');
-        DB::statement('SET FOREIGN_KEY_CHECKS = 1');
+        Schema::table('candidate', function (Blueprint $table) {
+            $table->dropForeign('candidate_accommodation_foreign');
+            $table->dropForeign('candidate_user_foreign');
+        });
     }
 }

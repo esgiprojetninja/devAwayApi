@@ -29,8 +29,9 @@ class UpdateMessageTable extends Migration
      */
     public function down()
     {
-        DB::statement('SET FOREIGN_KEY_CHECKS = 0');
-        Schema::dropIfExists('message');
-        DB::statement('SET FOREIGN_KEY_CHECKS = 1');
+        Schema::table('message', function (Blueprint $table) {
+            $table->dropForeign('message_accommodation_foreign');
+            $table->dropForeign('message_candidate_foreign');
+        });
     }
 }

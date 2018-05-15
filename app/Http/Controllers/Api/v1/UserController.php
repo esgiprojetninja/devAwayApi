@@ -19,7 +19,7 @@ class UserController extends Controller
     public function index()
     {
         $user = new User;
-        return $user->all();
+        return $user->with('accommodations')->get();
     }
 
     /**

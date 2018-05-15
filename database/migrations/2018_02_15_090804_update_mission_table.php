@@ -29,8 +29,9 @@ class UpdateMissionTable extends Migration
      */
     public function down()
     {
-        DB::statement('SET FOREIGN_KEY_CHECKS = 0');
-        Schema::dropIfExists('mission');
-        DB::statement('SET FOREIGN_KEY_CHECKS = 1');
+        Schema::table('mission', function (Blueprint $table) {
+            $table->dropForeign('mission_accommodation_foreign');
+            $table->dropForeign('mission_traveller_foreign');
+        });
     }
 }

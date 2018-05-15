@@ -4,18 +4,12 @@ namespace Tests\Feature;
 
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Support\Facades\Auth;
+use Illuminate\Foundation\Testing\WithoutMiddleware;
 
 class PictureTest extends TestCase
 {
 
-    use RefreshDatabase;
-
-    public function testLogin()
-    {
-        $this->post('/api/login', ["email" => "lambot.rom@gmail.com", "password" => "Rootroot9"])
-             ->assertStatus(200);
-    }
+    use WithoutMiddleware, RefreshDatabase;
 
     /**
      * Test if insert picture is working.
@@ -25,11 +19,9 @@ class PictureTest extends TestCase
     public function testPictureInsertSuccess()
     {
 
-        $this->withHeaders([
-            'Accept' => 'application/json',
-            'Content-Type' => 'application/json',
-            'Authorization' => 'Bearer ' .'',
-            ])->post("/api/v1/pictures", ['url' => 'testingUrl'])
+        $accommodation = factory(\App\Accommodation::class)->make();
+
+        $this->post("/api/v1/pictures", ['url' => 'testingUrl', "accommodation_id" => 1])
              ->assertStatus(201);
     }
 

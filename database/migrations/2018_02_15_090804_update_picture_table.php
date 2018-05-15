@@ -14,7 +14,7 @@ class UpdatePictureTable extends Migration
     public function up()
     {
         Schema::table('picture', function (Blueprint $table) {
-            $table->integer('accommodation_id')->unsigned()->nullable();
+            $table->integer('accommodation_id')->unsigned();
             $table->foreign('accommodation_id')->references('id')->on('accommodation')->onUpdate('cascade')->onDelete('cascade');
         });
     }
@@ -26,8 +26,8 @@ class UpdatePictureTable extends Migration
      */
     public function down()
     {
-        DB::statement('SET FOREIGN_KEY_CHECKS = 0');
-        Schema::dropIfExists('picture');
-        DB::statement('SET FOREIGN_KEY_CHECKS = 1');
+        Schema::table('picture', function (Blueprint $table) {
+            $table->dropForeign('picture_accommodation_id_foreign');
+        });
     }
 }
