@@ -13,6 +13,12 @@ class MessageController extends Controller
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
+     *
+     * @SWG\GET(
+     *     path="/api/v1/messages",
+     *     @SWG\Response(response="200", description="Get all messages"),
+     *     security={ {"passport": {} } }
+     * )
      */
     public function index()
     {
@@ -25,6 +31,12 @@ class MessageController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
+     *
+     * @SWG\POST(
+     *     path="/api/v1/messages",
+     *     @SWG\Response(response="200", description="Create one message"),
+     *     security={ {"passport": {} } }
+     * )
      */
     public function store(Request $request)
     {
@@ -37,6 +49,12 @@ class MessageController extends Controller
      *
      * @param  int  $messageId
      * @return \Illuminate\Http\Response
+     *
+     * @SWG\GET(
+     *     path="/api/v1/messages/{id}",
+     *     @SWG\Response(response="200", description="Get one message by id"),
+     *     security={ {"passport": {} } }
+     * )
      */
     public function show($messageId)
     {
@@ -50,6 +68,12 @@ class MessageController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $messageId
      * @return \Illuminate\Http\Response
+     *
+     * @SWG\PUT(
+     *     path="/api/v1/messages/{id}",
+     *     @SWG\Response(response="200", description="Update one message by id"),
+     *     security={ {"passport": {} } }
+     * )
      */
     public function update(Request $request, $messageId)
     {
@@ -65,6 +89,12 @@ class MessageController extends Controller
      *
      * @param  int  $messageId
      * @return \Illuminate\Http\Response
+     *
+     * @SWG\DELETE(
+     *     path="/api/v1/messages/{id}",
+     *     @SWG\Response(response="200", description="Delete one message by id"),
+     *     security={ {"passport": {} } }
+     * )
      */
     public function destroy($messageId)
     {

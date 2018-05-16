@@ -10,9 +10,19 @@ use App\Accommodation;
 class AccommodationController extends Controller
 {
     /**
+     * @SWG\Info(title="Accommodation CRUD", version="1.0")
+     */
+
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
+     *
+     * @SWG\Get(
+     *     path="/api/v1/accommodations",
+     *     @SWG\Response(response="200", description="Get all accommodations"),
+     *     security={ {"passport": {} } }
+     * )
      */
     public function index()
     {
@@ -25,6 +35,12 @@ class AccommodationController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
+     *
+     * @SWG\Post(
+     *     path="/api/v1/accommodations",
+     *     @SWG\Response(response="201", description="Create one accommodation"),
+     *     security={ {"passport": {} } }
+     * )
      */
     public function store(Request $request)
     {
@@ -37,6 +53,12 @@ class AccommodationController extends Controller
      *
      * @param  int  $accommodationId
      * @return \Illuminate\Http\Response
+     *
+     * @SWG\Get(
+     *     path="/api/v1/accommodations/{id}",
+     *     @SWG\Response(response="200", description="Get one accommodation by id"),
+     *     security={ {"passport": {} } }
+     * )
      */
     public function show($accommodationId)
     {
@@ -50,6 +72,12 @@ class AccommodationController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $accommodationId
      * @return \Illuminate\Http\Response
+     *
+     * @SWG\PUT(
+     *     path="/api/v1/accommodations/{id}",
+     *     @SWG\Response(response="200", description="Update one accommodation by id"),
+     *     security={ {"passport": {} } }
+     * )
      */
     public function update(Request $request, $accommodationId)
     {
@@ -65,6 +93,12 @@ class AccommodationController extends Controller
      *
      * @param  int  $accommodationId
      * @return \Illuminate\Http\Response
+     *
+     * @SWG\DELETE(
+     *     path="/api/v1/accommodations/{id}",
+     *     @SWG\Response(response="200", description="Delete one accommodation by id"),
+     *     security={ {"passport": {} } }
+     * )
      */
     public function destroy($accommodationId)
     {

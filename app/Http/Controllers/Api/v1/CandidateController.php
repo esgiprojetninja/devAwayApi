@@ -13,6 +13,12 @@ class CandidateController extends Controller
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
+     *
+     * @SWG\GET(
+     *     path="/api/v1/candidates",
+     *     @SWG\Response(response="200", description="Get all candidates"),
+     *     security={ {"passport": {} } }
+     * )
      */
     public function index()
     {
@@ -25,6 +31,12 @@ class CandidateController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
+     *
+     * @SWG\POST(
+     *     path="/api/v1/candidates",
+     *     @SWG\Response(response="200", description="Create one candidate"),
+     *     security={ {"passport": {} } }
+     * )
      */
     public function store(Request $request)
     {
@@ -37,6 +49,12 @@ class CandidateController extends Controller
      *
      * @param  int  $candidateId
      * @return \Illuminate\Http\Response
+     *
+     * @SWG\GET(
+     *     path="/api/v1/candidates/{id}",
+     *     @SWG\Response(response="200", description="Get one candidate by id"),
+     *     security={ {"passport": {} } }
+     * )
      */
     public function show($candidateId)
     {
@@ -50,6 +68,12 @@ class CandidateController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $candidateId
      * @return \Illuminate\Http\Response
+     *
+     * @SWG\PUT(
+     *     path="/api/v1/candidates/{id}",
+     *     @SWG\Response(response="200", description="Update one candidate by id"),
+     *     security={ {"passport": {} } }
+     * )
      */
     public function update(Request $request, $candidateId)
     {
@@ -65,6 +89,12 @@ class CandidateController extends Controller
      *
      * @param  int  $candidateId
      * @return \Illuminate\Http\Response
+     *
+     * @SWG\DELETE(
+     *     path="/api/v1/candidates/{id}",
+     *     @SWG\Response(response="200", description="Delete one candidate by id"),
+     *     security={ {"passport": {} } }
+     * )
      */
     public function destroy($candidateId)
     {

@@ -15,6 +15,12 @@ class MissionController extends Controller
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
+     *
+     * @SWG\GET(
+     *     path="/api/v1/missions",
+     *     @SWG\Response(response="200", description="Get all missions"),
+     *     security={ {"passport": {} } }
+     * )
      */
     public function index()
     {
@@ -27,6 +33,12 @@ class MissionController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
+     *
+     * @SWG\POST(
+     *     path="/api/v1/missions",
+     *     @SWG\Response(response="200", description="Create one mission"),
+     *     security={ {"passport": {} } }
+     * )
      */
     public function store(Request $request)
     {
@@ -39,6 +51,12 @@ class MissionController extends Controller
      *
      * @param  int  $missionId
      * @return \Illuminate\Http\Response
+     *
+     * @SWG\GET(
+     *     path="/api/v1/missions/{id}",
+     *     @SWG\Response(response="200", description="Get one mission by id"),
+     *     security={ {"passport": {} } }
+     * )
      */
     public function show($missionId)
     {
@@ -52,6 +70,12 @@ class MissionController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $missionId
      * @return \Illuminate\Http\Response
+     *
+     * @SWG\PUT(
+     *     path="/api/v1/missions/{id}",
+     *     @SWG\Response(response="200", description="Update one mission by id"),
+     *     security={ {"passport": {} } }
+     * )
      */
     public function update(Request $request, $missionId)
     {
@@ -67,6 +91,12 @@ class MissionController extends Controller
      *
      * @param  int  $missionId
      * @return \Illuminate\Http\Response
+     *
+     * @SWG\DELETE(
+     *     path="/api/v1/missions/{id}",
+     *     @SWG\Response(response="200", description="Delete one mission by id"),
+     *     security={ {"passport": {} } }
+     * )
      */
     public function destroy($missionId)
     {
@@ -80,7 +110,7 @@ class MissionController extends Controller
     public function apply(Request $request, $missionId)
     {
         $idUser = Auth::user()->id;
-
+        //TODO : Verifier que l'user n'a pas déjà postulé
         $candidate = new Candidate();
         $candidate->setUser($idUser);
         $candidate->setMission($missionId);
