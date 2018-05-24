@@ -11,13 +11,6 @@ class AccommodationController extends Controller
 {
     /**
      * @SWG\Info(title="Accommodation CRUD", version="1.0")
-     * @SWG\SecurityScheme(
-     *   securityDefinition="apKey",
-     *   type="apiKey",
-     *   in="header",
-     *   name="Authorization",
-     *   scopes={}
-     * )
      */
 
     /**
@@ -28,7 +21,7 @@ class AccommodationController extends Controller
      * @SWG\Get(
      *     path="/api/v1/accommodations",
      *     tags={"accommodation"},
-     *     security={ {"apKey": {} } },
+     *     security={ {"passport": {} } },
      *     summary="Get accommodations",
      *     @SWG\Response(response="200", description="Get all accommodations"),
      * )

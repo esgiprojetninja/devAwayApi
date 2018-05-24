@@ -49,7 +49,7 @@ return [
                 \Illuminate\View\Middleware\ShareErrorsFromSession::class,
                 \App\Http\Middleware\VerifyCsrfToken::class,
                 \Illuminate\Routing\Middleware\SubstituteBindings::class,
-                \Laravel\Passport\Http\Middleware\CreateFreshApiToken::class
+                \Laravel\Passport\Http\Middleware\CreateFreshApiToken::class,
             ],
             'asset' => [],
             'docs' => [],
@@ -118,7 +118,7 @@ return [
         | Examples of Security definitions
         |--------------------------------------------------------------------------
         */
-
+        /*
         'api_key_security_example' => [ // Unique name of security
             'type' => 'apiKey', // The type of the security scheme. Valid values are "basic", "apiKey" or "oauth2".
             'description' => 'A short description for security scheme',
@@ -136,14 +136,14 @@ return [
                 'write:projects' => 'modify projects in your account',
             ]
         ],
-
+        */
 
         //Open API 3.0 support
         'passport' => [ // Unique name of security
             'type' => 'oauth2', // The type of the security scheme. Valid values are "basic", "apiKey" or "oauth2".
             'description' => 'Laravel passport oauth2 security.',
             'in' => 'header',
-            'scheme' => 'https',
+            'scheme' => 'http',
             'flows' => [
                 "password" => [
                     "authorizationUrl" => config('app.url') . '/oauth/authorize',
