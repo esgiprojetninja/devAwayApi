@@ -11,6 +11,13 @@ class AccommodationController extends Controller
 {
     /**
      * @SWG\Info(title="Accommodation CRUD", version="1.0")
+     * @SWG\SecurityScheme(
+     *   securityDefinition="apKey",
+     *   type="apiKey",
+     *   in="header",
+     *   name="Authorization",
+     *   scopes={}
+     * )
      */
 
     /**
@@ -20,8 +27,10 @@ class AccommodationController extends Controller
      *
      * @SWG\Get(
      *     path="/api/v1/accommodations",
+     *     tags={"accommodation"},
+     *     security={ {"apKey": {} } },
+     *     summary="Get accommodations",
      *     @SWG\Response(response="200", description="Get all accommodations"),
-     *     security={ {"passport": {} } }
      * )
      */
     public function index()
@@ -38,8 +47,9 @@ class AccommodationController extends Controller
      *
      * @SWG\Post(
      *     path="/api/v1/accommodations",
+     *     tags={"accommodation"},
+     *     security={ {"passport": {} } },
      *     @SWG\Response(response="201", description="Create one accommodation"),
-     *     security={ {"passport": {} } }
      * )
      */
     public function store(Request $request)
@@ -56,8 +66,9 @@ class AccommodationController extends Controller
      *
      * @SWG\Get(
      *     path="/api/v1/accommodations/{id}",
+     *     tags={"accommodation"},
+     *     security={ {"passport": {} } },
      *     @SWG\Response(response="200", description="Get one accommodation by id"),
-     *     security={ {"passport": {} } }
      * )
      */
     public function show($accommodationId)
@@ -75,8 +86,9 @@ class AccommodationController extends Controller
      *
      * @SWG\PUT(
      *     path="/api/v1/accommodations/{id}",
+     *     tags={"accommodation"},
+     *     security={ {"passport": {} } },
      *     @SWG\Response(response="200", description="Update one accommodation by id"),
-     *     security={ {"passport": {} } }
      * )
      */
     public function update(Request $request, $accommodationId)
@@ -96,8 +108,9 @@ class AccommodationController extends Controller
      *
      * @SWG\DELETE(
      *     path="/api/v1/accommodations/{id}",
+     *     tags={"accommodation"},
+     *     security={ {"passport": {} } },
      *     @SWG\Response(response="200", description="Delete one accommodation by id"),
-     *     security={ {"passport": {} } }
      * )
      */
     public function destroy($accommodationId)

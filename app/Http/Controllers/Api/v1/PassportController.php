@@ -16,6 +16,26 @@ class PassportController extends Controller
     /**
      * login api
      *
+     * @SWG\POST(
+     *     path="/api/login",
+     *     @SWG\Response(response="200", description="Logged in"),
+     *     @SWG\Parameter(
+     *       name="email",
+     *       in="query",
+     *       description="Email",
+     *       required=true,
+     *       type="string"
+     *     ),
+     *     @SWG\Parameter(
+     *       name="password",
+     *       in="query",
+     *       description="Password",
+     *       required=true,
+     *       type="string"
+     *     ),
+     *     security={ {"passport": {} } }
+     * )
+     *
      * @return \Illuminate\Http\Response
      */
     public function login(){

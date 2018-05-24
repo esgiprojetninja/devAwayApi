@@ -18,8 +18,9 @@ class MissionController extends Controller
      *
      * @SWG\GET(
      *     path="/api/v1/missions",
+     *     tags={"mission"},
+     *     security={ {"passport": {} } },
      *     @SWG\Response(response="200", description="Get all missions"),
-     *     security={ {"passport": {} } }
      * )
      */
     public function index()
@@ -36,8 +37,9 @@ class MissionController extends Controller
      *
      * @SWG\POST(
      *     path="/api/v1/missions",
+     *     tags={"mission"},
+     *     security={ {"passport": {} } },
      *     @SWG\Response(response="200", description="Create one mission"),
-     *     security={ {"passport": {} } }
      * )
      */
     public function store(Request $request)
@@ -54,8 +56,9 @@ class MissionController extends Controller
      *
      * @SWG\GET(
      *     path="/api/v1/missions/{id}",
+     *     tags={"mission"},
+     *     security={ {"passport": {} } },
      *     @SWG\Response(response="200", description="Get one mission by id"),
-     *     security={ {"passport": {} } }
      * )
      */
     public function show($missionId)
@@ -73,8 +76,9 @@ class MissionController extends Controller
      *
      * @SWG\PUT(
      *     path="/api/v1/missions/{id}",
+     *     tags={"mission"},
+     *     security={ {"passport": {} } },
      *     @SWG\Response(response="200", description="Update one mission by id"),
-     *     security={ {"passport": {} } }
      * )
      */
     public function update(Request $request, $missionId)
@@ -94,8 +98,9 @@ class MissionController extends Controller
      *
      * @SWG\DELETE(
      *     path="/api/v1/missions/{id}",
+     *     tags={"mission"},
+     *     security={ {"passport": {} } },
      *     @SWG\Response(response="200", description="Delete one mission by id"),
-     *     security={ {"passport": {} } }
      * )
      */
     public function destroy($missionId)

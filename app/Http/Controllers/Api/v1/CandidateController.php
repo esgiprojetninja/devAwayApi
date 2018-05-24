@@ -16,8 +16,9 @@ class CandidateController extends Controller
      *
      * @SWG\GET(
      *     path="/api/v1/candidates",
+     *     tags={"candidate"},
+     *     security={ {"passport": {} } },
      *     @SWG\Response(response="200", description="Get all candidates"),
-     *     security={ {"passport": {} } }
      * )
      */
     public function index()
@@ -34,8 +35,9 @@ class CandidateController extends Controller
      *
      * @SWG\POST(
      *     path="/api/v1/candidates",
+     *     tags={"candidate"},
+     *     security={ {"passport": {} } },
      *     @SWG\Response(response="200", description="Create one candidate"),
-     *     security={ {"passport": {} } }
      * )
      */
     public function store(Request $request)
@@ -52,8 +54,9 @@ class CandidateController extends Controller
      *
      * @SWG\GET(
      *     path="/api/v1/candidates/{id}",
+     *     tags={"candidate"},
+     *     security={ {"passport": {} } },
      *     @SWG\Response(response="200", description="Get one candidate by id"),
-     *     security={ {"passport": {} } }
      * )
      */
     public function show($candidateId)
@@ -71,8 +74,9 @@ class CandidateController extends Controller
      *
      * @SWG\PUT(
      *     path="/api/v1/candidates/{id}",
+     *     tags={"candidate"},
+     *     security={ {"passport": {} } },
      *     @SWG\Response(response="200", description="Update one candidate by id"),
-     *     security={ {"passport": {} } }
      * )
      */
     public function update(Request $request, $candidateId)
@@ -92,8 +96,9 @@ class CandidateController extends Controller
      *
      * @SWG\DELETE(
      *     path="/api/v1/candidates/{id}",
+     *     tags={"candidate"},
+     *     security={ {"passport": {} } },
      *     @SWG\Response(response="200", description="Delete one candidate by id"),
-     *     security={ {"passport": {} } }
      * )
      */
     public function destroy($candidateId)

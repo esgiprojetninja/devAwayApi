@@ -16,8 +16,9 @@ class PictureController extends Controller
      *
      * @SWG\GET(
      *     path="/api/v1/pictures",
+     *     tags={"picture"},
+     *     security={ {"passport": {} } },
      *     @SWG\Response(response="200", description="Get all pictures"),
-     *     security={ {"passport": {} } }
      * )
      */
     public function index()
@@ -34,8 +35,9 @@ class PictureController extends Controller
      *
      * @SWG\POST(
      *     path="/api/v1/pictures",
+     *     tags={"picture"},
+     *     security={ {"passport": {} } },
      *     @SWG\Response(response="200", description="Create one picture"),
-     *     security={ {"passport": {} } }
      * )
      */
     public function store(Request $request)
@@ -52,8 +54,9 @@ class PictureController extends Controller
      *
      * @SWG\GET(
      *     path="/api/v1/pictures/{id}",
+     *     tags={"picture"},
+     *     security={ {"passport": {} } },
      *     @SWG\Response(response="200", description="Get one picture by id"),
-     *     security={ {"passport": {} } }
      * )
      */
     public function show($pictureId)
@@ -71,8 +74,9 @@ class PictureController extends Controller
      *
      * @SWG\PUT(
      *     path="/api/v1/pictures/{id}",
+     *     tags={"picture"},
+     *     security={ {"passport": {} } },
      *     @SWG\Response(response="200", description="Update one picture by id"),
-     *     security={ {"passport": {} } }
      * )
      */
     public function update(Request $request, $pictureId)
@@ -92,8 +96,9 @@ class PictureController extends Controller
      *
      * @SWG\DELETE(
      *     path="/api/v1/pictures/{id}",
+     *     tags={"picture"},
+     *     security={ {"passport": {} } },
      *     @SWG\Response(response="200", description="Delete one picture by id"),
-     *     security={ {"passport": {} } }
      * )
      */
     public function destroy($pictureId)

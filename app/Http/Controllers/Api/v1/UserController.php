@@ -18,8 +18,9 @@ class UserController extends Controller
      *
      * @SWG\GET(
      *     path="/api/v1/users",
+     *     tags={"user"},
+     *     security={ {"passport": {} } },
      *     @SWG\Response(response="200", description="Get all users"),
-     *     security={ {"passport": {} } }
      * )
      */
     public function index()
@@ -36,8 +37,9 @@ class UserController extends Controller
      *
      * @SWG\POST(
      *     path="/api/v1/users",
+     *     tags={"user"},
+     *     security={ {"passport": {} } },
      *     @SWG\Response(response="200", description="Create one user"),
-     *     security={ {"passport": {} } }
      * )
      */
     public function store(Request $request)
@@ -54,8 +56,9 @@ class UserController extends Controller
      *
      * @SWG\GET(
      *     path="/api/v1/users/{id}",
+     *     tags={"user"},
+     *     security={ {"passport": {} } },
      *     @SWG\Response(response="200", description="Get one user by id"),
-     *     security={ {"passport": {} } }
      * )
      */
     public function show($userId)
@@ -78,8 +81,9 @@ class UserController extends Controller
      *
      * @SWG\PUT(
      *     path="/api/v1/users/{id}",
+     *     tags={"user"},
+     *     security={ {"passport": {} } },
      *     @SWG\Response(response="200", description="Update one user by id"),
-     *     security={ {"passport": {} } }
      * )
      */
     public function update(Request $request, $userId)
@@ -99,8 +103,9 @@ class UserController extends Controller
      *
      * @SWG\DELETE(
      *     path="/api/v1/users/{id}",
+     *     tags={"user"},
+     *     security={ {"passport": {} } },
      *     @SWG\Response(response="200", description="Delete one user by id"),
-     *     security={ {"passport": {} } }
      * )
      */
     public function destroy($userId)

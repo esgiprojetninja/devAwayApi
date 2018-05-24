@@ -16,8 +16,9 @@ class MessageController extends Controller
      *
      * @SWG\GET(
      *     path="/api/v1/messages",
+     *     tags={"message"},
+     *     security={ {"passport": {} } },
      *     @SWG\Response(response="200", description="Get all messages"),
-     *     security={ {"passport": {} } }
      * )
      */
     public function index()
@@ -34,8 +35,9 @@ class MessageController extends Controller
      *
      * @SWG\POST(
      *     path="/api/v1/messages",
+     *     tags={"message"},
+     *     security={ {"passport": {} } },
      *     @SWG\Response(response="200", description="Create one message"),
-     *     security={ {"passport": {} } }
      * )
      */
     public function store(Request $request)
@@ -52,8 +54,9 @@ class MessageController extends Controller
      *
      * @SWG\GET(
      *     path="/api/v1/messages/{id}",
+     *     tags={"message"},
+     *     security={ {"passport": {} } },
      *     @SWG\Response(response="200", description="Get one message by id"),
-     *     security={ {"passport": {} } }
      * )
      */
     public function show($messageId)
@@ -71,8 +74,9 @@ class MessageController extends Controller
      *
      * @SWG\PUT(
      *     path="/api/v1/messages/{id}",
+     *     tags={"message"},
+     *     security={ {"passport": {} } },
      *     @SWG\Response(response="200", description="Update one message by id"),
-     *     security={ {"passport": {} } }
      * )
      */
     public function update(Request $request, $messageId)
@@ -92,8 +96,9 @@ class MessageController extends Controller
      *
      * @SWG\DELETE(
      *     path="/api/v1/messages/{id}",
+     *     tags={"message"},
+     *     security={ {"passport": {} } },
      *     @SWG\Response(response="200", description="Delete one message by id"),
-     *     security={ {"passport": {} } }
      * )
      */
     public function destroy($messageId)

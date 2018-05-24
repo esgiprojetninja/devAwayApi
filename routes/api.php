@@ -13,9 +13,6 @@ use Illuminate\Http\Request;
 |
 */
 
-/**
- * @SWG\Info(title="My First API", version="0.1")
- */
 
 Route::get('foo', function () {
     return 'Hello World';
