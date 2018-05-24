@@ -75,6 +75,7 @@ window.onload = function() {
   const ui = SwaggerUIBundle({
     dom_id: '#swagger-ui',
 
+      docExpansion: 'none', //Pour collapse all
     url: "{!! $urlToDocs !!}",
     operationsSorter: {!! isset($operationsSorter) ? '"' . $operationsSorter . '"' : 'null' !!},
     configUrl: {!! isset($configUrl) ? '"' . $configUrl . '"' : 'null' !!},
@@ -97,15 +98,6 @@ window.onload = function() {
 
     layout: "StandaloneLayout"
   })
-
-    ui.initOAuth({
-        clientId: "your-client-id",
-        clientSecret: "your-client-secret-if-required",
-        realm: "your-realms",
-        appName: "your-app-name",
-        scopeSeparator: " ",
-        additionalQueryStringParams: {test: "hello"}
-    })
 
   window.ui = ui
 }

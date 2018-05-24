@@ -18,6 +18,7 @@ class PassportController extends Controller
      *
      * @SWG\POST(
      *     path="/api/login",
+     *     tags={"Login"},
      *     @SWG\Response(response="200", description="Logged in"),
      *     @SWG\Parameter(
      *       name="email",

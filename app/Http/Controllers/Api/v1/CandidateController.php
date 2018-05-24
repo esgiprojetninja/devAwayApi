@@ -16,8 +16,9 @@ class CandidateController extends Controller
      *
      * @SWG\GET(
      *     path="/api/v1/candidates",
-     *     tags={"candidate"},
+     *     tags={"Candidate"},
      *     security={ {"passport": {} } },
+     *     summary="Get all candidates",
      *     @SWG\Response(response="200", description="Get all candidates"),
      * )
      */
@@ -35,8 +36,36 @@ class CandidateController extends Controller
      *
      * @SWG\POST(
      *     path="/api/v1/candidates",
-     *     tags={"candidate"},
+     *     tags={"Candidate"},
      *     security={ {"passport": {} } },
+     *     @SWG\Parameter(
+     *       name="fromDate",
+     *       in="query",
+     *       required=true,
+     *       description="Beginning date YYYY-MM-DD",
+     *       type="string"
+     *     ),
+     *     @SWG\Parameter(
+     *       name="toDate",
+     *       in="query",
+     *       required=true,
+     *       description="Ending date YYYY-MM-DD",
+     *       type="string"
+     *     ),
+     *     @SWG\Parameter(
+     *       name="user",
+     *       in="query",
+     *       description="Id of the user postuling",
+     *       required=true,
+     *       type="integer"
+     *     ),
+     *     @SWG\Parameter(
+     *       name="mission",
+     *       in="query",
+     *       description="Id of the mission",
+     *       required=true,
+     *       type="integer"
+     *     ),
      *     @SWG\Response(response="200", description="Create one candidate"),
      * )
      */
@@ -54,9 +83,17 @@ class CandidateController extends Controller
      *
      * @SWG\GET(
      *     path="/api/v1/candidates/{id}",
-     *     tags={"candidate"},
+     *     tags={"Candidate"},
      *     security={ {"passport": {} } },
+     *     summary="Get one candidate by id",
+     *     @SWG\Parameter(
+     *       name="id",
+     *       in="path",
+     *       required=true,
+     *       type="integer"
+     *     ),
      *     @SWG\Response(response="200", description="Get one candidate by id"),
+     *     @SWG\Response(response="404", description="Not found"),
      * )
      */
     public function show($candidateId)
@@ -74,8 +111,42 @@ class CandidateController extends Controller
      *
      * @SWG\PUT(
      *     path="/api/v1/candidates/{id}",
-     *     tags={"candidate"},
+     *     tags={"Candidate"},
      *     security={ {"passport": {} } },
+     *     @SWG\Parameter(
+     *       name="fromDate",
+     *       in="query",
+     *       required=false,
+     *       description="Beginning date YYYY-MM-DD",
+     *       type="string"
+     *     ),
+     *     @SWG\Parameter(
+     *       name="toDate",
+     *       in="query",
+     *       required=false,
+     *       description="Ending date YYYY-MM-DD",
+     *       type="string"
+     *     ),
+     *     @SWG\Parameter(
+     *       name="user",
+     *       in="query",
+     *       description="Id of the user postuling",
+     *       required=false,
+     *       type="integer"
+     *     ),
+     *     @SWG\Parameter(
+     *       name="mission",
+     *       in="query",
+     *       description="Id of the mission",
+     *       required=false,
+     *       type="integer"
+     *     ),
+     *     @SWG\Parameter(
+     *       name="id",
+     *       in="path",
+     *       required=true,
+     *       type="integer"
+     *     ),
      *     @SWG\Response(response="200", description="Update one candidate by id"),
      * )
      */
@@ -96,9 +167,17 @@ class CandidateController extends Controller
      *
      * @SWG\DELETE(
      *     path="/api/v1/candidates/{id}",
-     *     tags={"candidate"},
+     *     tags={"Candidate"},
      *     security={ {"passport": {} } },
-     *     @SWG\Response(response="200", description="Delete one candidate by id"),
+     *     summary="Delete one candidate by id",
+     *     @SWG\Parameter(
+     *       name="id",
+     *       in="path",
+     *       required=true,
+     *       type="integer"
+     *     ),
+     *     @SWG\Response(response="204", description="No content"),
+     *     @SWG\Response(response="404", description="Not found"),
      * )
      */
     public function destroy($candidateId)

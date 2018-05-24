@@ -18,8 +18,9 @@ class MissionController extends Controller
      *
      * @SWG\GET(
      *     path="/api/v1/missions",
-     *     tags={"mission"},
+     *     tags={"Mission"},
      *     security={ {"passport": {} } },
+     *     summary="Get all missions",
      *     @SWG\Response(response="200", description="Get all missions"),
      * )
      */
@@ -37,8 +38,94 @@ class MissionController extends Controller
      *
      * @SWG\POST(
      *     path="/api/v1/missions",
-     *     tags={"mission"},
+     *     tags={"Mission"},
      *     security={ {"passport": {} } },
+     *     @SWG\Parameter(
+     *       name="accommodation",
+     *       in="query",
+     *       required=true,
+     *       description="Id of the accommodation",
+     *       type="integer"
+     *     ),
+     *     @SWG\Parameter(
+     *       name="traveller",
+     *       in="query",
+     *       description="Id of the user",
+     *       required=true,
+     *       type="integer"
+     *     ),
+     *     @SWG\Parameter(
+     *       name="checkinDate",
+     *       in="query",
+     *       required=true,
+     *       description="YYYY-MM-DD",
+     *       type="string"
+     *     ),
+     *     @SWG\Parameter(
+     *       name="checkoutDate",
+     *       in="query",
+     *       description="YYYY-MM-DD",
+     *       required=true,
+     *       type="string"
+     *     ),
+     *     @SWG\Parameter(
+     *       name="checkinHour",
+     *       in="query",
+     *       required=true,
+     *       description="HH:MM",
+     *       type="string"
+     *     ),
+     *     @SWG\Parameter(
+     *       name="checkoutHour",
+     *       in="query",
+     *       description="HH:MM",
+     *       required=true,
+     *       type="string"
+     *     ),
+     *     @SWG\Parameter(
+     *       name="checkinDetails",
+     *       in="query",
+     *       required=true,
+     *       type="string"
+     *     ),
+     *     @SWG\Parameter(
+     *       name="checkoutDetails",
+     *       in="query",
+     *       required=true,
+     *       type="string"
+     *     ),
+     *     @SWG\Parameter(
+     *       name="nbNights",
+     *       in="query",
+     *       required=true,
+     *       type="integer"
+     *     ),
+     *     @SWG\Parameter(
+     *       name="nbPersons",
+     *       in="query",
+     *       required=true,
+     *       type="integer"
+     *     ),
+     *     @SWG\Parameter(
+     *       name="description",
+     *       in="query",
+     *       required=true,
+     *       type="string"
+     *     ),
+     *     @SWG\Parameter(
+     *       name="isBooked",
+     *       in="query",
+     *       required=true,
+     *       description="0 if it's free, 1 if it's allready booked",
+     *       type="integer"
+     *     ),
+     *     @SWG\Parameter(
+     *       name="isActive",
+     *       in="query",
+     *       required=true,
+     *       description="0 if it's no longer active, 1 if it's still active",
+     *       type="integer"
+     *     ),
      *     @SWG\Response(response="200", description="Create one mission"),
      * )
      */
@@ -56,9 +143,17 @@ class MissionController extends Controller
      *
      * @SWG\GET(
      *     path="/api/v1/missions/{id}",
-     *     tags={"mission"},
+     *     tags={"Mission"},
      *     security={ {"passport": {} } },
+     *     summary="Get one mission by id",
+     *     @SWG\Parameter(
+     *       name="id",
+     *       in="path",
+     *       required=true,
+     *       type="integer"
+     *     ),
      *     @SWG\Response(response="200", description="Get one mission by id"),
+     *     @SWG\Response(response="404", description="Not found"),
      * )
      */
     public function show($missionId)
@@ -76,9 +171,103 @@ class MissionController extends Controller
      *
      * @SWG\PUT(
      *     path="/api/v1/missions/{id}",
-     *     tags={"mission"},
+     *     tags={"Mission"},
      *     security={ {"passport": {} } },
+     *     summary="Update one mission by id",
+     *     @SWG\Parameter(
+     *       name="accommodation",
+     *       in="query",
+     *       required=false,
+     *       description="Id of the accommodation",
+     *       type="integer"
+     *     ),
+     *     @SWG\Parameter(
+     *       name="traveller",
+     *       in="query",
+     *       description="Id of the user",
+     *       required=false,
+     *       type="integer"
+     *     ),
+     *     @SWG\Parameter(
+     *       name="checkinDate",
+     *       in="query",
+     *       required=false,
+     *       description="YYYY-MM-DD",
+     *       type="string"
+     *     ),
+     *     @SWG\Parameter(
+     *       name="checkoutDate",
+     *       in="query",
+     *       description="YYYY-MM-DD",
+     *       required=false,
+     *       type="string"
+     *     ),
+     *     @SWG\Parameter(
+     *       name="checkinHour",
+     *       in="query",
+     *       required=false,
+     *       description="HH:MM",
+     *       type="string"
+     *     ),
+     *     @SWG\Parameter(
+     *       name="checkoutHour",
+     *       in="query",
+     *       description="HH:MM",
+     *       required=false,
+     *       type="string"
+     *     ),
+     *     @SWG\Parameter(
+     *       name="checkinDetails",
+     *       in="query",
+     *       required=false,
+     *       type="string"
+     *     ),
+     *     @SWG\Parameter(
+     *       name="checkoutDetails",
+     *       in="query",
+     *       required=false,
+     *       type="string"
+     *     ),
+     *     @SWG\Parameter(
+     *       name="nbNights",
+     *       in="query",
+     *       required=false,
+     *       type="integer"
+     *     ),
+     *     @SWG\Parameter(
+     *       name="nbPersons",
+     *       in="query",
+     *       required=false,
+     *       type="integer"
+     *     ),
+     *     @SWG\Parameter(
+     *       name="description",
+     *       in="query",
+     *       required=false,
+     *       type="string"
+     *     ),
+     *     @SWG\Parameter(
+     *       name="isBooked",
+     *       in="query",
+     *       required=false,
+     *       description="0 if it's free, 1 if it's allready booked",
+     *       type="integer"
+     *     ),
+     *     @SWG\Parameter(
+     *       name="isActive",
+     *       in="query",
+     *       required=false,
+     *       description="0 if it's no longer active, 1 if it's still active",
+     *       type="integer"
+     *     ),
+     *     @SWG\Parameter(
+     *       name="id",
+     *       in="path",
+     *       required=true,
+     *       type="integer"
+     *     ),
      *     @SWG\Response(response="200", description="Update one mission by id"),
+     *     @SWG\Response(response="404", description="Not found"),
      * )
      */
     public function update(Request $request, $missionId)
@@ -98,9 +287,17 @@ class MissionController extends Controller
      *
      * @SWG\DELETE(
      *     path="/api/v1/missions/{id}",
-     *     tags={"mission"},
+     *     tags={"Mission"},
      *     security={ {"passport": {} } },
-     *     @SWG\Response(response="200", description="Delete one mission by id"),
+     *     summary="Delete one mission by id",
+     *     @SWG\Parameter(
+     *       name="id",
+     *       in="path",
+     *       required=true,
+     *       type="integer"
+     *     ),
+     *     @SWG\Response(response="204", description="No content"),
+     *     @SWG\Response(response="404", description="Not found"),
      * )
      */
     public function destroy($missionId)

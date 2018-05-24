@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Api\v1;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
-
+use Validator;
 use App\User;
 use function PHPSTORM_META\type;
 
@@ -18,8 +18,9 @@ class UserController extends Controller
      *
      * @SWG\GET(
      *     path="/api/v1/users",
-     *     tags={"user"},
+     *     tags={"User"},
      *     security={ {"passport": {} } },
+     *     summary="Get all users",
      *     @SWG\Response(response="200", description="Get all users"),
      * )
      */
@@ -37,15 +38,95 @@ class UserController extends Controller
      *
      * @SWG\POST(
      *     path="/api/v1/users",
-     *     tags={"user"},
+     *     tags={"User"},
      *     security={ {"passport": {} } },
+     *     summary="Create one user",
+     *     @SWG\Parameter(
+     *       name="email",
+     *       in="query",
+     *       required=true,
+     *       type="string"
+     *     ),
+     *     @SWG\Parameter(
+     *       name="roles",
+     *       in="query",
+     *       description="0 for basic user, 1 for admin",
+     *       required=false,
+     *       type="integer"
+     *     ),
+     *     @SWG\Parameter(
+     *       name="username",
+     *       in="query",
+     *       required=true,
+     *       type="string"
+     *     ),
+     *     @SWG\Parameter(
+     *       name="password",
+     *       in="query",
+     *       required=true,
+     *       type="string"
+     *     ),
+     *     @SWG\Parameter(
+     *       name="c_password",
+     *       in="query",
+     *       required=true,
+     *       description="Confirm password",
+     *       type="string"
+     *     ),
+     *     @SWG\Parameter(
+     *       name="isActive",
+     *       in="query",
+     *       required=false,
+     *       description="0 if is no longer available, 1 if still active",
+     *       type="integer"
+     *     ),
+     *     @SWG\Parameter(
+     *       name="lastName",
+     *       in="query",
+     *       required=false,
+     *       type="string"
+     *     ),
+     *     @SWG\Parameter(
+     *       name="firstName",
+     *       in="query",
+     *       required=false,
+     *       type="string"
+     *     ),
+     *     @SWG\Parameter(
+     *       name="languages",
+     *       in="query",
+     *       required=false,
+     *       type="string"
+     *     ),
+     *     @SWG\Parameter(
+     *       name="skills",
+     *       in="query",
+     *       required=false,
+     *       type="string"
+     *     ),
      *     @SWG\Response(response="200", description="Create one user"),
      * )
      */
     public function store(Request $request)
     {
-        $user = new User;
-        return $user->create($request->all());
+        $validator = Validator::make($request->all(), [
+            'username' => 'required',
+            'email' => 'required|email',
+            'password' => 'required',
+            'c_password' => 'required|same:password',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json(['error'=>$validator->errors()], 401);
+        }
+
+        $input = $request->all();
+        $input['password'] = bcrypt($input['password']);
+        $user = User::create($input);
+        $success['token'] =  $user->createToken('MyApp')->accessToken;
+        $success['username'] =  $user->username;
+
+        return response()->json(['success'=>$success], 200);
     }
 
     /**
@@ -56,9 +137,17 @@ class UserController extends Controller
      *
      * @SWG\GET(
      *     path="/api/v1/users/{id}",
-     *     tags={"user"},
+     *     tags={"User"},
      *     security={ {"passport": {} } },
+     *     summary="Get one user by id",
+     *     @SWG\Parameter(
+     *       name="id",
+     *       in="path",
+     *       required=true,
+     *       type="integer"
+     *     ),
      *     @SWG\Response(response="200", description="Get one user by id"),
+     *     @SWG\Response(response="404", description="Not found"),
      * )
      */
     public function show($userId)
@@ -81,16 +170,100 @@ class UserController extends Controller
      *
      * @SWG\PUT(
      *     path="/api/v1/users/{id}",
-     *     tags={"user"},
+     *     tags={"User"},
      *     security={ {"passport": {} } },
+     *     summary="Update one user by id",
+     *     @SWG\Parameter(
+     *       name="email",
+     *       in="query",
+     *       required=false,
+     *       type="string"
+     *     ),
+     *     @SWG\Parameter(
+     *       name="roles",
+     *       in="query",
+     *       description="0 for basic user, 1 for admin",
+     *       required=false,
+     *       type="integer"
+     *     ),
+     *     @SWG\Parameter(
+     *       name="username",
+     *       in="query",
+     *       required=false,
+     *       type="string"
+     *     ),
+     *     @SWG\Parameter(
+     *       name="password",
+     *       in="query",
+     *       required=false,
+     *       type="string"
+     *     ),
+     *     @SWG\Parameter(
+     *       name="c_password",
+     *       in="query",
+     *       required=false,
+     *       description="Confirm password",
+     *       type="string"
+     *     ),
+     *     @SWG\Parameter(
+     *       name="isActive",
+     *       in="query",
+     *       required=false,
+     *       description="0 if is no longer available, 1 if still active",
+     *       type="integer"
+     *     ),
+     *     @SWG\Parameter(
+     *       name="lastName",
+     *       in="query",
+     *       required=false,
+     *       type="string"
+     *     ),
+     *     @SWG\Parameter(
+     *       name="firstName",
+     *       in="query",
+     *       required=false,
+     *       type="string"
+     *     ),
+     *     @SWG\Parameter(
+     *       name="languages",
+     *       in="query",
+     *       required=false,
+     *       type="string"
+     *     ),
+     *     @SWG\Parameter(
+     *       name="skills",
+     *       in="query",
+     *       required=false,
+     *       type="string"
+     *     ),
+     *     @SWG\Parameter(
+     *       name="id",
+     *       in="path",
+     *       required=true,
+     *       type="integer"
+     *     ),
      *     @SWG\Response(response="200", description="Update one user by id"),
      * )
      */
     public function update(Request $request, $userId)
     {
+
+        $input = $request->all();
+        if(isset($input['password'])){
+            $validator = Validator::make($input, [
+                'password' => 'required',
+                'c_password' => 'required|same:password',
+            ]);
+
+            if ($validator->fails()) {
+                return response()->json(['error'=>$validator->errors()], 401);
+            }
+        }
+
+        $input['password'] = bcrypt($input['password']);
         $user = new User;
         $user = $user->findOrFail($userId);
-        $user->update($request->all());
+        $user->update($input);
 
         return $user;
     }
@@ -103,9 +276,17 @@ class UserController extends Controller
      *
      * @SWG\DELETE(
      *     path="/api/v1/users/{id}",
-     *     tags={"user"},
+     *     tags={"User"},
      *     security={ {"passport": {} } },
-     *     @SWG\Response(response="200", description="Delete one user by id"),
+     *     summary="Delete one user by id",
+     *     @SWG\Parameter(
+     *       name="id",
+     *       in="path",
+     *       required=true,
+     *       type="integer"
+     *     ),
+     *     @SWG\Response(response="204", description="No content"),
+     *     @SWG\Response(response="404", description="Not found"),
      * )
      */
     public function destroy($userId)

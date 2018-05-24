@@ -27,8 +27,7 @@ class User extends Authenticatable
         'firstName',
         'languages',
         'skills',
-        'isActive',
-        'roles'
+        'isActive'
     ];
 
     /**

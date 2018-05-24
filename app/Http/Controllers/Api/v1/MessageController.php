@@ -18,6 +18,7 @@ class MessageController extends Controller
      *     path="/api/v1/messages",
      *     tags={"message"},
      *     security={ {"passport": {} } },
+     *     summary="Get all messages",
      *     @SWG\Response(response="200", description="Get all messages"),
      * )
      */
@@ -56,7 +57,15 @@ class MessageController extends Controller
      *     path="/api/v1/messages/{id}",
      *     tags={"message"},
      *     security={ {"passport": {} } },
+     *     summary="Get one message by id",
+     *     @SWG\Parameter(
+     *       name="id",
+     *       in="path",
+     *       required=true,
+     *       type="integer"
+     *     ),
      *     @SWG\Response(response="200", description="Get one message by id"),
+     *     @SWG\Response(response="404", description="Not found"),
      * )
      */
     public function show($messageId)
@@ -98,7 +107,15 @@ class MessageController extends Controller
      *     path="/api/v1/messages/{id}",
      *     tags={"message"},
      *     security={ {"passport": {} } },
-     *     @SWG\Response(response="200", description="Delete one message by id"),
+     *     summary="Delete one message by id",
+     *     @SWG\Parameter(
+     *       name="id",
+     *       in="path",
+     *       required=true,
+     *       type="integer"
+     *     ),
+     *     @SWG\Response(response="204", description="No content"),
+     *     @SWG\Response(response="404", description="Not found"),
      * )
      */
     public function destroy($messageId)
