@@ -137,21 +137,21 @@ class AccommodationController extends Controller
      *       name="animalsAllowed",
      *       in="query",
      *       required=true,
-     *       description="0 if for, 1 for yes",
+     *       description="0 for no, 1 for yes",
      *       type="integer"
      *     ),
      *     @SWG\Parameter(
      *       name="smokersAllowed",
      *       in="query",
      *       required=true,
-     *       description="0 if for, 1 for yes",
+     *       description="0 for no, 1 for yes",
      *       type="integer"
      *     ),
      *     @SWG\Parameter(
      *       name="hasInternet",
      *       in="query",
      *       required=true,
-     *       description="0 if for, 1 for yes",
+     *       description="0 for no, 1 for yes",
      *       type="integer"
      *     ),
      *     @SWG\Response(response="201", description="Create one accommodation"),
