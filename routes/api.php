@@ -31,8 +31,6 @@ Route::group(['middleware' => ['api', 'auth:api'], 'prefix' => '/v1'], function 
     Route::put('accommodations/{id}', 'Api\v1\AccommodationController@update');
     Route::post('accommodations', 'Api\v1\AccommodationController@store');
 
-
-    Route::resource('accommodations', 'Api\v1\AccommodationController');
     Route::resource('candidates', 'Api\v1\CandidateController');
     Route::resource('messages', 'Api\v1\MessageController');
     Route::resource('missions', 'Api\v1\MissionController');
