@@ -30,6 +30,7 @@ Route::group(['middleware' => ['api', 'auth:api'], 'prefix' => '/v1'], function 
     Route::delete('accommodations/{id}', 'Api\v1\AccommodationController@destroy');
     Route::put('accommodations/{id}', 'Api\v1\AccommodationController@update');
     Route::post('accommodations', 'Api\v1\AccommodationController@store');
+    Route::get('/me', 'Api\v1\UserController@showMe');
 
     Route::resource('candidates', 'Api\v1\CandidateController');
     Route::resource('messages', 'Api\v1\MessageController');
@@ -43,4 +44,11 @@ Route::group(['middleware' => ['api', 'auth:api'], 'prefix' => '/v1'], function 
 
     //CUSTOM ROUTE => BACK
     Route::post('missions/{idMission}/apply', 'Api\v1\MissionController@apply');
+});
+
+Route::group(['prefix' => 'user'], function() {
+    Route::get('/', function() {
+        $token = request()->bearerToken();
+        return response()->json(request()->user());
+    });
 });
