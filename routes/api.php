@@ -46,9 +46,6 @@ Route::group(['middleware' => ['api', 'auth:api'], 'prefix' => '/v1'], function 
     Route::post('missions/{idMission}/apply', 'Api\v1\MissionController@apply');
 });
 
-Route::group(['prefix' => 'user'], function() {
-    Route::get('/', function() {
-        $token = request()->bearerToken();
-        return response()->json(request()->user());
-    });
-});
+Route::get('/user/me', function(Request $request) {
+    return Auth::user();
+})->middleware('auth:api');
