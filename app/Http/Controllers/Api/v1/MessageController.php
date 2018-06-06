@@ -4,8 +4,10 @@ namespace App\Http\Controllers\Api\v1;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 
 use App\Message;
+use Illuminate\Support\Facades\DB;
 
 class MessageController extends Controller
 {
@@ -124,5 +126,17 @@ class MessageController extends Controller
         $message->findOrFail($messageId)->delete();
 
         return response()->json(null, 204);
+    }
+
+    public function getMyMessages()
+    {
+        $message = new Message;
+        return $message->where('candidate', '=', Auth::user()->id)->get();
+    }
+
+    public function getMessageByCandidate($idCandidate)
+    {
+        $message = new Message;
+        return $message->where('candidate', $idCandidate)->get();
     }
 }

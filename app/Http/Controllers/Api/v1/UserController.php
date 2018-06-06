@@ -297,9 +297,4 @@ class UserController extends Controller
         return response()->json(null, 204);
     }
 
-    public function showMe()
-    {
-        $user = new User;
-        $user->findOrFail($userId)->delete();
-    }
 }

@@ -15,8 +15,14 @@ use Carbon\Carbon;
 */
 
 $factory->define(App\Message::class, function (Faker $faker) {
+    $candidates = \App\Candidate::all();
+    $candidate = $candidates[rand(0, count($candidates)-1)]->getId();
+    $missions = \App\Mission::all();
+    $mission = $missions[rand(0, count($missions)-1)]->getId();
     return [
         'content' => $faker->text,
-        'created_at' => Carbon::now()->format('Y-m-d H:i:s')
+        'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+        'candidate' => $candidate,
+        'mission' => $mission
     ];
 });
