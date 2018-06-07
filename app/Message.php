@@ -26,10 +26,10 @@ class Message extends Model
     }
 
     public function candidate() {
-        return $this->hasMany('App\Candidate', 'id', 'candidate');
+        return $this->hasOne('App\Candidate', 'id', 'candidate');
     }
 
     public function mission() {
-        return $this->hasMany('App\Mission', 'id', 'mission');
+        return $this->hasOne('App\Mission', 'id', 'mission');
     }
 }
