@@ -25,4 +25,11 @@ class Message extends Model
         return $this->id;
     }
 
+    public function candidate() {
+        return $this->hasMany('App\Candidate', 'id', 'candidate');
+    }
+
+    public function mission() {
+        return $this->hasMany('App\Mission', 'id', 'mission');
+    }
 }

@@ -35,4 +35,13 @@ class Mission extends Model
         return $this->id;
     }
 
+    public function messages()
+    {
+        return $this->hasMany('App\Messages');
+    }
+
+    public function traveller() {
+        return $this->belongsTo('App\User', 'traveller', 'id');
+    }
+
 }

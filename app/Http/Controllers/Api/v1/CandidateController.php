@@ -99,7 +99,7 @@ class CandidateController extends Controller
     public function show($candidateId)
     {
         $candidate = new Candidate;
-        return $candidate->findOrFail($candidateId);
+        return $candidate->with(['user'])->findOrFail($candidateId);
     }
 
     /**

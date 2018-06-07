@@ -131,7 +131,7 @@ class MessageController extends Controller
     public function getMyMessages()
     {
         $message = new Message;
-        return $message->where('candidate', '=', Auth::user()->id)->get();
+        return $message->where('candidate', Auth::user()->id)->with(['candidate', 'candidate.user', 'mission', 'mission.traveller'])->get();
     }
 
     public function getMessageByCandidate($idCandidate)
