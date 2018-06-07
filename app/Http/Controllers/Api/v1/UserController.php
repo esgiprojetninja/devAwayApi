@@ -7,6 +7,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Validator;
 use App\User;
+use Image;
+use Illuminate\Support\Facades\Input;
 use function PHPSTORM_META\type;
 
 class UserController extends Controller
@@ -122,6 +124,7 @@ class UserController extends Controller
 
         $input = $request->all();
         $input['password'] = bcrypt($input['password']);
+
         $user = User::create($input);
         $success['token'] =  $user->createToken('MyApp')->accessToken;
         $success['username'] =  $user->username;
@@ -258,11 +261,33 @@ class UserController extends Controller
             if ($validator->fails()) {
                 return response()->json(['error'=>$validator->errors()], 401);
             }
+            $input['password'] = bcrypt($input['password']);
         }
 
-        $input['password'] = bcrypt($input['password']);
         $user = new User;
         $user = $user->findOrFail($userId);
+
+        $file = $request->file('avatar');
+        var_dump($request->file('avatar'));
+        var_dump($input);
+        if($request->image){
+            echo "NTM";
+        } else {
+            echo "JTM";
+        }
+        die();
+        $thumbnail_path = public_path('img/avatar/thumbnail/');
+        $original_path = public_path('img/avatar/original/');
+        $file_name = 'user_'. $user->username . '.' . $file->getClientOriginalExtension();
+        Image::make($file)
+            ->resize(261,null,function ($constraint) {
+                $constraint->aspectRatio();
+            })
+            ->save($original_path . $file_name)
+            ->resize(90, 90)
+            ->save($thumbnail_path . $file_name);
+
+        $user->update(['avatar' => $file_name]);
         $user->update($input);
 
         return $user;

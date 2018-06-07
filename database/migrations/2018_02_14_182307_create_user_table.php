@@ -24,6 +24,7 @@ class CreateUserTable extends Migration
             $table->longText('skills')->nullable();
             $table->boolean('isActive')->default(1);
             $table->tinyInteger('roles')->default(0);
+            $table->string('avatar')->default("default.jpg");
             $table->rememberToken();
             $table->timestamps();
         });
