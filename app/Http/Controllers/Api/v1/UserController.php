@@ -267,14 +267,9 @@ class UserController extends Controller
         $user = new User;
         $user = $user->findOrFail($userId);
 
-        $file = $request->file('avatar');
+       /* $file = $request->file('avatar');
         var_dump($request->file('avatar'));
         var_dump($input);
-        if($request->image){
-            echo "NTM";
-        } else {
-            echo "JTM";
-        }
         die();
         $thumbnail_path = public_path('img/avatar/thumbnail/');
         $original_path = public_path('img/avatar/original/');
@@ -287,7 +282,8 @@ class UserController extends Controller
             ->resize(90, 90)
             ->save($thumbnail_path . $file_name);
 
-        $user->update(['avatar' => $file_name]);
+        $user->update(['avatar' => $file_name]);*/
+       
         $user->update($input);
 
         return $user;
