@@ -313,4 +313,19 @@ class UserController extends Controller
         return response()->json(null, 204);
     }
 
+    public function test()
+    {
+        $pointBaseUn = 19146;
+        $pointBaseDeux = 16326;
+
+        $nbPointMinuteBaseUn = 6;
+        $nbPointMinuteBaseDeux = 26;
+
+        $intervalBaseUn = (20000 - $pointBaseUn) / $nbPointMinuteBaseUn;
+        $intervalBaseDeux = (20000 - $pointBaseDeux) / $nbPointMinuteBaseDeux;
+
+        echo "La une gagne en : ".$intervalBaseUn ." minutes.\n";
+        echo "La deux gagne en : ".$intervalBaseDeux." minutes.";
+    }
+
 }
