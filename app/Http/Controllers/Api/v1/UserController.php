@@ -266,7 +266,7 @@ class UserController extends Controller
         $user = new User;
         $user = $user->findOrFail($userId);
 
-        $file = $request->file('avatar');
+        /*$file = $request->file('avatar');
         $thumbnail_path = public_path('img/avatar/thumbnail/');
         $original_path = public_path('img/avatar/original/');
         $file_name = 'user_'. $user->username . '.' . $file->getClientOriginalExtension();
@@ -277,8 +277,13 @@ class UserController extends Controller
             ->save($original_path . $file_name)
             ->resize(90, 90)
             ->save($thumbnail_path . $file_name);
+        $input['avatar'] = $file_name;*/
 
-        $input['avatar'] = $file_name;
+        $file = $request->file('avatar');
+        $imagedata = file_get_contents($file);
+        $base64 = base64_encode($imagedata);
+        $input['avatar'] = $base64;
+
         $user->update($input);
 
         return $user;
