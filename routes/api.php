@@ -29,7 +29,7 @@ Route::group(['middleware' => ['api', 'auth:api'], 'prefix' => '/v1'], function 
     Route::get('accommodations/{idAccommodation}/pictures', 'Api\v1\AccommodationController@getPictures');
     Route::get('accommodations/{idAccommodation}/host', 'Api\v1\AccommodationController@getHost');
     Route::get('messages/me/latest', 'Api\v1\MessageController@getMyMessages');
-    Route::get('messages/candidate/{id}', 'Api\v1\MessageController@getMessageByCandidate');
+    Route::get('messages/me/with/{idUser}', 'Api\v1\MessageController@getMyDiscutionWith');
 
     //CRUD BASIQUE
     Route::delete('accommodations/{id}', 'Api\v1\AccommodationController@destroy');

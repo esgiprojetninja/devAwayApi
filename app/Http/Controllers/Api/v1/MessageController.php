@@ -130,9 +130,6 @@ class MessageController extends Controller
 
     public function getMyMessages()
     {
-        $message = new Message;
-
-
         return $messages = Message::select()
             ->from('message As S')
             ->whereRaw('Not Exists (
@@ -146,12 +143,22 @@ class MessageController extends Controller
             ->groupBy(['from', 'to'])
             ->orderBy('created_at')
             ->get();
-
     }
 
-    public function getMessageByCandidate($idCandidate)
+    public function getMyDiscutionWith($idUser)
     {
         $message = new Message;
-        return $message->where('candidate', $idCandidate)->get();
+        $myId = Auth::user()->id;
+        return $message->where(function($q) use ($myId, $idUser) {
+                            $q->where('from', $myId)
+                                ->where('to', $idUser);
+                        })
+                       ->orWhere(function($q) use ($myId, $idUser) {
+                           $q->where('from', $idUser)
+                               ->where('to', $myId);
+                       })
+                       ->with(['from', 'to'])
+                       ->get();
     }
+
 }
