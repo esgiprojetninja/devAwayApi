@@ -27,7 +27,7 @@ class MissionController extends Controller
     public function index()
     {
         $mission = new Mission;
-        return $mission->all();
+        return $mission->with(['accommodation', 'traveller', 'accommodation.host'])->get();
     }
 
     /**
@@ -159,7 +159,7 @@ class MissionController extends Controller
     public function show($missionId)
     {
         $mission = new Mission;
-        return $mission->findOrFail($missionId);
+        return $mission->with(['accommodation', 'traveller', 'accommodation.host'])->findOrFail($missionId);
     }
 
     /**

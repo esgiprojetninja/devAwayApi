@@ -17,19 +17,19 @@ class Message extends Model
     protected $fillable = [
         'id',
         'content',
-        'mission',
-        'candidate',
+        'from',
+        'to',
     ];
 
     public function getId() {
         return $this->id;
     }
 
-    public function candidate() {
-        return $this->hasOne('App\Candidate', 'id', 'candidate');
+    public function from() {
+        return $this->hasOne('App\User', 'id', 'from');
     }
 
-    public function mission() {
-        return $this->hasOne('App\Mission', 'id', 'mission');
+    public function to() {
+        return $this->hasOne('App\User', 'id', 'to');
     }
 }

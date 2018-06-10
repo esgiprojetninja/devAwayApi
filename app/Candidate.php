@@ -51,12 +51,11 @@ class Candidate extends Model
         $this->toDate = $toDate;
     }
 
-    public function messages()
-    {
-        return $this->hasMany('App\Messages');
-    }
-
     public function user() {
         return $this->belongsTo('App\User', 'user', 'id');
+    }
+
+    public function mission() {
+        return $this->belongsTo('App\Mission', 'mission', 'id');
     }
 }
