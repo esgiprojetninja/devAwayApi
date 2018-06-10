@@ -131,23 +131,22 @@ class MessageController extends Controller
     public function getMyMessages()
     {
         $message = new Message;
-        /*return $message->where('from', Auth::user()->id)
-                       ->orWhere('to', Auth::user()->id)
-                       ->with(['from', 'to'])
-                       ->groupBy(['from', 'to'])
-                       ->orderBy('created_at')
-                       ->get();*/
-        return DB::select("Select *
-        From `message` As S
-  where `from` = ".Auth::user()->id." or `to` = ".Auth::user()->id." AND(
- `from` < `to`
-    Or Not Exists   (
+
+
+        return $messages = Message::select()
+            ->from('message As S')
+            ->whereRaw('Not Exists (
                     Select 1
                     From `message` As S1
-                    Where S1.`from` = S.`to`
-                        And S1.`to` = S.`from`
-                    ) )
-GROUP BY `from`,`to`");
+                    Where S1.`from` = S.`to` And S1.`to` = S.`from`
+                    )')
+            ->where('from', Auth::user()->id)
+            ->orWhere('to', Auth::user()->id)
+            ->with(['from', 'to'])
+            ->groupBy(['from', 'to'])
+            ->orderBy('created_at')
+            ->get();
+
     }
 
     public function getMessageByCandidate($idCandidate)
