@@ -31,6 +31,6 @@ class DatabaseSeeder extends Seeder
         factory(App\Picture::class, 20)->create();
         factory(App\Mission::class, 20)->create();
         factory(App\Candidate::class, 20)->create();
-        factory(App\Message::class, 500)->create();
+        factory(App\Message::class, 100)->create();
     }
 }
