@@ -22,9 +22,9 @@ Route::post('login', [ 'as' => 'login', 'uses' => 'Api\v1\PassportController@log
 Route::post('register', 'Api\v1\PassportController@register');
 
 
-Route::group(['middleware' => ['api'], 'prefix' => '/v1'], function () {
-    Route::get('/v1/accommodations', 'Api\v1\AccommodationController@index');
-    Route::get('/v1/accommodations/{id}', 'Api\v1\AccommodationController@show');
+Route::group(['middleware' => 'api', 'prefix' => '/v1'], function () {
+    Route::get('accommodations', 'Api\v1\AccommodationController@index');
+    Route::get('accommodations/{id}', 'Api\v1\AccommodationController@show');
 });
 
 Route::group(['middleware' => ['api', 'auth:api'], 'prefix' => '/v1'], function () {
