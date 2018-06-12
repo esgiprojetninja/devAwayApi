@@ -44,8 +44,7 @@ Route::group(['middleware' => ['api', 'auth:api'], 'prefix' => '/v1'], function 
 
     //CUSTOM ROUTE => BACK
     Route::post('missions/{idMission}/apply', 'Api\v1\MissionController@apply');
+    Route::get('/user/me', function(Request $request) {
+        return Auth::user();
+    });
 });
-
-Route::get('/user/me', function(Request $request) {
-    return Auth::user();
-})->middleware('auth:api');
