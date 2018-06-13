@@ -184,6 +184,7 @@ class MessageController extends Controller
                                ->where('to', $myId);
                        })
                        ->with(['from', 'to'])
+                       ->orderBy('created_at')
                        ->get();
     }
 

@@ -21,7 +21,6 @@ Route::get('foo', function () {
 Route::post('login', [ 'as' => 'login', 'uses' => 'Api\v1\PassportController@login']);
 Route::post('register', 'Api\v1\PassportController@register');
 
-
 Route::group(['middleware' => 'api', 'prefix' => '/v1'], function () {
     Route::get('accommodations', 'Api\v1\AccommodationController@index');
     Route::get('accommodations/{id}', 'Api\v1\AccommodationController@show');
@@ -52,8 +51,8 @@ Route::group(['middleware' => ['api', 'auth:api'], 'prefix' => '/v1'], function 
     Route::resource('pictures', 'Api\v1\PictureController');
 
     //USERS
+    Route::get('users/me', function(Request $request) { return Auth::user(); });
     Route::resource('users', 'Api\v1\UserController');
     Route::get('users/{idUser}/accommodations', 'Api\v1\UserController@getAccommodations');
-    Route::get('users/me', function(Request $request) { return Auth::user(); });
-
 });
+

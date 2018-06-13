@@ -53,6 +53,7 @@ class Handler extends ExceptionHandler
             return response('unauthorized', 401);
 
         }
+
         return parent::render($request, $exception);
     }
 }
