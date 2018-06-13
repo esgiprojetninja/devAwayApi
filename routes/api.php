@@ -54,6 +54,6 @@ Route::group(['middleware' => ['api', 'auth:api'], 'prefix' => '/v1'], function 
     //USERS
     Route::resource('users', 'Api\v1\UserController');
     Route::get('users/{idUser}/accommodations', 'Api\v1\UserController@getAccommodations');
-    Route::get('/users/me', function(Request $request) { return Auth::user(); });
+    Route::get('users/me', function(Request $request) { return Auth::user(); });
 
 });
