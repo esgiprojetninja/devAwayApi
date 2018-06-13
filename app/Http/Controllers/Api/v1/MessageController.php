@@ -18,7 +18,7 @@ class MessageController extends Controller
      *
      * @SWG\GET(
      *     path="/api/v1/messages",
-     *     tags={"message"},
+     *     tags={"Message"},
      *     security={ {"passport": {} } },
      *     summary="Get all messages",
      *     @SWG\Response(response="200", description="Get all messages"),
@@ -38,7 +38,7 @@ class MessageController extends Controller
      *
      * @SWG\POST(
      *     path="/api/v1/messages",
-     *     tags={"message"},
+     *     tags={"Message"},
      *     security={ {"passport": {} } },
      *     @SWG\Response(response="200", description="Create one message"),
      * )
@@ -57,7 +57,7 @@ class MessageController extends Controller
      *
      * @SWG\GET(
      *     path="/api/v1/messages/{id}",
-     *     tags={"message"},
+     *     tags={"Message"},
      *     security={ {"passport": {} } },
      *     summary="Get one message by id",
      *     @SWG\Parameter(
@@ -85,7 +85,7 @@ class MessageController extends Controller
      *
      * @SWG\PUT(
      *     path="/api/v1/messages/{id}",
-     *     tags={"message"},
+     *     tags={"Message"},
      *     security={ {"passport": {} } },
      *     @SWG\Response(response="200", description="Update one message by id"),
      * )
@@ -107,7 +107,7 @@ class MessageController extends Controller
      *
      * @SWG\DELETE(
      *     path="/api/v1/messages/{id}",
-     *     tags={"message"},
+     *     tags={"Message"},
      *     security={ {"passport": {} } },
      *     summary="Delete one message by id",
      *     @SWG\Parameter(
@@ -128,6 +128,19 @@ class MessageController extends Controller
         return response()->json(null, 204);
     }
 
+    /**
+     * Display all the last message i have send or receive with one user
+     *
+     * @return \Illuminate\Http\Response
+     *
+     * @SWG\GET(
+     *     path="/api/v1/messages/me/latest",
+     *     tags={"Message"},
+     *     security={ {"passport": {} } },
+     *     summary="Get all the last message i have send or receive with one user",
+     *     @SWG\Response(response="200", description="Get all messages"),
+     * )
+     */
     public function getMyMessages()
     {
         return $messages = Message::select()
@@ -145,6 +158,19 @@ class MessageController extends Controller
             ->get();
     }
 
+    /**
+     * Display all messages between me and one user by id
+     *
+     * @return \Illuminate\Http\Response
+     *
+     * @SWG\GET(
+     *     path="/api/v1/messages/me/with/{idUser]",
+     *     tags={"Message"},
+     *     security={ {"passport": {} } },
+     *     summary="Get all messages between me and one user by id",
+     *     @SWG\Response(response="200", description="Get all messages"),
+     * )
+     */
     public function getMyDiscutionWith($idUser)
     {
         $message = new Message;

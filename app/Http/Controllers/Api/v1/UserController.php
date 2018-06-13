@@ -318,6 +318,28 @@ class UserController extends Controller
         return response()->json(null, 204);
     }
 
+    /**
+     * Get the accommodations for an user by id.
+     *
+     * @param  int  $userId
+     * @return \Illuminate\Http\Response
+     *
+     * @SWG\GET(
+     *     path="/api/v1/users/{id}/accommodations",
+     *     tags={"User"},
+     *     security={ {"passport": {} } },
+     *     summary="Get all accommodations for one user by id",
+     *     @SWG\Parameter(
+     *       name="id",
+     *       in="path",
+     *       required=true,
+     *       type="integer"
+     *     ),
+     *     @SWG\Response(response="200", description="Get all accommodations or empty array"),
+     *     @SWG\Response(response="204", description="No content"),
+     *     @SWG\Response(response="404", description="Not found"),
+     * )
+     */
     public function getAccommodations($userId)
     {
         return User::find($userId)->accommodations;
