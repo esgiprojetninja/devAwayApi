@@ -136,7 +136,7 @@ return [
                 'write:projects' => 'modify projects in your account',
             ]
         ],
-        */
+
 
         //Open API 3.0 support
         'passport' => [ // Unique name of security
@@ -152,7 +152,14 @@ return [
                     "scopes" => []
                 ],
             ],
-        ],
+        ],*/
+
+        'passport' => [
+            'type' => "apiKey",
+            'in' => 'header',
+            'scheme' => 'http',
+            'name' => 'Authorization',
+        ]
 
     ],
 
