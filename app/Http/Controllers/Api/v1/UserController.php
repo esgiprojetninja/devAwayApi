@@ -318,4 +318,9 @@ class UserController extends Controller
         return response()->json(null, 204);
     }
 
+    public function getAccommodations($userId)
+    {
+        return User::find($userId)->accommodations;
+    }
+
 }

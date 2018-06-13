@@ -31,6 +31,8 @@ Route::group(['middleware' => ['api', 'auth:api'], 'prefix' => '/v1'], function 
     //CUSTOM ROUTE => EASIER GET
     Route::get('accommodations/{idAccommodation}/pictures', 'Api\v1\AccommodationController@getPictures');
     Route::get('accommodations/{idAccommodation}/host', 'Api\v1\AccommodationController@getHost');
+
+    Route::get('users/{idUser}/accommodations', 'Api\v1\UserController@getAccommodations');
     Route::get('messages/me/latest', 'Api\v1\MessageController@getMyMessages');
     Route::get('messages/me/with/{idUser}', 'Api\v1\MessageController@getMyDiscutionWith');
 
