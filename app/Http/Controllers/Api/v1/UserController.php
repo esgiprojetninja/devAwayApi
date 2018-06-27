@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Validator;
 use App\User;
+use App\Accommodation;
 use Intervention\Image\ImageManagerStatic as Image;
 use function PHPSTORM_META\type;
 
@@ -266,19 +267,6 @@ class UserController extends Controller
         $user = new User;
         $user = $user->findOrFail($userId);
 
-        /*$file = $request->file('avatar');
-        $thumbnail_path = public_path('img/avatar/thumbnail/');
-        $original_path = public_path('img/avatar/original/');
-        $file_name = 'user_'. $user->username . '.' . $file->getClientOriginalExtension();
-        Image::make($file)
-            ->resize(261,null,function ($constraint) {
-                $constraint->aspectRatio();
-            })
-            ->save($original_path . $file_name)
-            ->resize(90, 90)
-            ->save($thumbnail_path . $file_name);
-        $input['avatar'] = $file_name;*/
-
         $file = $request->file('avatar');
         $imagedata = file_get_contents($file);
         $base64 = base64_encode($imagedata);
@@ -342,7 +330,7 @@ class UserController extends Controller
      */
     public function getAccommodations($userId)
     {
-        return User::find($userId)->accommodations;
+        return Accommodation::where("user_id", $userId)->with('pictures')->get();
     }
 
 }
