@@ -326,7 +326,7 @@ class AccommodationController extends Controller
     public function update(Request $request, $accommodationId)
     {
         $accommodation = new Accommodation;
-        $accommodation = $accommodation->findOrFail($accommodationId);
+        $accommodation = $accommodation->with(['pictures', 'host'])->findOrFail($accommodationId);
         $accommodation->update($request->all());
 
         return $accommodation;
