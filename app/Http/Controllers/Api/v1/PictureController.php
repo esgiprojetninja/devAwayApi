@@ -31,7 +31,7 @@ class PictureController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      *
      * @SWG\POST(
@@ -64,7 +64,7 @@ class PictureController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $pictureId
+     * @param  int $pictureId
      * @return \Illuminate\Http\Response
      *
      * @SWG\GET(
@@ -91,8 +91,8 @@ class PictureController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $pictureId
+     * @param  \Illuminate\Http\Request $request
+     * @param  int $pictureId
      * @return \Illuminate\Http\Response
      *
      * @SWG\PUT(
@@ -135,7 +135,7 @@ class PictureController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $pictureId
+     * @param  int $pictureId
      * @return \Illuminate\Http\Response
      *
      * @SWG\DELETE(
@@ -159,5 +159,28 @@ class PictureController extends Controller
         $picture->findOrFail($pictureId)->delete();
 
         return response()->json(null, 204);
+    }
+
+    public function addPicture(Request $request, $id_accommodation)
+    {
+        $getNbPictures = Picture::where('accommodation_id', "=", $id_accommodation)->count();
+
+        if ($getNbPictures < 7) {
+
+            $picture = new Picture;
+            $picture->setAccommodationId($id_accommodation);
+
+            $file = $request->file('picture');
+            $imagedata = file_get_contents($file);
+            $base64 = base64_encode($imagedata);
+
+            $picture->setUrl($base64);
+
+            $picture->save();
+
+            return $picture;
+        } else {
+            return response()->json("This accommodation allready has 7 accommodations", 500);
+        }
     }
 }

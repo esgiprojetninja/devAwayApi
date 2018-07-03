@@ -28,4 +28,13 @@ class Picture extends Model
         return $this->belongsTo('App\Accommodation', 'picture_accommodation_id_foreign');
     }
 
+    public function setAccommodationId($id) {
+        $this->accommodation_id = $id;
+    }
+
+    public function setUrl($url) {
+        $this->url = $url;
+    }
+
+
 }

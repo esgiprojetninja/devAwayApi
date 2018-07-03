@@ -31,6 +31,7 @@ Route::group(['middleware' => ['api', 'auth:api'], 'prefix' => '/v1'], function 
     Route::delete('accommodations/{id}', 'Api\v1\AccommodationController@destroy');
     Route::put('accommodations/{id}', 'Api\v1\AccommodationController@update');
 
+
     //CANDIDATES
     Route::resource('candidates', 'Api\v1\CandidateController');
 
@@ -50,6 +51,9 @@ Route::group(['middleware' => ['api', 'auth:api'], 'prefix' => '/v1'], function 
     Route::get('users/me', function(Request $request) { return Auth::user(); });
     Route::resource('users', 'Api\v1\UserController');
     Route::get('users/{idUser}/accommodations', 'Api\v1\UserController@getAccommodations');
+
+    //PICTURES & ACCOMMODATIONS
+    Route::put('accommodations/{id}/pictures', 'Api\v1\PictureController@addPicture');
 });
 
 Route::group(['middleware' => 'api', 'prefix' => '/v1'], function () {
