@@ -21,19 +21,15 @@ Route::get('foo', function () {
 Route::post('login', [ 'as' => 'login', 'uses' => 'Api\v1\PassportController@login']);
 Route::post('register', 'Api\v1\PassportController@register');
 
-Route::group(['middleware' => 'api', 'prefix' => '/v1'], function () {
-    Route::get('accommodations', 'Api\v1\AccommodationController@index');
-    Route::get('accommodations/{id}', 'Api\v1\AccommodationController@show');
-});
 
 Route::group(['middleware' => ['api', 'auth:api'], 'prefix' => '/v1'], function () {
 
     //ACCOMMODATIONS
+    Route::post('accommodations', 'Api\v1\AccommodationController@store');
     Route::get('accommodations/{idAccommodation}/pictures', 'Api\v1\AccommodationController@getPictures');
     Route::get('accommodations/{idAccommodation}/host', 'Api\v1\AccommodationController@getHost');
     Route::delete('accommodations/{id}', 'Api\v1\AccommodationController@destroy');
     Route::put('accommodations/{id}', 'Api\v1\AccommodationController@update');
-    Route::post('accommodations', 'Api\v1\AccommodationController@store');
 
     //CANDIDATES
     Route::resource('candidates', 'Api\v1\CandidateController');
@@ -56,3 +52,8 @@ Route::group(['middleware' => ['api', 'auth:api'], 'prefix' => '/v1'], function 
     Route::get('users/{idUser}/accommodations', 'Api\v1\UserController@getAccommodations');
 });
 
+Route::group(['middleware' => 'api', 'prefix' => '/v1'], function () {
+    Route::get('accommodations', 'Api\v1\AccommodationController@index');
+    Route::get('accommodations/search', 'Api\v1\AccommodationController@searchAccommodationByLocation');
+    Route::get('accommodations/{id}', 'Api\v1\AccommodationController@show');
+});

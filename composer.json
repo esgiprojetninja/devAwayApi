@@ -6,7 +6,9 @@
     "type": "project",
     "require": {
         "php": ">=7.1.3",
+        "ext-gd": "*",
         "barryvdh/laravel-cors": "^0.11.0",
+        "cviebrock/laravel-elasticsearch": "^3.1",
         "darkaonline/l5-swagger": "^5.6",
         "fideloper/proxy": "~4.0",
         "friendsofphp/php-cs-fixer": "^2.10",
@@ -16,8 +18,7 @@
         "laravel/framework": "5.6.*",
         "laravel/passport": "^5.0",
         "laravel/tinker": "~1.0",
-        "zircote/swagger-php": "^2.0",
-        "ext-gd": "*"
+        "zircote/swagger-php": "^2.0"
     },
     "require-dev": {
         "filp/whoops": "~2.0",

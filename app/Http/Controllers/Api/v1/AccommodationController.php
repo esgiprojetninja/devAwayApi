@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Api\v1;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Monolog\Handler\ElasticSearchHandler;
+use Illuminate\Support\Facades\Input;
 
 use App\Accommodation;
 
@@ -369,6 +371,16 @@ class AccommodationController extends Controller
     public function getHost($accommodationId)
     {
         return Accommodation::find($accommodationId)->host;
+    }
+
+    public function searchAccommodationByLocation()
+    {
+        $accommodation = new Accommodation();
+        $query =  Input::get('q');
+        return $accommodation->with(['pictures', 'host'])
+            ->where('country', 'LIKE', '%'. $query.'%')
+            ->orWhere('city', 'LIKE', '%'.$query.'%')
+            ->get();
     }
 
 }
