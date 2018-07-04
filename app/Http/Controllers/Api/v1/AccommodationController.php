@@ -383,4 +383,11 @@ class AccommodationController extends Controller
             ->get();
     }
 
+    public function paginateAll()
+    {
+        $accommodation = new Accommodation;
+        $itemsPerPage =  Input::get('itemsPerPage');
+        return $accommodation->with(['pictures', 'host'])->paginate($itemsPerPage);
+    }
+
 }

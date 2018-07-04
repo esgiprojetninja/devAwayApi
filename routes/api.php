@@ -58,6 +58,7 @@ Route::group(['middleware' => ['api', 'auth:api'], 'prefix' => '/v1'], function 
 
 Route::group(['middleware' => 'api', 'prefix' => '/v1'], function () {
     Route::get('accommodations', 'Api\v1\AccommodationController@index');
+    Route::get('accommodations/paginate', 'Api\v1\AccommodationController@paginateAll');
     Route::get('accommodations/search', 'Api\v1\AccommodationController@searchAccommodationByLocation');
     Route::get('accommodations/{id}', 'Api\v1\AccommodationController@show');
 });
