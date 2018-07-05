@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use Monolog\Handler\ElasticSearchHandler;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Auth;
+use Validator;
 
 use App\Accommodation;
 
@@ -59,13 +60,11 @@ class AccommodationController extends Controller
      *       type="string"
      *     ),
      *     @SWG\Parameter(
-     *       name="city",
      *       in="query",
      *       required=true,
      *       type="string"
      *     ),
      *     @SWG\Parameter(
-     *       name="country",
      *       in="query",
      *       required=true,
      *       type="string"
@@ -91,112 +90,94 @@ class AccommodationController extends Controller
      *     @SWG\Parameter(
      *       name="region",
      *       in="query",
-     *       required=true,
      *       type="string"
      *     ),
      *     @SWG\Parameter(
      *       name="nbBathoom",
      *       in="query",
-     *       required=true,
      *       type="integer"
      *     ),
      *     @SWG\Parameter(
      *       name="nbBedroom",
      *       in="query",
-     *       required=true,
      *       type="integer"
      *     ),
      *     @SWG\Parameter(
      *       name="nbToilet",
      *       in="query",
-     *       required=true,
      *       type="integer"
      *     ),
      *     @SWG\Parameter(
      *       name="nbMaxBaby",
      *       in="query",
-     *       required=true,
      *       type="integer"
      *     ),
      *     @SWG\Parameter(
      *       name="nbMaxChild",
      *       in="query",
-     *       required=true,
      *       type="integer"
      *     ),
      *     @SWG\Parameter(
      *       name="nbMaxGuest",
      *       in="query",
-     *       required=true,
      *       type="integer"
      *     ),
      *     @SWG\Parameter(
      *       name="nbMaxAdult",
      *       in="query",
-     *       required=true,
      *       type="integer"
      *     ),
      *     @SWG\Parameter(
      *       name="animalsAllowed",
      *       in="query",
-     *       required=true,
      *       description="0 for no, 1 for yes",
      *       type="integer"
      *     ),
      *     @SWG\Parameter(
      *       name="smokersAllowed",
      *       in="query",
-     *       required=true,
      *       description="0 for no, 1 for yes",
      *       type="integer"
      *     ),
      *     @SWG\Parameter(
      *       name="hasInternet",
      *       in="query",
-     *       required=true,
      *       description="0 for no, 1 for yes",
      *       type="integer"
      *     ),
      *     @SWG\Parameter(
      *       name="propertySize",
      *       in="query",
-     *       required=true,
      *       type="number"
      *     ),
      *     @SWG\Parameter(
      *       name="floor",
      *       in="query",
-     *       required=true,
      *       type="integer"
      *     ),
      *     @SWG\Parameter(
      *       name="minStay",
      *       in="query",
-     *       required=true,
      *       type="integer"
      *     ),
      *     @SWG\Parameter(
      *       name="maxStay",
      *       in="query",
-     *       required=true,
      *       type="integer"
      *     ),
      *     @SWG\Parameter(
      *       name="type",
      *       in="query",
-     *       required=true,
      *       type="string"
      *     ),
      *     @SWG\Parameter(
      *       name="checkinHour",
      *       in="query",
-     *       required=true,
      *       type="datetime"
      *     ),
      *     @SWG\Parameter(
      *       name="checkoutHour",
      *       in="query",
-     *       required=true,
      *       type="datetime"
      *     ),
      *     @SWG\Response(response="201", description="Create one accommodation"),
@@ -204,6 +185,19 @@ class AccommodationController extends Controller
      */
     public function store(Request $request)
     {
+        $validator = Validator::make($request->all(), [
+            'title' => 'required',
+            'description' => 'required',
+            'address' => 'required',
+            'latitude' => 'required',
+            'longitude' => 'required'
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json(['error'=>$validator->errors()], 400);
+        }
+
+
         $accommodation = new Accommodation;
 
         $input = $request->all();
