@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Monolog\Handler\ElasticSearchHandler;
 use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Auth;
 
 use App\Accommodation;
 
@@ -156,13 +157,59 @@ class AccommodationController extends Controller
      *       description="0 for no, 1 for yes",
      *       type="integer"
      *     ),
+     *     @SWG\Parameter(
+     *       name="propertySize",
+     *       in="query",
+     *       required=true,
+     *       type="number"
+     *     ),
+     *     @SWG\Parameter(
+     *       name="floor",
+     *       in="query",
+     *       required=true,
+     *       type="integer"
+     *     ),
+     *     @SWG\Parameter(
+     *       name="minStay",
+     *       in="query",
+     *       required=true,
+     *       type="integer"
+     *     ),
+     *     @SWG\Parameter(
+     *       name="maxStay",
+     *       in="query",
+     *       required=true,
+     *       type="integer"
+     *     ),
+     *     @SWG\Parameter(
+     *       name="type",
+     *       in="query",
+     *       required=true,
+     *       type="string"
+     *     ),
+     *     @SWG\Parameter(
+     *       name="checkinHour",
+     *       in="query",
+     *       required=true,
+     *       type="datetime"
+     *     ),
+     *     @SWG\Parameter(
+     *       name="checkoutHour",
+     *       in="query",
+     *       required=true,
+     *       type="datetime"
+     *     ),
      *     @SWG\Response(response="201", description="Create one accommodation"),
      * )
      */
     public function store(Request $request)
     {
         $accommodation = new Accommodation;
-        return $accommodation->create($request->all());
+
+        $input = $request->all();
+        $input['user_id'] = Auth::user()->id;
+
+        return $accommodation->create($input);
     }
 
     /**

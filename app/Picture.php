@@ -36,5 +36,4 @@ class Picture extends Model
         $this->url = $url;
     }
 
-
 }

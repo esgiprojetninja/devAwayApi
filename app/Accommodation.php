@@ -40,7 +40,8 @@ class Accommodation extends Model
         'maxStay',
         'type',
         'checkinHour',
-        'checkoutHour'
+        'checkoutHour',
+        'user_id'
     ];
 
     public function getId() {
