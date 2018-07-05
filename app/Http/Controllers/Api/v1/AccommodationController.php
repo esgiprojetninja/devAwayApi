@@ -370,6 +370,30 @@ class AccommodationController extends Controller
     {
         $accommodation = new Accommodation;
         $accommodation = $accommodation->with(['pictures', 'host'])->findOrFail($accommodationId);
+
+        $input = $request->all();
+        var_dump($input);
+        if(isset($input['address'])){
+            if(!isset($input['longitude']) && !isset($input['latitude'])) {
+                return response()->json("You can't update the address without specifing both latitude and longitude!", 400);
+            }
+            $key = ['city', 'country', 'region'];
+            foreach ($key as $value) {
+                if(!isset($input[$value])) {
+                    $input[$value] = "";
+                }
+            }
+        } else {
+            if(isset($input['city']) || isset($input['country']) || isset($input['region'])) {
+                return response()->json("You can't update the city or country or region without updating the address!", 400);
+            }
+            if(isset($input['longitude']) || isset($input['latitude'])) {
+                return response()->json("You can't update the longitude or latitude without updating the address!", 400);
+            }
+        }
+        var_dump($input);
+        die();
+
         $accommodation->update($request->all());
 
         return $accommodation;
