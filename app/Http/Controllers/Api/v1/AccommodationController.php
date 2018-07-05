@@ -372,7 +372,6 @@ class AccommodationController extends Controller
         $accommodation = $accommodation->with(['pictures', 'host'])->findOrFail($accommodationId);
 
         $input = $request->all();
-        var_dump($input);
         if(isset($input['address'])){
             if(!isset($input['longitude']) && !isset($input['latitude'])) {
                 return response()->json("You can't update the address without specifing both latitude and longitude!", 400);
@@ -391,10 +390,8 @@ class AccommodationController extends Controller
                 return response()->json("You can't update the longitude or latitude without updating the address!", 400);
             }
         }
-        var_dump($input);
-        die();
 
-        $accommodation->update($request->all());
+        $accommodation->update($input);
 
         return $accommodation;
     }
