@@ -267,10 +267,13 @@ class UserController extends Controller
         $user = new User;
         $user = $user->findOrFail($userId);
 
-        $file = $request->file('avatar');
-        $imagedata = file_get_contents($file);
-        $base64 = base64_encode($imagedata);
-        $input['avatar'] = $base64;
+
+        if($request->hasFile('avatar')){
+            $file = $request->file('avatar');
+            $imagedata = file_get_contents($file);
+            $base64 = base64_encode($imagedata);
+            $input['avatar'] = $base64;
+        }
 
         $user->update($input);
 
