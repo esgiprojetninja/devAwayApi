@@ -39,6 +39,7 @@ $factory->define(App\Mission::class, function (Faker $faker) {
         'traveller' => $user,
         'accommodation' => $accommodation,
         'nbNights' => $faker->numberBetween(1,14),
+        'title' => $faker->catchPhrase(),
         'created_at' => Carbon::now()->format('Y-m-d H:i:s')
     ];
 });

@@ -21,7 +21,7 @@ $factory->define(App\Picture::class, function (Faker $faker) {
     $base64 = base64_encode($imagedata);
     return [
         'url' => $base64,
-        'accommodation_id' => $accommodation,
-        'created_at' => Carbon::now()->format('Y-m-d H:i:s')
+        'accommodationId' => $accommodation,
+        'createdAt' => Carbon::now()->format('Y-m-d H:i:s')
     ];
 });

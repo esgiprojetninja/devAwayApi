@@ -28,7 +28,8 @@ class Mission extends Model
         'nbPersons',
         'isBooked',
         'description',
-        'isActive'
+        'isActive',
+        'title'
     ];
 
     public function getId() {

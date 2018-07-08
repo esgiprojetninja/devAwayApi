@@ -25,7 +25,7 @@ $factory->define(App\Message::class, function (Faker $faker) {
     }
     return [
         'content' => $faker->text,
-        'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+        'createdAt' => Carbon::now()->format('Y-m-d H:i:s'),
         'from' => $from,
         'to' => $to
     ];

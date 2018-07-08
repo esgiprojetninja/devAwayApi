@@ -159,7 +159,7 @@ class MissionController extends Controller
     public function show($missionId)
     {
         $mission = new Mission;
-        return $mission->with(['accommodation', 'traveller', 'accommodation.host'])->findOrFail($missionId);
+        return $mission->with(['accommodation', 'traveller', 'accommodation.host', 'accommodation.pictures'])->findOrFail($missionId);
     }
 
     /**

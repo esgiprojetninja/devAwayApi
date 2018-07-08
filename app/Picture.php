@@ -17,7 +17,7 @@ class Picture extends Model
     protected $fillable = [
         'id',
         'url',
-        'accommodation_id'
+        'accommodationId'
     ];
 
     public function getId() {
@@ -29,7 +29,7 @@ class Picture extends Model
     }
 
     public function setAccommodationId($id) {
-        $this->accommodation_id = $id;
+        $this->accommodationId = $id;
     }
 
     public function setUrl($url) {
