@@ -31,7 +31,7 @@ Route::group(['middleware' => ['api', 'auth:api'], 'prefix' => '/v1'], function 
     Route::delete('accommodations/{id}', 'Api\v1\AccommodationController@destroy');
     Route::put('accommodations/{id}', 'Api\v1\AccommodationController@update');
 
-
+    // OUI J'AIME LA BITE
     //CANDIDATES
     Route::resource('candidates', 'Api\v1\CandidateController');
 

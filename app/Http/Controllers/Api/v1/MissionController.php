@@ -27,7 +27,7 @@ class MissionController extends Controller
     public function index()
     {
         $mission = new Mission;
-        return $mission->with(['accommodation', 'traveller', 'accommodation.host'])->get();
+        return $mission->with(['accommodation', 'traveller', 'accommodation.host', 'accommodation.pictures'])->get();
     }
 
     /**
