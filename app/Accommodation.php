@@ -41,7 +41,7 @@ class Accommodation extends Model
         'type',
         'checkinHour',
         'checkoutHour',
-        'userId'
+        'user_id'
     ];
 
     public function getId() {
@@ -57,7 +57,7 @@ class Accommodation extends Model
     }
 
     public function host() {
-        return $this->belongsTo('App\User', 'userId', 'id');
+        return $this->belongsTo('App\User', 'user_id', 'id');
     }
 
     public function missions()

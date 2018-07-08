@@ -230,7 +230,7 @@ class AccommodationController extends Controller
     public function show($accommodationId)
     {
         $accommodation = new Accommodation;
-        return $accommodation->with(['pictures', 'host'])->findOrFail($accommodationId);
+        return $accommodation->with(['pictures', 'host', 'missions'])->findOrFail($accommodationId);
     }
 
     /**

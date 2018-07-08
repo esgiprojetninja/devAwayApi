@@ -25,6 +25,6 @@ $factory->define(App\Candidate::class, function (Faker $faker) {
         'toDate' => $faker->dateTime,
         'mission' => $mission,
         'user' => $user,
-        'createdAt' => Carbon::now()->format('Y-m-d H:i:s')
+        'created_at' => Carbon::now()->format('Y-m-d H:i:s')
     ];
 });

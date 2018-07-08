@@ -26,9 +26,9 @@ $factory->define(App\User::class, function (Faker $faker) {
         'languages' => $faker->text(40),
         'skills' => $faker->text(40),
         'isActive' => $faker->boolean,
-        'rememberToken' => str_random(10),
+        'remember_token' => str_random(10),
         'roles' => $faker->numberBetween(0,1),
-        'createdAt' => Carbon::now()->format('Y-m-d H:i:s'),
+        'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
         'avatar' => $base64
     ];
 });

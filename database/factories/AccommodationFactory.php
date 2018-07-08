@@ -21,7 +21,7 @@ $factory->define(App\Accommodation::class, function (Faker $faker) {
         'title' => $faker->catchPhrase(),
         'description' => $faker->text,
         'city' => $faker->city,
-        'userId' => $user,
+        'user_id' => $user,
         'country' => $faker->country,
         'region' => $faker->text(40),
         'address' => $faker->address,
@@ -44,6 +44,6 @@ $factory->define(App\Accommodation::class, function (Faker $faker) {
         'type' => $faker->text(40),
         'checkinHour' => $faker->datetime,
         'checkoutHour' => $faker->datetime,
-        'createdAt' => Carbon::now()->format('Y-m-d H:i:s')
+        'created_at' => Carbon::now()->format('Y-m-d H:i:s')
     ];
 });

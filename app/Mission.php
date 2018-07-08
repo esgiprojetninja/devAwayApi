@@ -16,7 +16,6 @@ class Mission extends Model
      */
     protected $fillable = [
         'id',
-        'accommodation',
         'traveller',
         'checkinDate',
         'checkoutDate',
@@ -29,7 +28,8 @@ class Mission extends Model
         'isBooked',
         'description',
         'isActive',
-        'title'
+        'title',
+        'accommodation_id'
     ];
 
     public function getId() {
@@ -41,7 +41,7 @@ class Mission extends Model
     }
 
     public function accommodation() {
-        return $this->belongsTo('App\Accommodation', 'accommodation', 'id');
+        return $this->belongsTo('App\Accommodation', 'picture_accommodation_id_foreign');
     }
 
     public function candidate()
