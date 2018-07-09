@@ -16,9 +16,6 @@ class UpdateMissionTable extends Migration
         Schema::table('mission', function (Blueprint $table) {
             $table->integer('accommodation_id')->unsigned();
             $table->foreign('accommodation_id')->references('id')->on('accommodation')->onUpdate('cascade')->onDelete('cascade');
-
-            $table->integer('traveller')->unsigned()->nullable();
-            $table->foreign('traveller')->references('id')->on('user')->onUpdate('cascade')->onDelete('set null');
         });
     }
 
@@ -31,7 +28,6 @@ class UpdateMissionTable extends Migration
     {
         Schema::table('mission', function (Blueprint $table) {
             $table->dropForeign('mission_accommodation_id_foreign');
-            $table->dropForeign('mission_traveller_foreign');
         });
     }
 }

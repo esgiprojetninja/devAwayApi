@@ -17,7 +17,7 @@ class Candidate extends Model
     protected $fillable = [
         'id',
         'user',
-        'mission',
+        'mission_id',
         'fromDate',
         'toDate',
         'status'
@@ -55,7 +55,7 @@ class Candidate extends Model
         return $this->belongsTo('App\User', 'user', 'id');
     }
 
-    public function mission() {
-        return $this->belongsTo('App\Mission', 'mission', 'id');
+    public function missions() {
+        return $this->belongsTo('App\Mission', 'candidate_mission_id_foreign');
     }
 }

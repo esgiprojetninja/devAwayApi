@@ -21,8 +21,6 @@ $factory->define(App\Mission::class, function (Faker $faker) {
         $isActive = false;
         $isBooked = false;
     }
-    $users = \App\User::all();
-    $user = $users[rand(0, count($users)-1)]->getId();
     $accommodations = \App\Accommodation::all();
     $accommodation = $accommodations[rand(0, count($accommodations)-1)]->getId();
     return [
@@ -36,7 +34,6 @@ $factory->define(App\Mission::class, function (Faker $faker) {
         'description' => $faker->text(40),
         'isActive' => $isActive,
         'isBooked' => $isBooked,
-        'traveller' => $user,
         'accommodation_id' => $accommodation,
         'nbNights' => $faker->numberBetween(1,14),
         'title' => $faker->catchPhrase(),

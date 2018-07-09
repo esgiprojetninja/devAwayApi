@@ -23,7 +23,7 @@ $factory->define(App\Candidate::class, function (Faker $faker) {
         'status' => $faker->numberBetween(0,2),
         'fromDate' => $faker->dateTime,
         'toDate' => $faker->dateTime,
-        'mission' => $mission,
+        'mission_id' => $mission,
         'user' => $user,
         'created_at' => Carbon::now()->format('Y-m-d H:i:s')
     ];

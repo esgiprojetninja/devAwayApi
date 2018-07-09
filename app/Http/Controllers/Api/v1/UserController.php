@@ -57,7 +57,7 @@ class UserController extends Controller
      *       type="integer"
      *     ),
      *     @SWG\Parameter(
-     *       name="username",
+     *       name="userName",
      *       in="query",
      *       required=true,
      *       type="string"
@@ -112,8 +112,8 @@ class UserController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'username' => 'required|unique:users',
-            'email' => 'required|email|unique:users',
+            'userName' => 'required|unique:user',
+            'email' => 'required|email|unique:user',
             'password' => 'required',
             'c_password' => 'required|same:password',
         ]);
@@ -127,7 +127,7 @@ class UserController extends Controller
 
         $user = User::create($input);
         $success['token'] =  $user->createToken('MyApp')->accessToken;
-        $success['username'] =  $user->username;
+        $success['userName'] =  $user->userName;
 
         return response()->json(['success'=>$success], 200);
     }
@@ -159,7 +159,7 @@ class UserController extends Controller
         if (Auth::user()->id == $userId || Auth::user()->roles == 1){
             return  $user->findOrFail($userId);
         } else {
-            return $user->select("username")->where('id', $userId)->get();
+            return $user->select("userName")->where('id', $userId)->get();
         }
         return response()->json(null, 404);
     }
@@ -190,7 +190,7 @@ class UserController extends Controller
      *       type="integer"
      *     ),
      *     @SWG\Parameter(
-     *       name="username",
+     *       name="userName",
      *       in="query",
      *       required=false,
      *       type="string"

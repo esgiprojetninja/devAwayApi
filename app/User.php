@@ -21,7 +21,7 @@ class User extends Authenticatable
         'id',
         'email',
         'roles',
-        'username',
+        'userName',
         'password',
         'lastName',
         'firstName',
@@ -56,11 +56,6 @@ class User extends Authenticatable
     public function candidates()
     {
         return $this->hasMany('App\Candidate');
-    }
-
-    public function missions()
-    {
-        return $this->hasMany('App\Mission');
     }
 
     public function messages()
