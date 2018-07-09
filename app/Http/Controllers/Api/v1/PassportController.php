@@ -58,23 +58,24 @@ class PassportController extends Controller
     public function register(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'username' => 'required|unique:user',
-            'email' => 'required|unique:user,email',
+            'userName' => 'required|unique:user',
+            'email' => 'required|email|unique:user',
             'password' => 'required',
             'c_password' => 'required|same:password',
         ]);
 
         if ($validator->fails()) {
-            return response()->json(['error'=>$validator->errors()], 401);
+            return response()->json(['error'=>$validator->errors()], 400);
         }
 
         $input = $request->all();
         $input['password'] = bcrypt($input['password']);
+
         $user = User::create($input);
         $success['token'] =  $user->createToken('MyApp')->accessToken;
-        $success['username'] =  $user->username;
+        $success['userName'] =  $user->userName;
 
-        return response()->json(['success'=>$success], $this->successStatus);
+        return response()->json(['success'=>$success], 200);
     }
 
 }
