@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 use App\Candidate;
+use Illuminate\Support\Facades\Auth;
 
 class CandidateController extends Controller
 {
@@ -25,7 +26,12 @@ class CandidateController extends Controller
     public function index()
     {
         $candidate = new Candidate;
-        return $candidate->all();
+
+        if(Auth::user()->roles == 1){
+            return $candidate->with(['user'])->get();
+        }
+
+        return $candidate->get();
     }
 
     /**
@@ -99,7 +105,13 @@ class CandidateController extends Controller
     public function show($candidateId)
     {
         $candidate = new Candidate;
-        return $candidate->with(['user'])->findOrFail($candidateId);
+        $candidateTemp = $candidate->findOrFail($candidateId);
+
+        if(Auth::user()->roles == 1 || $candidateTemp->user == Auth::user()->id){
+            return $candidate->with(['user'])->findOrFail($candidateId);
+        }
+
+        return $candidate->findOrFail($candidateId);
     }
 
     /**

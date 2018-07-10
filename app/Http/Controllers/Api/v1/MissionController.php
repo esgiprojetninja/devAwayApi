@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 
 use App\Mission;
+use Validator;
 
 class MissionController extends Controller
 {
@@ -131,8 +132,22 @@ class MissionController extends Controller
      */
     public function store(Request $request)
     {
-        $mission = new Mission;
-        return $mission->create($request->all());
+        $validator = Validator::make($request->all(), [
+            'title' => 'required',
+            'description' => 'required',
+            'accommodation_id' => 'required|exists:accommodation,id',
+            'checkinDate' => 'required|date',
+            'checkoutDate' => 'required|date',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json(['error'=>$validator->errors()], 400);
+        }
+
+        $mission = new Mission();
+
+        return response()->json(['success'=>$mission->create($request->all())], 200);
+
     }
 
     /**

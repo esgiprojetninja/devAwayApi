@@ -270,10 +270,16 @@ class UserController extends Controller
 
         if($request->hasFile('avatar')){
             $file = $request->file('avatar');
+            $extension = $file->getClientOriginalExtension();
+            $extensionAllowed = ["png", "jpg", "jpeg"];
+            if(!in_array($extension,$extensionAllowed)) {
+                return response()->json(['error'=>"Your file extension is not allowed, only JPEG, JPG and PNG."], 401);
+            }
             $imagedata = file_get_contents($file);
             $base64 = base64_encode($imagedata);
             $input['avatar'] = $base64;
         }
+
 
         $user->update($input);
 
