@@ -170,14 +170,24 @@ class PictureController extends Controller
             $picture = new Picture;
             $picture->setAccommodationId($id_accommodation);
 
-            $file = $request->file('picture');
-            $imagedata = file_get_contents($file);
-            $base64 = base64_encode($imagedata);
+            if($request->hasFile('picture')) {
+                $file = $request->file('picture');
+                $extension = $file->getClientOriginalExtension();
+                $extensionAllowed = ["png", "jpg", "jpeg"];
+                if (!in_array($extension, $extensionAllowed)) {
+                    return response()->json(['error' => "Your file extension is not allowed, only JPEG, JPG and PNG."], 401);
+                }
+                $imagedata = file_get_contents($file);
+                $base64 = base64_encode($imagedata);
 
-            $picture->setUrl($base64);
+                $picture->setUrl($base64);
+
+            } else {
+                $input = $request->all();
+                $picture->setUrl($input['url']);
+            }
 
             $picture->save();
-
             return $picture;
         } else {
             return response()->json("This accommodation allready has 7 accommodations", 500);
