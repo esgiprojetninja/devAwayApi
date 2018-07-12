@@ -53,7 +53,7 @@ class Accommodation extends Model
      */
     public function pictures()
     {
-        return $this->hasMany('App\Picture');
+        return $this->hasMany('App\PictureAccommodation');
     }
 
     public function host() {

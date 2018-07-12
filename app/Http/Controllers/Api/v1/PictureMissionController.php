@@ -5,9 +5,9 @@ namespace App\Http\Controllers\Api\v1;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-use App\Picture;
+use App\PictureMission;
 
-class PictureController extends Controller
+class PictureMissionController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -24,7 +24,7 @@ class PictureController extends Controller
      */
     public function index()
     {
-        $picture = new Picture;
+        $picture = new PictureMission;
         return $picture->all();
     }
 
@@ -40,9 +40,9 @@ class PictureController extends Controller
      *     security={ {"passport": {} } },
      *     summary="Create one picture",
      *     @SWG\Parameter(
-     *       name="accommodation_id",
+     *       name="mission_id",
      *       in="query",
-     *       description="Id of the accommodation",
+     *       description="Id of the mission",
      *       required=true,
      *       type="integer"
      *     ),
@@ -57,7 +57,7 @@ class PictureController extends Controller
      */
     public function store(Request $request)
     {
-        $picture = new Picture;
+        $picture = new PictureMission;
         return $picture->create($request->all());
     }
 
@@ -84,7 +84,7 @@ class PictureController extends Controller
      */
     public function show($pictureId)
     {
-        $picture = new Picture;
+        $picture = new PictureMission;
         return $picture->findOrFail($pictureId);
     }
 
@@ -101,9 +101,9 @@ class PictureController extends Controller
      *     security={ {"passport": {} } },
      *     summary="Update one picture by id",
      *     @SWG\Parameter(
-     *       name="accommodation_id",
+     *       name="mission_id",
      *       in="query",
-     *       description="Id of the accommodation",
+     *       description="Id of the mission",
      *       required=false,
      *       type="integer"
      *     ),
@@ -125,7 +125,7 @@ class PictureController extends Controller
      */
     public function update(Request $request, $pictureId)
     {
-        $picture = new Picture;
+        $picture = new PictureMission;
         $picture = $picture->findOrFail($pictureId);
         $picture->update($request->all());
 
@@ -155,20 +155,20 @@ class PictureController extends Controller
      */
     public function destroy($pictureId)
     {
-        $picture = new Picture;
+        $picture = new PictureMission;
         $picture->findOrFail($pictureId)->delete();
 
         return response()->json(null, 204);
     }
 
-    public function addPicture(Request $request, $id_accommodation)
+    public function addPicture(Request $request, $id_mission)
     {
-        $getNbPictures = Picture::where('accommodation_id', "=", $id_accommodation)->count();
+        $getNbPictures = PictureMission::where('mission_id', "=", $id_mission)->count();
 
         if ($getNbPictures < 7) {
 
-            $picture = new Picture;
-            $picture->setAccommodationId($id_accommodation);
+            $picture = new PictureMission;
+            $picture->setMissionId($id_mission);
 
             if($request->hasFile('picture')) {
                 $file = $request->file('picture');
@@ -190,7 +190,7 @@ class PictureController extends Controller
             $picture->save();
             return $picture;
         } else {
-            return response()->json("This accommodation allready has 7 accommodations", 500);
+            return response()->json("This mission allready has 7 pictures", 500);
         }
     }
 }

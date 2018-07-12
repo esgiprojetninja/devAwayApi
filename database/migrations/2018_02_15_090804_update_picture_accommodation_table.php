@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class UpdatePictureTable extends Migration
+class UpdatePictureAccommodationTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class UpdatePictureTable extends Migration
      */
     public function up()
     {
-        Schema::table('picture', function (Blueprint $table) {
+        Schema::table('picture_accommodation', function (Blueprint $table) {
             $table->integer('accommodation_id')->unsigned();
             $table->foreign('accommodation_id')->references('id')->on('accommodation')->onUpdate('cascade')->onDelete('cascade');
         });
@@ -26,8 +26,8 @@ class UpdatePictureTable extends Migration
      */
     public function down()
     {
-        Schema::table('picture', function (Blueprint $table) {
-            $table->dropForeign('picture_accommodation_id_foreign');
+        Schema::table('picture_accommodation', function (Blueprint $table) {
+            $table->dropForeign('picture_accommodation_accommodation_id_foreign');
         });
     }
 }

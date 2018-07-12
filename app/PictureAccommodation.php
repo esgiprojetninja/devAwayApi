@@ -4,10 +4,10 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Picture extends Model
+class PictureAccommodation extends Model
 {
 
-    protected $table = "picture";
+    protected $table = "picture_accommodation";
 
     /**
      * The attributes that are mass assignable.
@@ -25,7 +25,7 @@ class Picture extends Model
     }
 
     public function accommodations() {
-        return $this->belongsTo('App\Accommodation', 'picture_accommodation_id_foreign');
+        return $this->belongsTo('App\Accommodation', 'picture_accommodation_accommodation_id_foreign');
     }
 
     public function setAccommodationId($id) {

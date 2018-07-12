@@ -45,8 +45,11 @@ Route::group(['middleware' => ['api', 'auth:api'], 'prefix' => '/v1'], function 
     Route::put('missions/{id}', 'Api\v1\MissionController@update');
     Route::post('missions/{idMission}/apply', 'Api\v1\MissionController@apply');
 
-    //PICTURES
-    Route::resource('pictures', 'Api\v1\PictureController');
+    //PICTURES ACCOMMODATION
+    Route::resource('pictures/accommodation', 'Api\v1\PictureAccommodationController');
+
+    //PICTURES MISSION
+    Route::resource('pictures/mission', 'Api\v1\PictureMissionController');
 
     //USERS
     Route::get('users/me', function(Request $request) { return Auth::user(); });

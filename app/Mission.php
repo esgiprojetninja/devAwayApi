@@ -48,4 +48,9 @@ class Mission extends Model
         return $this->hasOne('App\Candidate');
     }
 
+    public function pictures()
+    {
+        return $this->hasMany('App\PictureMission');
+    }
+
 }

@@ -14,14 +14,14 @@ use Carbon\Carbon;
 |
 */
 
-$factory->define(App\Picture::class, function (Faker $faker) {
-    $accommodations = \App\Accommodation::all();
-    $accommodation = $accommodations[rand(0, count($accommodations)-1)]->getId();
+$factory->define(App\PictureMission::class, function (Faker $faker) {
+    $missions = \App\Mission::all();
+    $mission = $missions[rand(0, count($missions)-1)]->getId();
     $imagedata = file_get_contents($faker->imageUrl());
     $base64 = base64_encode($imagedata);
     return [
         'url' => $base64,
-        'accommodation_id' => $accommodation,
+        'mission_id' => $mission,
         'created_at' => Carbon::now()->format('Y-m-d H:i:s')
     ];
 });
