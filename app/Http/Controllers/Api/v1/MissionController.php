@@ -42,7 +42,7 @@ class MissionController extends Controller
      *     tags={"Mission"},
      *     security={ {"passport": {} } },
      *     @SWG\Parameter(
-     *       name="accommodation",
+     *       name="accommodation_id",
      *       in="query",
      *       required=true,
      *       description="Id of the accommodation",
@@ -190,7 +190,7 @@ class MissionController extends Controller
      *     security={ {"passport": {} } },
      *     summary="Update one mission by id",
      *     @SWG\Parameter(
-     *       name="accommodation",
+     *       name="accommodation_id",
      *       in="query",
      *       required=false,
      *       description="Id of the accommodation",

@@ -41,7 +41,9 @@ Route::group(['middleware' => ['api', 'auth:api'], 'prefix' => '/v1'], function 
     Route::get('messages/me/with/{idUser}', 'Api\v1\MessageController@getMyDiscutionWith');
 
     //MISSIONS
-    Route::resource('missions', 'Api\v1\MissionController');
+    Route::post('missions', 'Api\v1\MissionController@store');
+    Route::delete('missions', 'Api\v1\MissionController@destroy');
+    Route::put('missions/{id}', 'Api\v1\MissionController@update');
     Route::post('missions/{idMission}/apply', 'Api\v1\MissionController@apply');
 
     //PICTURES
@@ -61,4 +63,7 @@ Route::group(['middleware' => 'api', 'prefix' => '/v1'], function () {
     Route::get('accommodations/paginate', 'Api\v1\AccommodationController@paginateAll');
     Route::get('accommodations/search', 'Api\v1\AccommodationController@searchAccommodationByLocation');
     Route::get('accommodations/{id}', 'Api\v1\AccommodationController@show');
+
+    Route::get('missions', 'Api\v1\MissionController@index');
+    Route::get('missions/{id}', 'Api\v1\MissionController@show');
 });
