@@ -40,7 +40,7 @@ class Mission extends Model
     }
 
     public function accommodation() {
-        return $this->belongsTo('App\Accommodation', 'picture_accommodation_id_foreign');
+        return $this->belongsTo('App\Accommodation', 'accommodation_id', 'id');
     }
 
     public function candidate()
