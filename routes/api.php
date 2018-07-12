@@ -62,8 +62,8 @@ Route::group(['middleware' => 'api', 'prefix' => '/v1'], function () {
     Route::get('accommodations', 'Api\v1\AccommodationController@index');
     Route::get('accommodations/paginate', 'Api\v1\AccommodationController@paginateAll');
     Route::get('accommodations/search', 'Api\v1\AccommodationController@searchAccommodationByLocation');
-    Route::get('accommodations/{id}', 'Api\v1\AccommodationController@show');
-
     Route::get('missions', 'Api\v1\MissionController@index');
+
+    Route::get('accommodations/{id}', 'Api\v1\AccommodationController@show');
     Route::get('missions/{id}', 'Api\v1\MissionController@show');
 });
