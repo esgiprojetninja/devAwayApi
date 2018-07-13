@@ -29,7 +29,7 @@ class PictureMission extends Model
     }
 
     public function setMissionId($id) {
-        $this->accommodation_id = $id;
+        $this->mission_id = $id;
     }
 
     public function setUrl($url) {

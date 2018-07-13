@@ -57,7 +57,10 @@ Route::group(['middleware' => ['api', 'auth:api'], 'prefix' => '/v1'], function 
     Route::get('users/{idUser}/accommodations', 'Api\v1\UserController@getAccommodations');
 
     //PICTURES & ACCOMMODATIONS
-    Route::put('accommodations/{id}/pictures', 'Api\v1\PictureController@addPicture');
+    Route::put('accommodations/{id}/pictures', 'Api\v1\PictureAccommodationController@addPicture');
+
+    //PICTURES & MISSIONS
+    Route::put('missions/{id}/pictures', 'Api\v1\PictureMissionController@addPicture');
 });
 
 Route::group(['middleware' => 'api', 'prefix' => '/v1'], function () {
