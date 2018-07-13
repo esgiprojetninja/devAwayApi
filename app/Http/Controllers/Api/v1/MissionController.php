@@ -28,7 +28,9 @@ class MissionController extends Controller
     public function index()
     {
         $mission = new Mission;
-        return $mission->with(['accommodation', 'travellers', 'accommodation.host', 'accommodation.pictures', 'travellers.user', 'pictures'])->get();
+        return $mission->with(['accommodation', 'travellers', 'accommodation.host', 'accommodation.pictures'=>function($query) {
+            return $query->limit(1);
+        }, 'travellers.user', 'pictures'])->get();
     }
 
     /**
@@ -174,7 +176,9 @@ class MissionController extends Controller
     public function show($missionId)
     {
         $mission = new Mission;
-        return $mission->with(['accommodation', 'travellers', 'accommodation.host', 'accommodation.pictures', 'pictures'])->findOrFail($missionId);
+        return $mission->with(['accommodation', 'travellers', 'accommodation.host', 'accommodation.pictures'=>function($query) {
+            return $query->limit(1);
+        }, 'pictures'])->findOrFail($missionId);
     }
 
     /**
