@@ -46,10 +46,10 @@ Route::group(['middleware' => ['api', 'auth:api'], 'prefix' => '/v1'], function 
     Route::post('missions/{idMission}/apply', 'Api\v1\MissionController@apply');
 
     //PICTURES ACCOMMODATION
-    Route::resource('pictures/accommodation', 'Api\v1\PictureAccommodationController');
+    Route::resource('pictures/accommodations', 'Api\v1\PictureAccommodationController');
 
     //PICTURES MISSION
-    Route::resource('pictures/mission', 'Api\v1\PictureMissionController');
+    Route::resource('pictures/missions', 'Api\v1\PictureMissionController');
 
     //USERS
     Route::get('users/me', function(Request $request) { return Auth::user(); });
