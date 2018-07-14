@@ -128,8 +128,8 @@ class PictureAccommodationController extends Controller
         $picture = new PictureAccommodation;
         $picture = $picture->findOrFail($pictureId);
 
-        if($request->hasFile('picture')) {
-            $file = $request->file('picture');
+        if($request->hasFile('url')) {
+            $file = $request->file('url');
             $extension = $file->getClientOriginalExtension();
             $extensionAllowed = ["png", "jpg", "jpeg"];
             if (!in_array($extension, $extensionAllowed)) {
@@ -187,8 +187,8 @@ class PictureAccommodationController extends Controller
             $picture = new PictureAccommodation;
             $picture->setAccommodationId($id_accommodation);
 
-            if($request->hasFile('picture')) {
-                $file = $request->file('picture');
+            if($request->hasFile('url')) {
+                $file = $request->file('url');
                 $extension = $file->getClientOriginalExtension();
                 $extensionAllowed = ["png", "jpg", "jpeg"];
                 if (!in_array($extension, $extensionAllowed)) {
