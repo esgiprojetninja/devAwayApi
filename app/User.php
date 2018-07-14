@@ -28,7 +28,9 @@ class User extends Authenticatable
         'languages',
         'skills',
         'isActive',
-        'avatar'
+        'avatar',
+        'city',
+        'country'
     ];
 
     /**

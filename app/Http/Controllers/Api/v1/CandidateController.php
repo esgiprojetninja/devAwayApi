@@ -165,7 +165,14 @@ class CandidateController extends Controller
     public function update(Request $request, $candidateId)
     {
         $candidate = new Candidate;
+        $candidateTemp = $candidate->findOrFail($candidateId);
+
         $candidate = $candidate->findOrFail($candidateId);
+
+        if(Auth::user()->roles == 1 || $candidateTemp->user == Auth::user()->id){
+            $candidate = $candidate->with(['user'])->findOrFail($candidateId);
+        }
+
         $candidate->update($request->all());
 
         return $candidate;

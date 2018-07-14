@@ -265,7 +265,7 @@ class UserController extends Controller
         }
 
         $user = new User;
-        $user = $user->findOrFail($userId);
+        $user = $user->with('accommodations')->findOrFail($userId);
 
 
         if($request->hasFile('avatar')){

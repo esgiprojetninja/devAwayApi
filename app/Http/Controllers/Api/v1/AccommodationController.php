@@ -369,7 +369,7 @@ class AccommodationController extends Controller
     public function update(Request $request, $accommodationId)
     {
         $accommodation = new Accommodation;
-        $accommodation = $accommodation->with(['pictures', 'host'])->findOrFail($accommodationId);
+        $accommodation = $accommodation->with(['pictures', 'host', 'missions'])->findOrFail($accommodationId);
 
         $input = $request->all();
         if(isset($input['address'])){

@@ -292,7 +292,9 @@ class MissionController extends Controller
     public function update(Request $request, $missionId)
     {
         $mission = new Mission;
-        $mission = $mission->findOrFail($missionId);
+        $mission = $mission->with(['accommodation', 'travellers', 'accommodation.host', 'accommodation.pictures'=>function($query) {
+            return $query->limit(1);
+        }, 'pictures'])->findOrFail($missionId);
         $mission->update($request->all());
 
         return $mission;

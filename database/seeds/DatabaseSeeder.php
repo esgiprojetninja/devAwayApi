@@ -23,6 +23,8 @@ class DatabaseSeeder extends Seeder
             'isActive' => 1,
             'remember_token' => str_random(10),
             'roles' => 1,
+            'city' => "Quincy-voisins",
+            'country'=> "France",
             'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
             'avatar' => "/9j/4AAQSkZJRgABAgAAAQABAAD/7QCEUGhvdG9zaG9wIDMuMAA4QklNBAQAAAAAAGccAigAYkZC
 TUQwMTAwMGE4NzBkMDAwMDVhODIwMDAwMzFmNjAwMDBiYWZkMDAwMDgxMDcwMTAwM2QzNzAxMDA5

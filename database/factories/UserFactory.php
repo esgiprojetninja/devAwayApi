@@ -23,6 +23,8 @@ $factory->define(App\User::class, function (Faker $faker) {
         'password' => password_hash($faker->text, PASSWORD_BCRYPT),
         'firstName' => $faker->firstName,
         'lastName' => $faker->lastName,
+        'city' => $faker->city,
+        'country' => $faker->country,
         'languages' => $faker->text(40),
         'skills' => $faker->text(40),
         'isActive' => $faker->boolean,
