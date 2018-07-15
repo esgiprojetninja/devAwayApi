@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 use App\PictureAccommodation;
+use App\Http\Controllers\Api\v1\AccommodationController;
 
 class PictureAccommodationController extends Controller
 {
@@ -205,7 +206,9 @@ class PictureAccommodationController extends Controller
             }
 
             $picture->save();
-            return $picture;
+
+            $accommodation = new AccommodationController();
+            return $accommodation->show($id_accommodation);
         } else {
             return response()->json("This accommodation allready has 7 pictures", 500);
         }

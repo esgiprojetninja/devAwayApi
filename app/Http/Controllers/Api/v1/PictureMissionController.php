@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 use App\PictureMission;
+use App\Http\Controllers\Api\v1\MissionController;
 
 class PictureMissionController extends Controller
 {
@@ -206,7 +207,9 @@ class PictureMissionController extends Controller
             }
 
             $picture->save();
-            return $picture;
+
+            $mission = new MissionController();
+            return $mission->show($id_mission);
         } else {
             return response()->json("This mission allready has 7 pictures", 500);
         }
