@@ -338,8 +338,26 @@ class MissionController extends Controller
 
         if ($candidate->where('mission_id', '=', $missionId)
                                     ->where('user', '=', $idUser)
+                        ->where('status', '=', 1)
                                     ->count() > 0 ){
             return response()->json("You allready applied on this mission!", 500);
+        }
+
+        if ($candidate->where('mission_id', '=', $missionId)
+                ->where('user', '=', $idUser)
+                ->where('status', '=', 0)
+                ->count() > 0 ){
+            $candidate = $candidate->where('mission_id', '=', $missionId)
+                ->where('user', '=', $idUser)
+                ->where('status', '=', 0)
+                ->first();
+            $candidate->setStatus(1);
+            $candidate->setFromDate($request->fromDate);
+            $candidate->setToDate($request->toDate);
+            if($candidate->save()){
+                return response()->json($candidate, 201);
+            }
+            return response()->json(null, 500);
         }
 
         $validator = Validator::make($request->all(), [
@@ -357,7 +375,7 @@ class MissionController extends Controller
         $candidate->setFromDate($request->fromDate);
         $candidate->setToDate($request->toDate);
         if($candidate->save()){
-            return response()->json("Success", 201);
+            return response()->json($candidate, 201);
         }
         return response()->json(null, 500);
     }
@@ -378,7 +396,7 @@ class MissionController extends Controller
                   ->where('user', '=', $idUser)->first();
         $candidate->setStatus(0);
         if($candidate->save()){
-            return response()->json("Success", 201);
+            return response()->json($candidate, 201);
         }
 
         return response()->json(null, 500);
@@ -403,7 +421,7 @@ class MissionController extends Controller
                 ->where('user', '=', $userId)->first();
             $candidate->setStatus(69);
             if($candidate->save()){
-                return response()->json("Success", 201);
+                return response()->json($candidate, 201);
             }
         }
 
@@ -429,7 +447,7 @@ class MissionController extends Controller
                 ->where('user', '=', $userId)->first();
             $candidate->setStatus(-1);
             if($candidate->save()){
-                return response()->json("Success", 201);
+                return response()->json($candidate, 201);
             }
         }
 
