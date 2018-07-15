@@ -333,13 +333,22 @@ class MissionController extends Controller
     public function apply(Request $request, $missionId)
     {
         $idUser = Auth::user()->id;
-        //TODO : Verifier que l'user n'a pas déjà postulé
+
         $candidate = new Candidate();
 
         if ($candidate->where('mission_id', '=', $missionId)
                                     ->where('user', '=', $idUser)
                                     ->count() > 0 ){
             return response()->json("You allready applied on this mission!", 500);
+        }
+
+        $validator = Validator::make($request->all(), [
+            'fromDate' => 'required|date',
+            'toDate' => 'required|date',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json(['error'=>$validator->errors()], 400);
         }
 
         $candidate->setUser($idUser);
@@ -357,11 +366,73 @@ class MissionController extends Controller
     {
         $idUser = Auth::user()->id;
         $candidate = new Candidate();
+        $candidateCheck = new Candidate();
 
-        if($candidate->where('mission_id', '=', $missionId)
-            ->where('user', '=', $idUser)->delete()){
-            return response()->json("Success", 204);
+        if ($candidateCheck->where('mission_id', '=', $missionId)
+                ->where('user', '=', $idUser)
+                ->count() == 0 ){
+            return response()->json("You didn't applied on this mission!", 500);
         }
+
+        $candidate = $candidate->where('mission_id', '=', $missionId)
+                  ->where('user', '=', $idUser)->first();
+        $candidate->setStatus(0);
+        if($candidate->save()){
+            return response()->json("Success", 201);
+        }
+
+        return response()->json(null, 500);
+    }
+
+    public function accept(Request $request, $missionId, $userId)
+    {
+        $idUser = Auth::user()->id;
+
+        //@todo  check is idUser == gerant mission / get mission=>acco=>user_id
+        if(Auth::user()->roles == 1 ){
+            $candidate = new Candidate();
+            $candidateCheck = new Candidate();
+
+            if ($candidateCheck->where('mission_id', '=', $missionId)
+                    ->where('user', '=', $userId)
+                    ->count() == 0 ){
+                return response()->json("There is no candidate with this id on this mission!", 500);
+            }
+
+            $candidate = $candidate->where('mission_id', '=', $missionId)
+                ->where('user', '=', $userId)->first();
+            $candidate->setStatus(69);
+            if($candidate->save()){
+                return response()->json("Success", 201);
+            }
+        }
+
+        return response()->json(null, 500);
+    }
+
+    public function refuse(Request $request, $missionId, $userId)
+    {
+        $idUser = Auth::user()->id;
+
+        //@todo  check is idUser == gerant mission / get mission=>acco=>user_id
+        if(Auth::user()->roles == 1 ){
+            $candidate = new Candidate();
+            $candidateCheck = new Candidate();
+
+            if ($candidateCheck->where('mission_id', '=', $missionId)
+                    ->where('user', '=', $userId)
+                    ->count() == 0 ){
+                return response()->json("There is no candidate with this id on this mission!", 500);
+            }
+
+            $candidate = $candidate->where('mission_id', '=', $missionId)
+                ->where('user', '=', $userId)->first();
+            $candidate->setStatus(-1);
+            if($candidate->save()){
+                return response()->json("Success", 201);
+            }
+        }
+
         return response()->json(null, 500);
     }
 }

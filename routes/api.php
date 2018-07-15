@@ -45,6 +45,8 @@ Route::group(['middleware' => ['api', 'auth:api'], 'prefix' => '/v1'], function 
     Route::put('missions/{id}', 'Api\v1\MissionController@update');
     Route::post('missions/{idMission}/apply', 'Api\v1\MissionController@apply');
     Route::post('missions/{idMission}/leave', 'Api\v1\MissionController@leave');
+    Route::post('missions/{idMission}/candidates/{idUser}/accept', 'Api\v1\MissionController@accept');
+    Route::post('missions/{idMission}/candidates/{idUser}/refuse', 'Api\v1\MissionController@refuse');
 
     //PICTURES ACCOMMODATION
     Route::resource('pictures/accommodations', 'Api\v1\PictureAccommodationController');
