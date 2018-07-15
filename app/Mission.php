@@ -39,8 +39,15 @@ class Mission extends Model
         return $this->isBooked;
     }
 
+    public function getIsActive() {
+        return $this->isActive;
+    }
+
     public function setIsBooked($isBooked) {
         $this->isBooked = $isBooked;
+    }
+    public function setIsActive($isActive) {
+        $this->isActive = $isActive;
     }
 
     public function travellers() {

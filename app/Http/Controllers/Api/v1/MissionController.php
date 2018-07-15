@@ -338,7 +338,7 @@ class MissionController extends Controller
         $mission = new Mission();
         $mission =$mission->findOrFail($missionId);
 
-        if($mission->getIsBooked() == 1){
+        if($mission->getIsBooked() == 1 || $mission->getIsActive() == 0){
             return response()->json("Sorry, this mission is no longer available!", 500);
         }
 
@@ -354,13 +354,6 @@ class MissionController extends Controller
                 ->where('status', '=', -1)
                 ->count() > 0 ){
             return response()->json("The host reject your candidate you can't apply one more time!", 500);
-        }
-
-        if ($candidate->where('mission_id', '=', $missionId)
-                ->where('user', '=', $idUser)
-                ->where('status', '=', '0')
-                ->count() == 1 ){
-            return response()->json("You have left the mission, you can't join it now!", 500);
         }
 
         if ($candidate->where('mission_id', '=', $missionId)
@@ -420,6 +413,7 @@ class MissionController extends Controller
 
         if($mission->getIsBooked() == 1 && $candidate->getStatus() == 69){
             $mission->setIsBooked(0);
+            $mission->setIsActive(1);
             $mission->save();
         } else if($mission->getIsBooked() == 1 ) {
             return response()->json("Sorry, this mission is no longer available!", 500);
@@ -465,6 +459,7 @@ class MissionController extends Controller
             $candidate->setStatus(69);
 
             $mission->setIsBooked(1);
+            $mission->setIsActive(0);
             $mission->save();
             if($candidate->save()){
                 return response()->json($candidate, 201);
