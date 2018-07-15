@@ -335,12 +335,32 @@ class MissionController extends Controller
         $idUser = Auth::user()->id;
 
         $candidate = new Candidate();
+        $mission = new Mission();
+        $mission =$mission->findOrFail($missionId);
+
+        if($mission->getIsBooked() == 1){
+            return response()->json("Sorry, this mission is no longer available!", 500);
+        }
 
         if ($candidate->where('mission_id', '=', $missionId)
                                     ->where('user', '=', $idUser)
                         ->where('status', '=', 1)
                                     ->count() > 0 ){
             return response()->json("You allready applied on this mission!", 500);
+        }
+
+        if ($candidate->where('mission_id', '=', $missionId)
+                ->where('user', '=', $idUser)
+                ->where('status', '=', -1)
+                ->count() > 0 ){
+            return response()->json("The host reject your candidate you can't apply one more time!", 500);
+        }
+
+        if ($candidate->where('mission_id', '=', $missionId)
+                ->where('user', '=', $idUser)
+                ->where('status', '=', '0')
+                ->count() == 1 ){
+            return response()->json("You have left the mission, you can't join it now!", 500);
         }
 
         if ($candidate->where('mission_id', '=', $missionId)
@@ -385,6 +405,8 @@ class MissionController extends Controller
         $idUser = Auth::user()->id;
         $candidate = new Candidate();
         $candidateCheck = new Candidate();
+        $mission = new Mission();
+        $mission = $mission->findOrFail($missionId);
 
         if ($candidateCheck->where('mission_id', '=', $missionId)
                 ->where('user', '=', $idUser)
@@ -392,8 +414,17 @@ class MissionController extends Controller
             return response()->json("You didn't applied on this mission!", 500);
         }
 
+
         $candidate = $candidate->where('mission_id', '=', $missionId)
                   ->where('user', '=', $idUser)->first();
+
+        if($mission->getIsBooked() == 1 && $candidate->getStatus() == 69){
+            $mission->setIsBooked(0);
+            $mission->save();
+        } else if($mission->getIsBooked() == 1 ) {
+            return response()->json("Sorry, this mission is no longer available!", 500);
+        }
+
         $candidate->setStatus(0);
         if($candidate->save()){
             return response()->json($candidate, 201);
@@ -405,9 +436,14 @@ class MissionController extends Controller
     public function accept(Request $request, $missionId, $userId)
     {
         $idUser = Auth::user()->id;
+        $mission = new Mission();
+        $mission = $mission->findOrFail($missionId);
 
         //@todo  check is idUser == gerant mission / get mission=>acco=>user_id
         if(Auth::user()->roles == 1 ){
+            if($mission->getIsBooked() == 1){
+                return response()->json("You allready accept someone on this mission!", 500);
+            }
             $candidate = new Candidate();
             $candidateCheck = new Candidate();
 
@@ -417,9 +453,19 @@ class MissionController extends Controller
                 return response()->json("There is no candidate with this id on this mission!", 500);
             }
 
+            if ($candidateCheck->where('mission_id', '=', $missionId)
+                    ->where('user', '=', $userId)
+                    ->where('status', '=', '0')
+                    ->count() == 1 ){
+                return response()->json("Sorry, this candidate leave the mission!", 500);
+            }
+
             $candidate = $candidate->where('mission_id', '=', $missionId)
                 ->where('user', '=', $userId)->first();
             $candidate->setStatus(69);
+
+            $mission->setIsBooked(1);
+            $mission->save();
             if($candidate->save()){
                 return response()->json($candidate, 201);
             }
@@ -431,9 +477,15 @@ class MissionController extends Controller
     public function refuse(Request $request, $missionId, $userId)
     {
         $idUser = Auth::user()->id;
+        $mission = new Mission();
+        $mission = $mission->findOrFail($missionId);
 
         //@todo  check is idUser == gerant mission / get mission=>acco=>user_id
         if(Auth::user()->roles == 1 ){
+            if($mission->getIsBooked() == 1){
+                return response()->json("You allready accept someone on this mission!", 500);
+            }
+
             $candidate = new Candidate();
             $candidateCheck = new Candidate();
 
@@ -441,6 +493,13 @@ class MissionController extends Controller
                     ->where('user', '=', $userId)
                     ->count() == 0 ){
                 return response()->json("There is no candidate with this id on this mission!", 500);
+            }
+
+            if ($candidateCheck->where('mission_id', '=', $missionId)
+                    ->where('user', '=', $userId)
+                    ->where('status', '=', '0')
+                    ->count() == 1 ){
+                return response()->json("Sorry, this candidate leave the mission!", 500);
             }
 
             $candidate = $candidate->where('mission_id', '=', $missionId)

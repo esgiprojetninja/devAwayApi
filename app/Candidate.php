@@ -42,10 +42,16 @@ class Candidate extends Model
         $this->status = $status;
     }
 
+    public function getStatus()
+    {
+        return $this->status;
+    }
+
     public function setFromDate($fromDate)
     {
         $this->fromDate = $fromDate;
     }
+
     public function setToDate($toDate)
     {
         $this->toDate = $toDate;

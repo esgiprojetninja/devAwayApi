@@ -35,6 +35,14 @@ class Mission extends Model
         return $this->id;
     }
 
+    public function getIsBooked() {
+        return $this->isBooked;
+    }
+
+    public function setIsBooked($isBooked) {
+        $this->isBooked = $isBooked;
+    }
+
     public function travellers() {
         return $this->hasMany('App\Candidate');
     }
