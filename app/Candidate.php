@@ -32,9 +32,9 @@ class Candidate extends Model
         $this->user = $user;
     }
 
-    public function setMission($mission)
+    public function setMissionId($mission)
     {
-        $this->mission = $mission;
+        $this->mission_id = $mission;
     }
 
     public function setStatus($status)

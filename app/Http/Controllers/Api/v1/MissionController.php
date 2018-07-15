@@ -335,13 +335,32 @@ class MissionController extends Controller
         $idUser = Auth::user()->id;
         //TODO : Verifier que l'user n'a pas déjà postulé
         $candidate = new Candidate();
+
+        if ($candidate->where('mission_id', '=', $missionId)
+                                    ->where('user', '=', $idUser)
+                                    ->count() > 0 ){
+            return response()->json("You allready applied on this mission!", 500);
+        }
+
         $candidate->setUser($idUser);
-        $candidate->setMission($missionId);
+        $candidate->setMissionId($missionId);
         $candidate->setStatus(1);
         $candidate->setFromDate($request->fromDate);
         $candidate->setToDate($request->toDate);
         if($candidate->save()){
-            return response()->json(null, 201);
+            return response()->json("Success", 201);
+        }
+        return response()->json(null, 500);
+    }
+
+    public function leave(Request $request, $missionId)
+    {
+        $idUser = Auth::user()->id;
+        $candidate = new Candidate();
+
+        if($candidate->where('mission_id', '=', $missionId)
+            ->where('user', '=', $idUser)->delete()){
+            return response()->json("Success", 204);
         }
         return response()->json(null, 500);
     }

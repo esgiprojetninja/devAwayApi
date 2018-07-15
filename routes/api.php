@@ -44,6 +44,7 @@ Route::group(['middleware' => ['api', 'auth:api'], 'prefix' => '/v1'], function 
     Route::delete('missions', 'Api\v1\MissionController@destroy');
     Route::put('missions/{id}', 'Api\v1\MissionController@update');
     Route::post('missions/{idMission}/apply', 'Api\v1\MissionController@apply');
+    Route::post('missions/{idMission}/leave', 'Api\v1\MissionController@leave');
 
     //PICTURES ACCOMMODATION
     Route::resource('pictures/accommodations', 'Api\v1\PictureAccommodationController');
