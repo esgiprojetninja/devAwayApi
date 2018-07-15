@@ -24,6 +24,11 @@ class PictureMission extends Model
         return $this->id;
     }
 
+    public function getMissionId()
+    {
+        return $this->mission_id;
+    }
+
     public function mission() {
         return $this->belongsTo('App\Mission', 'picture_mission_mission_id_foreign');
     }

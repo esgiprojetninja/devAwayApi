@@ -147,7 +147,8 @@ class PictureMissionController extends Controller
         }
 
         $picture->save();
-        return $picture;
+        $mission = new MissionController();
+        return $mission->show($picture->getMissionId());
     }
 
     /**

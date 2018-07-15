@@ -24,6 +24,11 @@ class PictureAccommodation extends Model
         return $this->id;
     }
 
+    public function getAccommodationId()
+    {
+        return $this->accommodation_id;
+    }
+
     public function accommodations() {
         return $this->belongsTo('App\Accommodation', 'picture_accommodation_accommodation_id_foreign');
     }

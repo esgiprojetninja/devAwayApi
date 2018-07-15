@@ -147,7 +147,8 @@ class PictureAccommodationController extends Controller
         }
 
         $picture->save();
-        return $picture;
+        $accommodation = new AccommodationController();
+        return $accommodation->show($picture->getAccommodationId());
     }
 
     /**
