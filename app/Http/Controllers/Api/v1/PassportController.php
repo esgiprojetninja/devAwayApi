@@ -76,7 +76,7 @@ class PassportController extends Controller
 
         $user = User::create($input);
         $success['token'] =  $user->createToken('MyApp')->accessToken;
-        $success['userName'] =  $user->userName;
+        $success['userphName'] =  $user->userName;
 
         Mail::to($input['email'])->send(new EmailValidation($user));
 

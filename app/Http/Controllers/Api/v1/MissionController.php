@@ -370,8 +370,7 @@ class MissionController extends Controller
             $candidate->setFromDate($request->fromDate);
             $candidate->setToDate($request->toDate);
             if($candidate->save()){
-                $candidateReturn = new CandidateController();
-                return response()->json($candidateReturn->show($candidate->id), 201);
+                return response()->json($this->show($missionId), 201);
             }
             return response()->json(null, 500);
         }
