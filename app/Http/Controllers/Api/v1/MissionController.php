@@ -403,10 +403,6 @@ class MissionController extends Controller
         $mission = new Mission();
         $mission = $mission->findOrFail($missionId);
 
-        if($mission->getIsActive() == 0){
-            return response()->json("Sorry, this mission is no longer available!", 500);
-        }
-
         if ($candidateCheck->where('mission_id', '=', $missionId)
                 ->where('user', '=', $idUser)
                 ->count() == 0 ){
