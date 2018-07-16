@@ -405,6 +405,10 @@ class MissionController extends Controller
         $mission = new Mission();
         $mission = $mission->findOrFail($missionId);
 
+        if($mission->getIsActive() == 0){
+            return response()->json("Sorry, this mission is no longer available!", 500);
+        }
+
         if ($candidateCheck->where('mission_id', '=', $missionId)
                 ->where('user', '=', $idUser)
                 ->count() == 0 ){
@@ -440,8 +444,10 @@ class MissionController extends Controller
 
         $getOwnerOfMission = $accommodation->findOrFail($mission->accommodation_id)->getUserId();
 
+        if($mission->getIsActive() == 0){
+            return response()->json("Sorry, this mission is no longer available!", 500);
+        }
 
-        //@todo  check is idUser == gerant mission / get mission=>acco=>user_id
         if(Auth::user()->roles == 1 || $idUser == $getOwnerOfMission){
             if($mission->getIsBooked() == 1){
                 return response()->json("You allready accept someone on this mission!", 500);
@@ -487,7 +493,10 @@ class MissionController extends Controller
 
         $getOwnerOfMission = $accommodation->findOrFail($mission->accommodation_id)->getUserId();
 
-        //@todo  check is idUser == gerant mission / get mission=>acco=>user_id
+        if($mission->getIsActive() == 0){
+            return response()->json("Sorry, this mission is no longer available!", 500);
+        }
+
         if(Auth::user()->roles == 1 || $idUser == $getOwnerOfMission){
             if($mission->getIsBooked() == 1){
                 return response()->json("You allready accept someone on this mission!", 500);
