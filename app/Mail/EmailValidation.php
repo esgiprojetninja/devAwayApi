@@ -6,6 +6,7 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Contracts\Queue\ShouldQueue;
+use App\User;
 
 class EmailValidation extends Mailable
 {
@@ -16,9 +17,9 @@ class EmailValidation extends Mailable
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(User $user)
     {
-        //
+        $this->user = $user;
     }
 
     /**
@@ -28,6 +29,10 @@ class EmailValidation extends Mailable
      */
     public function build()
     {
-        return $this->view('emails.validation');
+        return $this->view('emails.validation')
+                    ->with([
+                        'email' => $this->user->email,
+                        'userName' => $this->user->username
+                    ]);
     }
 }

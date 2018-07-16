@@ -16,7 +16,7 @@
 
     <div>
         <div>
-            Laravel
+            Bonjour <a href="{{ route('/validate/email/') }}">Register</a>
         </div>
     </div>
 </div>

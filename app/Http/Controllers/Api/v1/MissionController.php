@@ -391,8 +391,7 @@ class MissionController extends Controller
         $candidate->setFromDate($request->fromDate);
         $candidate->setToDate($request->toDate);
         if($candidate->save()){
-            $candidateReturn = new CandidateController();
-            return response()->json($candidateReturn->show($candidate->id), 201);
+            return response()->json($this->show($missionId), 201);
         }
         return response()->json(null, 500);
     }
@@ -428,8 +427,7 @@ class MissionController extends Controller
 
         $candidate->setStatus(0);
         if($candidate->save()){
-            $candidateReturn = new CandidateController();
-            return response()->json($candidateReturn->show($candidate->id), 201);
+            return response()->json($this->show($missionId), 201);
         }
 
         return response()->json(null, 500);
@@ -476,8 +474,7 @@ class MissionController extends Controller
             $mission->setIsActive(0);
             $mission->save();
             if($candidate->save()){
-                $candidateReturn = new CandidateController();
-                return response()->json($candidateReturn->show($candidate->id), 201);
+                return response()->json($this->show($missionId), 201);
             }
         }
 
@@ -522,8 +519,7 @@ class MissionController extends Controller
                 ->where('user', '=', $userId)->first();
             $candidate->setStatus(-1);
             if($candidate->save()){
-                $candidateReturn = new CandidateController();
-                return response()->json($candidateReturn->show($candidate->id), 201);
+                return response()->json($this->show($missionId), 201);
             }
         }
 

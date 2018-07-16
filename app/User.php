@@ -32,7 +32,8 @@ class User extends Authenticatable
         'city',
         'country',
         'emailVerified',
-        'adressVerified'
+        'adressVerified',
+        'emailVerifiedToken'
     ];
 
     /**
