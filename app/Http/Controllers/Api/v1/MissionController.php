@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Auth;
 
 use App\Mission;
 use Validator;
+use App\Http\Controllers\Api\v1\CandidateController;
 
 class MissionController extends Controller
 {
@@ -176,7 +177,7 @@ class MissionController extends Controller
     public function show($missionId)
     {
         $mission = new Mission;
-        return $mission->with(['accommodation', 'travellers', 'accommodation.host', 'accommodation.pictures'=>function($query) {
+        return $mission->with(['accommodation', 'travellers', 'travellers.user', 'accommodation.host', 'accommodation.pictures'=>function($query) {
             return $query->limit(1);
         }, 'pictures'])->findOrFail($missionId);
     }
@@ -292,7 +293,7 @@ class MissionController extends Controller
     public function update(Request $request, $missionId)
     {
         $mission = new Mission;
-        $mission = $mission->with(['accommodation', 'travellers', 'accommodation.host', 'accommodation.pictures'=>function($query) {
+        $mission = $mission->with(['accommodation', 'travellers', 'travellers.user', 'accommodation.host', 'accommodation.pictures'=>function($query) {
             return $query->limit(1);
         }, 'pictures'])->findOrFail($missionId);
         $mission->update($request->all());
@@ -368,7 +369,8 @@ class MissionController extends Controller
             $candidate->setFromDate($request->fromDate);
             $candidate->setToDate($request->toDate);
             if($candidate->save()){
-                return response()->json($candidate, 201);
+                $candidateReturn = new CandidateController();
+                return response()->json($candidateReturn->show($candidate->id), 201);
             }
             return response()->json(null, 500);
         }
@@ -388,7 +390,8 @@ class MissionController extends Controller
         $candidate->setFromDate($request->fromDate);
         $candidate->setToDate($request->toDate);
         if($candidate->save()){
-            return response()->json($candidate, 201);
+            $candidateReturn = new CandidateController();
+            return response()->json($candidateReturn->show($candidate->id), 201);
         }
         return response()->json(null, 500);
     }
@@ -407,7 +410,6 @@ class MissionController extends Controller
             return response()->json("You didn't applied on this mission!", 500);
         }
 
-
         $candidate = $candidate->where('mission_id', '=', $missionId)
                   ->where('user', '=', $idUser)->first();
 
@@ -421,7 +423,8 @@ class MissionController extends Controller
 
         $candidate->setStatus(0);
         if($candidate->save()){
-            return response()->json($candidate, 201);
+            $candidateReturn = new CandidateController();
+            return response()->json($candidateReturn->show($candidate->id), 201);
         }
 
         return response()->json(null, 500);

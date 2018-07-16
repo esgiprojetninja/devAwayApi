@@ -18,6 +18,7 @@ Route::get('foo', function () {
     return 'Hello World';
 });
 
+
 Route::post('login', [ 'as' => 'login', 'uses' => 'Api\v1\PassportController@login']);
 Route::post('register', 'Api\v1\PassportController@register');
 

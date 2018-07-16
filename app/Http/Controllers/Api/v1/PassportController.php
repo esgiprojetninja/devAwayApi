@@ -7,6 +7,8 @@ use App\Http\Controllers\Controller;
 use App\User;
 use Illuminate\Support\Facades\Auth;
 use Validator;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\EmailValidation;
 
 class PassportController extends Controller
 {
@@ -74,6 +76,8 @@ class PassportController extends Controller
         $user = User::create($input);
         $success['token'] =  $user->createToken('MyApp')->accessToken;
         $success['userName'] =  $user->userName;
+
+        Mail::to($input['email'])->send(new EmailValidation());
 
         return response()->json(['success'=>$success], 200);
     }
