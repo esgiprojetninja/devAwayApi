@@ -72,7 +72,7 @@ class PassportController extends Controller
 
         $input = $request->all();
         $input['password'] = bcrypt($input['password']);
-        $input['verifiedEmailToken'] = $user->createToken('MyApp')->accessToken;
+        $input['emailVerifiedToken'] = str_random(60);
 
         $user = User::create($input);
         $success['token'] =  $user->createToken('MyApp')->accessToken;
@@ -83,8 +83,29 @@ class PassportController extends Controller
         return response()->json(['success'=>$success], 200);
     }
 
-    public function validateEmail(Request $request)
+    public function validateEmail(Request $request, $email, $token)
     {
+        $user = new User();
+
+        if ($user->where('email', '=', $email)
+                ->where('emailVerifiedToken', '=', $token)
+                ->where('emailVerified', '=', 1)
+                ->count() == 1 ){
+            return response()->json("You have allready verified your email!", 500);
+        }
+
+        if ($user->where('email', '=', $email)
+                ->where('emailVerifiedToken', '=', $token)
+                ->where('emailVerified', '=', 0)
+                ->count() == 1 ){
+            $user = $user->where('email', '=', $email)
+                ->where('emailVerifiedToken', '=', $token)
+                ->where('emailVerified', '=', 0)->first();
+            $user->setEmailVerified(1);
+            $user->save();
+        }
+
+        return redirect('home');
 
     }
 

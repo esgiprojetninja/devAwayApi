@@ -29,10 +29,12 @@ class EmailValidation extends Mailable
      */
     public function build()
     {
-        return $this->view('emails.validation')
+        return $this->subject("Please confirm your email address")
+                    ->view('emails.validation')
                     ->with([
                         'email' => $this->user->email,
-                        'userName' => $this->user->username
+                        'userName' => $this->user->userName,
+                        'tokenEmail' => $this->user->emailVerifiedToken
                     ]);
     }
 }

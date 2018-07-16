@@ -18,10 +18,9 @@ Route::get('foo', function () {
     return 'Hello World';
 });
 
-
 Route::post('login', [ 'as' => 'login', 'uses' => 'Api\v1\PassportController@login']);
 Route::post('register', 'Api\v1\PassportController@register');
-Route::post('validate/email/{email}/{token}', 'Api\v1\PassportController@validateEmail');
+Route::get('validate/email/{email}/{token}', 'Api\v1\PassportController@validateEmail');
 
 
 Route::group(['middleware' => ['api', 'auth:api'], 'prefix' => '/v1'], function () {
@@ -71,7 +70,7 @@ Route::group(['middleware' => ['api', 'auth:api'], 'prefix' => '/v1'], function 
 Route::group(['middleware' => 'api', 'prefix' => '/v1'], function () {
     Route::get('accommodations', 'Api\v1\AccommodationController@index');
     Route::get('accommodations/paginate', 'Api\v1\AccommodationController@paginateAll');
-    Route::get('accommodations/search', 'Api\v1\AccommodationController@searchAccommodationByLocation');
+    Route::get('accommodations/search', 'Api\v1\AccommodationController@searchAccommodation');
     Route::get('missions', 'Api\v1\MissionController@index');
 
     Route::get('accommodations/{id}', 'Api\v1\AccommodationController@show');

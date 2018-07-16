@@ -445,6 +445,65 @@ class AccommodationController extends Controller
             ->get();
     }
 
+    public function searchAccommodation()
+    {
+        $accommodation = new Accommodation();
+        $city =  Input::get('city');
+        $country =  Input::get('country');
+        $fromDate =  Input::get('fromDate');
+        $toDate =  Input::get('toDate');
+
+        $query = $accommodation->with(['pictures', 'host'])
+                               ->leftJoin('mission', 'accommodation.id', '=', 'mission.accommodation_id');
+
+        if($city){
+            $query = $query->where('accommodation.city', 'LIKE', '%'.$city.'%');
+        }
+
+        if($country){
+            $query = $query->where('accommodation.country', 'LIKE', '%'.$country.'%');
+        }
+
+       if($fromDate){
+            $query = $query->whereBetween('mission.checkinDate', [$fromDate, $toDate]);
+        }
+
+        if($toDate){
+            $query = $query->whereBetween('mission.checkoutDate', [$fromDate, $toDate]);
+        }
+
+        $get = ['accommodation.id',
+            'accommodation.title',
+            'accommodation.description',
+            'accommodation.city',
+            'accommodation.region',
+            'accommodation.country',
+            'accommodation.address',
+            'accommodation.longitude',
+            'accommodation.latitude',
+            'accommodation.nbBedroom',
+            'accommodation.nbBathroom',
+            'accommodation.nbToilet',
+            'accommodation.nbMaxBaby',
+            'accommodation.nbMaxChild',
+            'accommodation.nbMaxGuest',
+            'accommodation.nbMaxAdult',
+            'accommodation.animalsAllowed',
+            'accommodation.smokersAllowed',
+            'accommodation.hasInternet',
+            'accommodation.propertySize',
+            'accommodation.floor',
+            'accommodation.minStay',
+            'accommodation.maxStay',
+            'accommodation.type',
+            'accommodation.checkinHour',
+            'accommodation.checkoutHour',
+            'accommodation.user_id',
+            ];
+
+        return $query->get($get);
+    }
+
     public function paginateAll()
     {
         $accommodation = new Accommodation;

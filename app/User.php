@@ -32,7 +32,7 @@ class User extends Authenticatable
         'city',
         'country',
         'emailVerified',
-        'adressVerified',
+        'addressVerified',
         'emailVerifiedToken'
     ];
 
@@ -51,6 +51,11 @@ class User extends Authenticatable
 
     public function getRoles() {
         return $this->roles;
+    }
+
+    public function setEmailVerified($bool)
+    {
+        $this->emailVerified = $bool;
     }
 
     public function accommodations()
