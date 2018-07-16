@@ -48,6 +48,10 @@ class Accommodation extends Model
         return $this->id;
     }
 
+    public function getUserId() {
+        return $this->user_id;
+    }
+
     /**
      * Get all of the posts for the country.
      */

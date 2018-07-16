@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 
 use App\Mission;
+use App\Accommodation;
 use Validator;
 use App\Http\Controllers\Api\v1\CandidateController;
 
@@ -435,9 +436,13 @@ class MissionController extends Controller
         $idUser = Auth::user()->id;
         $mission = new Mission();
         $mission = $mission->findOrFail($missionId);
+        $accommodation = new Accommodation();
+
+        $getOwnerOfMission = $accommodation->findOrFail($mission->accommodation_id)->getUserId();
+
 
         //@todo  check is idUser == gerant mission / get mission=>acco=>user_id
-        if(Auth::user()->roles == 1 ){
+        if(Auth::user()->roles == 1 || $idUser == $getOwnerOfMission){
             if($mission->getIsBooked() == 1){
                 return response()->json("You allready accept someone on this mission!", 500);
             }
@@ -477,9 +482,12 @@ class MissionController extends Controller
         $idUser = Auth::user()->id;
         $mission = new Mission();
         $mission = $mission->findOrFail($missionId);
+        $accommodation = new Accommodation();
+
+        $getOwnerOfMission = $accommodation->findOrFail($mission->accommodation_id)->getUserId();
 
         //@todo  check is idUser == gerant mission / get mission=>acco=>user_id
-        if(Auth::user()->roles == 1 ){
+        if(Auth::user()->roles == 1 || $idUser == $getOwnerOfMission){
             if($mission->getIsBooked() == 1){
                 return response()->json("You allready accept someone on this mission!", 500);
             }

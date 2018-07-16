@@ -16,13 +16,7 @@ return [
     |
     */
 
-    'driver' => env('MAIL_DRIVER', 'mailgun'),
-
-    'mailgun' => [
-        'domain' => 'sandboxd713c168af7842c3bc7e3f5b9f1777b1.mailgun.org',
-        'secret' => 'pubkey-e059885dab04f805e33fe71e03aacf1c',
-    ],
-
+    'driver' => env('MAIL_DRIVER', 'smtp'),
     /*
     |--------------------------------------------------------------------------
     | SMTP Host Address
