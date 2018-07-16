@@ -21,6 +21,7 @@ Route::get('foo', function () {
 
 Route::post('login', [ 'as' => 'login', 'uses' => 'Api\v1\PassportController@login']);
 Route::post('register', 'Api\v1\PassportController@register');
+Route::post('validate/email', 'Api\v1\PassportController@validateEmail');
 
 
 Route::group(['middleware' => ['api', 'auth:api'], 'prefix' => '/v1'], function () {

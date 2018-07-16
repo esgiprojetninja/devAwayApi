@@ -25,6 +25,8 @@ class CreateUserTable extends Migration
             $table->longText('languages')->nullable();
             $table->longText('skills')->nullable();
             $table->boolean('isActive')->default(1);
+            $table->boolean('adressVerified')->default(0);
+            $table->boolean('emailVerified')->default(0);
             $table->tinyInteger('roles')->default(0);
             $table->longText('avatar');
             $table->rememberToken();

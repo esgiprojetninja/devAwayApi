@@ -108,7 +108,7 @@ class CandidateController extends Controller
         $candidateTemp = $candidate->findOrFail($candidateId);
 
         if(Auth::user()->roles == 1 || $candidateTemp->user == Auth::user()->id){
-            return $candidate->with(['user'])->findOrFail($candidateId);
+            return $candidate->with(['user', 'missions', 'missions.accommodation'])->findOrFail($candidateId);
         }
 
         return $candidate->findOrFail($candidateId);
@@ -170,7 +170,7 @@ class CandidateController extends Controller
         $candidate = $candidate->findOrFail($candidateId);
 
         if(Auth::user()->roles == 1 || $candidateTemp->user == Auth::user()->id){
-            $candidate = $candidate->with(['user'])->findOrFail($candidateId);
+            $candidate = $candidate->with(['user', 'missions', 'missions.accommodation'])->findOrFail($candidateId);
         }
 
         $candidate->update($request->all());

@@ -82,5 +82,10 @@ class PassportController extends Controller
         return response()->json(['success'=>$success], 200);
     }
 
+    public function validateEmail(Request $request)
+    {
+
+    }
+
 }
 

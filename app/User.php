@@ -30,7 +30,9 @@ class User extends Authenticatable
         'isActive',
         'avatar',
         'city',
-        'country'
+        'country',
+        'emailVerified',
+        'adressVerified'
     ];
 
     /**

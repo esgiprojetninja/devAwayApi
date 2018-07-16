@@ -28,6 +28,8 @@ $factory->define(App\User::class, function (Faker $faker) {
         'languages' => $faker->text(40),
         'skills' => $faker->text(40),
         'isActive' => $faker->boolean,
+        'adressVerified' => $faker->boolean,
+        'emailVerified' => $faker->boolean,
         'remember_token' => str_random(10),
         'roles' => $faker->numberBetween(0,1),
         'created_at' => Carbon::now()->format('Y-m-d H:i:s'),

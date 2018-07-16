@@ -62,6 +62,6 @@ class Candidate extends Model
     }
 
     public function missions() {
-        return $this->belongsTo('App\Mission', 'candidate_mission_id_foreign');
+        return $this->belongsTo('App\Mission', 'mission_id', 'id');
     }
 }
