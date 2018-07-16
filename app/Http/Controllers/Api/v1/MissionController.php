@@ -470,7 +470,8 @@ class MissionController extends Controller
             $mission->setIsActive(0);
             $mission->save();
             if($candidate->save()){
-                return response()->json($candidate, 201);
+                $candidateReturn = new CandidateController();
+                return response()->json($candidateReturn->show($candidate->id), 201);
             }
         }
 
@@ -512,7 +513,8 @@ class MissionController extends Controller
                 ->where('user', '=', $userId)->first();
             $candidate->setStatus(-1);
             if($candidate->save()){
-                return response()->json($candidate, 201);
+                $candidateReturn = new CandidateController();
+                return response()->json($candidateReturn->show($candidate->id), 201);
             }
         }
 
