@@ -373,31 +373,39 @@ class AccommodationController extends Controller
     public function update(Request $request, $accommodationId)
     {
         $accommodation = new Accommodation;
+        $getOwnerOfAccommodation = $accommodation->findOrFail($accommodationId)->getUserId();
         $accommodation = $accommodation->with(['pictures', 'host', 'missions'])->findOrFail($accommodationId);
 
-        $input = $request->all();
-        if(isset($input['address'])){
-            if(!isset($input['longitude']) && !isset($input['latitude'])) {
-                return response()->json("You can't update the address without specifing both latitude and longitude!", 400);
-            }
-            $key = ['city', 'country', 'region'];
-            foreach ($key as $value) {
-                if(!isset($input[$value])) {
-                    $input[$value] = "";
+        $myId = Auth::user()->id;
+
+        if(Auth::user()->roles == 1 || $myId == $getOwnerOfAccommodation || Auth::user()->isActive == 0){
+            $input = $request->all();
+            if(isset($input['address'])){
+                if(!isset($input['longitude']) && !isset($input['latitude'])) {
+                    return response()->json("You can't update the address without specifing both latitude and longitude!", 400);
+                }
+                $key = ['city', 'country', 'region'];
+                foreach ($key as $value) {
+                    if(!isset($input[$value])) {
+                        $input[$value] = "";
+                    }
+                }
+            } else {
+                if(isset($input['city']) || isset($input['country']) || isset($input['region'])) {
+                    return response()->json("You can't update the city or country or region without updating the address!", 400);
+                }
+                if(isset($input['longitude']) || isset($input['latitude'])) {
+                    return response()->json("You can't update the longitude or latitude without updating the address!", 400);
                 }
             }
+
+            $accommodation->update($input);
+
+            return $accommodation;
         } else {
-            if(isset($input['city']) || isset($input['country']) || isset($input['region'])) {
-                return response()->json("You can't update the city or country or region without updating the address!", 400);
-            }
-            if(isset($input['longitude']) || isset($input['latitude'])) {
-                return response()->json("You can't update the longitude or latitude without updating the address!", 400);
-            }
+            return abort(404);
         }
 
-        $accommodation->update($input);
-
-        return $accommodation;
     }
 
     /**

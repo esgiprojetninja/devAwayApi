@@ -215,7 +215,7 @@ class MessageController extends Controller
                             $q->where('from', $idUser)
                                 ->where('to', $myId);
                         })
-                        ->orderBy('created_at')
+                        ->orderBy('created_at', 'DESC')
                         ->get();
         $idUsers = [$myId, $idUser];
         $return['users'] = User::whereIn('id', $idUsers)->get();
