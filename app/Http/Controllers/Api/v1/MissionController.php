@@ -534,9 +534,9 @@ class MissionController extends Controller
         $idUserHost = [];
 
         foreach($candidate as $oneCandidate){
-            $idUserHost = $accommodation->findOrFail($mission->findOrFail($oneCandidate->mission_id)->accommodation_id)->user_id;
-            if(Message::where('from', '=', $idUserHost)->orWhere('to', '=', $idUserHost)->count() == 0){
-                $idUserHost[] = $idUserHost;
+            $idUserHostTemp = $accommodation->findOrFail($mission->findOrFail($oneCandidate->mission_id)->accommodation_id)->user_id;
+            if(Message::where('from', '=', $idUser)->where('to', '=', $idUserHostTemp)->count() == 0 && Message::where('to', '=', $idUser)->where('from', '=', $idUserHostTemp)->count() == 0){
+                $idUserHost[] = $idUserHostTemp;
             }
         }
 
