@@ -539,4 +539,25 @@ class MissionController extends Controller
         }, 'pictures'])->whereIn('id', $idMissionsImIn)->get(), 200);
     }
 
+    public function getMyMissionsOwned()
+    {
+        $idUser = Auth::user()->id;
+        $mission = new Mission();
+        $accommodation = new Accommodation();
+        $accommodation = $accommodation->where('user_id', '=', $idUser)->get();
+
+        $missionsIOwnId = [];
+
+        foreach($accommodation as $oneAccommodation){
+            $missionsIOwn = $mission->where('accommodation_id', '=', $oneAccommodation->id)->get();
+            foreach ($missionsIOwn as $oneMissionIOwn){
+                $missionsIOwnId[] = $oneMissionIOwn->id;
+            }
+        }
+
+        return response()->json(Mission::with(['accommodation', 'travellers', 'travellers.user', 'accommodation.host', 'accommodation.pictures'=>function($query) {
+            return $query->limit(1);
+        }, 'pictures'])->whereIn('id', $missionsIOwnId)->get(), 200);
+    }
+
 }
