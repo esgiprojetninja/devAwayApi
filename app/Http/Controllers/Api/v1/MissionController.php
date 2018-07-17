@@ -11,6 +11,8 @@ use App\Mission;
 use App\Accommodation;
 use Validator;
 use App\Http\Controllers\Api\v1\CandidateController;
+use App\User;
+use App\Message;
 
 class MissionController extends Controller
 {
@@ -525,16 +527,20 @@ class MissionController extends Controller
     {
         $idUser = Auth::user()->id;
         $candidate = new Candidate();
+        $accommodation = new Accommodation();
+        $mission = new Mission();
 
         $candidate = $candidate->where('user', '=', $idUser)->get();
-        $idMissionsImIn = [];
+        $idUserHost = [];
 
         foreach($candidate as $oneCandidate){
-            $idMissionsImIn[] = $oneCandidate->mission_id;
+            $idUserHost = $accommodation->findOrFail($mission->findOrFail($oneCandidate->mission_id)->accommodation_id)->user_id;
+            if(Message::where('from', '=', $idUserHost)->orWhere('to', '=', $idUserHost)->count() == 0){
+                $idUserHost[] = $idUserHost;
+            }
         }
 
-
-        return response()->json(Mission::with(['accommodation.host'])->whereIn('id', $idMissionsImIn)->get(), 200);
+        return response()->json(User::whereIn('id', $idUserHost)->get(), 200);
     }
 
     public function getMyMissionsOwned()

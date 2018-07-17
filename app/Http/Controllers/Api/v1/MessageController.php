@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 
 use App\Message;
 use Illuminate\Support\Facades\DB;
+use Validator;
 
 class MessageController extends Controller
 {
@@ -40,6 +41,19 @@ class MessageController extends Controller
      *     path="/api/v1/messages",
      *     tags={"Message"},
      *     security={ {"passport": {} } },
+     *     @SWG\Parameter(
+     *       name="to",
+     *       in="query",
+     *       description="user_id sending to",
+     *       required=true,
+     *       type="integer"
+     *     ),
+     *     @SWG\Parameter(
+     *       name="content",
+     *       in="query",
+     *       required=true,
+     *       type="string"
+     *     ),
      *     @SWG\Response(response="200", description="Create one message"),
      * )
      */
@@ -47,6 +61,22 @@ class MessageController extends Controller
     {
         $message = new Message;
         return $message->create($request->all());
+
+        $validator = Validator::make($request->all(), [
+            'content' => 'required',
+            'to' => 'required|exists:user,id',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json(['error'=>$validator->errors()], 400);
+        }
+
+        $input = $request->all();
+        $input['from'] = Auth::user()->id;
+
+        $message = Message::create($input);
+
+        return response()->json($message, 200);
     }
 
     /**
