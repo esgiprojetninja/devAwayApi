@@ -45,7 +45,7 @@ Route::group(['middleware' => ['api', 'auth:api'], 'prefix' => '/v1'], function 
     Route::delete('missions', 'Api\v1\MissionController@destroy');
     Route::put('missions/{id}', 'Api\v1\MissionController@update');
     Route::get('missions/me/get/new/host', 'Api\v1\MissionController@getMyMissions');
-    Route::get('missions/me/owners', 'Api\v1\MissionController@getMyMissionsOwned');
+    Route::get('missions/me/owners/get/travellers', 'Api\v1\MissionController@getMyMissionsOwned');
     Route::post('missions/{idMission}/apply', 'Api\v1\MissionController@apply');
     Route::post('missions/{idMission}/leave', 'Api\v1\MissionController@leave');
     Route::post('missions/{idMission}/candidates/{idUser}/accept', 'Api\v1\MissionController@accept');

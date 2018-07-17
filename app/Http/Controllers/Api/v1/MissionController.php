@@ -550,16 +550,22 @@ class MissionController extends Controller
         $accommodation = new Accommodation();
         $accommodation = $accommodation->where('user_id', '=', $idUser)->get();
 
-        $missionsIOwnId = [];
+        $idUserTraveller = [];
 
         foreach($accommodation as $oneAccommodation){
             $missionsIOwn = $mission->where('accommodation_id', '=', $oneAccommodation->id)->get();
             foreach ($missionsIOwn as $oneMissionIOwn){
-                $missionsIOwnId[] = $oneMissionIOwn->id;
+                $candidate = Candidate::where('mission_id', '=', $oneMissionIOwn->id)->where('status', '>', 0)->get();
+                foreach($candidate as $oneCandidate){
+                    $idUserTravellerTemp = $oneCandidate->user. " ";
+                    if(Message::where('from', '=', $idUser)->where('to', '=', $idUserTravellerTemp)->count() == 0 && Message::where('to', '=', $idUser)->where('from', '=', $idUserTravellerTemp)->count() == 0){
+                        $idUserTraveller[] = $idUserTravellerTemp;
+                    }
+                }
             }
         }
 
-        return response()->json(Mission::with(['travellers', 'travellers.user'])->whereIn('id', $missionsIOwnId)->get(), 200);
+        return response()->json(User::whereIn('id', $idUserTraveller)->get(), 200);
     }
 
 }
