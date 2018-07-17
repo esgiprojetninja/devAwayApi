@@ -171,6 +171,8 @@ class CandidateController extends Controller
 
         if(Auth::user()->roles == 1 || $candidateTemp->user == Auth::user()->id){
             $candidate = $candidate->with(['user', 'missions', 'missions.accommodation'])->findOrFail($candidateId);
+        }else {
+            abort(404);
         }
 
         $candidate->update($request->all());
@@ -202,7 +204,14 @@ class CandidateController extends Controller
     public function destroy($candidateId)
     {
         $candidate = new Candidate;
-        $candidate->findOrFail($candidateId)->delete();
+        $candidateTemp = $candidate->findOrFail($candidateId);
+
+
+        if(Auth::user()->roles == 1 || $candidateTemp->user == Auth::user()->id) {
+            $candidate->findOrFail($candidateId)->delete();
+        } else {
+            abort(404);
+        }
 
         return response()->json(null, 204);
     }

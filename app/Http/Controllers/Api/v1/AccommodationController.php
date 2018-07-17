@@ -189,6 +189,7 @@ class AccommodationController extends Controller
      */
     public function store(Request $request)
     {
+
         $validator = Validator::make($request->all(), [
             'title' => 'required',
             'description' => 'required',
@@ -378,7 +379,7 @@ class AccommodationController extends Controller
 
         $myId = Auth::user()->id;
 
-        if(Auth::user()->roles == 1 || $myId == $getOwnerOfAccommodation || Auth::user()->isActive == 0){
+        if(Auth::user()->roles == 1 || ($myId == $getOwnerOfAccommodation && Auth::user()->isActive != 0)){
             $input = $request->all();
             if(isset($input['address'])){
                 if(!isset($input['longitude']) && !isset($input['latitude'])) {
@@ -432,7 +433,15 @@ class AccommodationController extends Controller
     public function destroy($accommodationId)
     {
         $accommodation = new Accommodation;
-        $accommodation->findOrFail($accommodationId)->delete();
+
+        $getOwnerOfAccommodation = $accommodation->findOrFail($accommodationId)->getUserId();
+        $myId = Auth::user()->id;
+
+        if(Auth::user()->roles == 1 || ($myId == $getOwnerOfAccommodation && Auth::user()->isActive != 0)) {
+            $accommodation->findOrFail($accommodationId)->delete();
+        } else {
+            abort(404);
+        }
 
         return response()->json(null, 204);
     }

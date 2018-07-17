@@ -357,7 +357,7 @@ class MissionController extends Controller
                 ->where('user', '=', $idUser)
                 ->where('status', '=', -1)
                 ->count() > 0 ){
-            return response()->json("The host reject your candidate you can't apply one more time!", 500);
+            return response()->json("The host reject your candidacy you can't apply one more time!", 500);
         }
 
         if ($candidate->where('mission_id', '=', $missionId)

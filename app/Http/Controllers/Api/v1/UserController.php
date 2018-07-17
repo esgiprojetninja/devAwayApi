@@ -250,40 +250,45 @@ class UserController extends Controller
      */
     public function update(Request $request, $userId)
     {
-
-        $input = $request->all();
-        if(isset($input['password'])){
-            $validator = Validator::make($input, [
-                'password' => 'required',
-                'c_password' => 'required|same:password',
-            ]);
-
-            if ($validator->fails()) {
-                return response()->json(['error'=>$validator->errors()], 401);
-            }
-            $input['password'] = bcrypt($input['password']);
-        }
-
         $user = new User;
-        $user = $user->with('accommodations')->findOrFail($userId);
 
+        $myId = Auth::user()->id;
 
-        if($request->hasFile('avatar')){
-            $file = $request->file('avatar');
-            $extension = $file->getClientOriginalExtension();
-            $extensionAllowed = ["png", "jpg", "jpeg"];
-            if(!in_array($extension,$extensionAllowed)) {
-                return response()->json(['error'=>"Your file extension is not allowed, only JPEG, JPG and PNG."], 401);
+        if(Auth::user()->roles == 1 || ($myId == $userId && Auth::user()->isActive != 0)) {
+            $input = $request->all();
+            if (isset($input['password'])) {
+                $validator = Validator::make($input, [
+                    'password' => 'required',
+                    'c_password' => 'required|same:password',
+                ]);
+
+                if ($validator->fails()) {
+                    return response()->json(['error' => $validator->errors()], 401);
+                }
+                $input['password'] = bcrypt($input['password']);
             }
-            $imagedata = file_get_contents($file);
-            $base64 = base64_encode($imagedata);
-            $input['avatar'] = $base64;
+
+            $user = $user->with('accommodations')->findOrFail($userId);
+
+
+            if ($request->hasFile('avatar')) {
+                $file = $request->file('avatar');
+                $extension = $file->getClientOriginalExtension();
+                $extensionAllowed = ["png", "jpg", "jpeg"];
+                if (!in_array($extension, $extensionAllowed)) {
+                    return response()->json(['error' => "Your file extension is not allowed, only JPEG, JPG and PNG."], 401);
+                }
+                $imagedata = file_get_contents($file);
+                $base64 = base64_encode($imagedata);
+                $input['avatar'] = $base64;
+            }
+
+
+            $user->update($input);
+
+            return $user;
         }
-
-
-        $user->update($input);
-
-        return $user;
+        abort(404);
     }
 
     /**
@@ -310,9 +315,15 @@ class UserController extends Controller
     public function destroy($userId)
     {
         $user = new User;
-        $user->findOrFail($userId)->delete();
 
-        return response()->json(null, 204);
+        $myId = Auth::user()->id;
+
+        if(Auth::user()->roles == 1 || ($myId == $userId && Auth::user()->isActive != 0)) {
+            $user->findOrFail($userId)->delete();
+
+            return response()->json(null, 204);
+        }
+        abort(404);
     }
 
     /**

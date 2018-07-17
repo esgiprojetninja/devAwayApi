@@ -9,6 +9,7 @@ class Accommodation extends Model
 
     protected $table = "accommodation";
 
+
     /**
      * The attributes that are mass assignable.
      *

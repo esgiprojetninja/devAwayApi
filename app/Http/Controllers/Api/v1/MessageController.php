@@ -124,10 +124,18 @@ class MessageController extends Controller
     public function update(Request $request, $messageId)
     {
         $message = new Message;
-        $message = $message->findOrFail($messageId);
-        $message->update($request->all());
 
-        return $message;
+        $myId = Auth::user()->id;
+
+        if(Auth::user()->roles == 1 || (Auth::user()->isActive != 0 && $message->where('id', '=', $messageId)->where(function($q) use ($myId){$q->where('from', '=', $myId)->orWhere('to', '=', $myId);})->count() >0)){
+            $message = $message->findOrFail($messageId);
+            $message->update($request->all());
+
+            return $message;
+        }
+
+        abort(404);
+
     }
 
     /**
@@ -154,9 +162,16 @@ class MessageController extends Controller
     public function destroy($messageId)
     {
         $message = new Message;
-        $message->findOrFail($messageId)->delete();
 
-        return response()->json(null, 204);
+        $myId = Auth::user()->id;
+
+        if(Auth::user()->roles == 1 || (Auth::user()->isActive != 0 && $message->where('id', '=', $messageId)->where(function($q) use ($myId){$q->where('from', '=', $myId)->orWhere('to', '=', $myId);})->count() >0)){
+            $message->findOrFail($messageId)->delete();
+
+            return response()->json(null, 204);
+        }
+
+        abort(404);
     }
 
     /**

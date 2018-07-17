@@ -148,6 +148,8 @@ return [
         Illuminate\View\ViewServiceProvider::class,
         Laravel\Passport\PassportServiceProvider::class,
 
+        Dwij\Laraadmin\LAProvider::class,
+
         /*
          * Package Service Providers...
          */
