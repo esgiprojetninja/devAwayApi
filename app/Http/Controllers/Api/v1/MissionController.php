@@ -534,9 +534,7 @@ class MissionController extends Controller
         }
 
 
-        return response()->json(Mission::with(['accommodation', 'travellers', 'travellers.user', 'accommodation.host', 'accommodation.pictures'=>function($query) {
-            return $query->limit(1);
-        }, 'pictures'])->whereIn('id', $idMissionsImIn)->get(), 200);
+        return response()->json(Mission::with(['accommodation.host'])->whereIn('id', $idMissionsImIn)->get(), 200);
     }
 
     public function getMyMissionsOwned()
@@ -555,9 +553,7 @@ class MissionController extends Controller
             }
         }
 
-        return response()->json(Mission::with(['accommodation', 'travellers', 'travellers.user', 'accommodation.host', 'accommodation.pictures'=>function($query) {
-            return $query->limit(1);
-        }, 'pictures'])->whereIn('id', $missionsIOwnId)->get(), 200);
+        return response()->json(Mission::with(['travellers', 'travellers.user'])->whereIn('id', $missionsIOwnId)->get(), 200);
     }
 
 }
