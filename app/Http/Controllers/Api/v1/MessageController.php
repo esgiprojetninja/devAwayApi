@@ -60,7 +60,6 @@ class MessageController extends Controller
     public function store(Request $request)
     {
         $message = new Message;
-        return $message->create($request->all());
 
         $validator = Validator::make($request->all(), [
             'content' => 'required',
@@ -72,11 +71,12 @@ class MessageController extends Controller
         }
 
         $input = $request->all();
-        $input['from'] = Auth::user()->id;
+        $idUser = Auth::user()->id;
+        $input['from'] = $idUser;
 
         $message = Message::create($input);
 
-        return response()->json($message, 200);
+        return response()->json($this->getMyDiscutionWith($request->to), 200);
     }
 
     /**
