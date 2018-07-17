@@ -175,14 +175,14 @@ class AccommodationController extends Controller
      *     @SWG\Parameter(
      *       name="checkinHour",
      *       in="query",
-     *       type="string"
-     * description="DATE TIME"
+     *       type="string",
+     *       description="DATE TIME"
      *     ),
      *     @SWG\Parameter(
      *       name="checkoutHour",
      *       in="query",
      *       type="string",
-     *     description="DATE TIME"
+     *       description="DATE TIME"
      *     ),
      *     @SWG\Response(response="201", description="Create one accommodation"),
      * )
