@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Message;
 use Illuminate\Support\Facades\DB;
 use Validator;
+use App\User;
 
 class MessageController extends Controller
 {
@@ -205,17 +206,20 @@ class MessageController extends Controller
     {
         $message = new Message;
         $myId = Auth::user()->id;
-        return $message->where(function($q) use ($myId, $idUser) {
-                            $q->where('from', $myId)
-                                ->where('to', $idUser);
+        $return = [];
+        $return['messages'] = $message->where(function($q) use ($myId, $idUser) {
+                        $q->where('from', $myId)
+                            ->where('to', $idUser);
+                    })
+                        ->orWhere(function($q) use ($myId, $idUser) {
+                            $q->where('from', $idUser)
+                                ->where('to', $myId);
                         })
-                       ->orWhere(function($q) use ($myId, $idUser) {
-                           $q->where('from', $idUser)
-                               ->where('to', $myId);
-                       })
-                       ->with(['from', 'to'])
-                       ->orderBy('created_at')
-                       ->get();
+                        ->orderBy('created_at')
+                        ->get();
+        $idUsers = [$myId, $idUser];
+        $return['users'] = User::whereIn('id', $idUsers)->get();
+        return $return;
     }
 
 }
