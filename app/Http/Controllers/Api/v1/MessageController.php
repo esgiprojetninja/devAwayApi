@@ -32,7 +32,7 @@ class MessageController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Store a new message
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
