@@ -402,7 +402,7 @@ class AccommodationController extends Controller
      * @param  int  $accommodationId
      * @return \Illuminate\Http\Response
      *
-     * @SWG\DELETE(
+     * @SWG\Delete(
      *     path="/api/v1/accommodations/{id}",
      *     tags={"Accommodation"},
      *     security={ {"passport": {} } },
