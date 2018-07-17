@@ -530,7 +530,7 @@ class MissionController extends Controller
         $accommodation = new Accommodation();
         $mission = new Mission();
 
-        $candidate = $candidate->where('user', '=', $idUser)->get();
+        $candidate = $candidate->where('user', '=', $idUser)->where('status', '>=', 0)->get();
         $idUserHost = [];
 
         foreach($candidate as $oneCandidate){
