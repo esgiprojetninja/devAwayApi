@@ -207,7 +207,7 @@ class MessageController extends Controller
             ->orWhere('to', Auth::user()->id)
             ->with(['from', 'to'])
             ->groupBy(['from', 'to'])
-            ->orderBy('created_at', 'DESC')
+            ->orderBy('created_at', 'ASC')
             ->get();
     }
 
