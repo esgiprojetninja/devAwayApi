@@ -16,8 +16,8 @@ class PictureMissionController extends Controller
      * @return \Illuminate\Http\Response
      *
      * @SWG\Get(
-     *     path="/api/v1/pictures",
-     *     tags={"picture"},
+     *     path="/api/v1/pictures/missions",
+     *     tags={"picture mission"},
      *     security={ {"passport": {} } },
      *     summary="Get all pictures",
      *     @SWG\Response(response="200", description="Get all pictures"),
@@ -36,8 +36,8 @@ class PictureMissionController extends Controller
      * @return \Illuminate\Http\Response
      *
      * @SWG\Post(
-     *     path="/api/v1/pictures",
-     *     tags={"picture"},
+     *     path="/api/v1/pictures/missions",
+     *     tags={"picture mission"},
      *     security={ {"passport": {} } },
      *     summary="Create one picture",
      *     @SWG\Parameter(
@@ -69,8 +69,8 @@ class PictureMissionController extends Controller
      * @return \Illuminate\Http\Response
      *
      * @SWG\Get(
-     *     path="/api/v1/pictures/{id}",
-     *     tags={"picture"},
+     *     path="/api/v1/pictures/missions/{id}",
+     *     tags={"picture mission"},
      *     security={ {"passport": {} } },
      *     summary="Get one picture by id",
      *     @SWG\Parameter(
@@ -97,8 +97,8 @@ class PictureMissionController extends Controller
      * @return \Illuminate\Http\Response
      *
      * @SWG\Put(
-     *     path="/api/v1/pictures/{id}",
-     *     tags={"picture"},
+     *     path="/api/v1/pictures/missions/{id}",
+     *     tags={"picture mission"},
      *     security={ {"passport": {} } },
      *     summary="Update one picture by id",
      *     @SWG\Parameter(
@@ -158,8 +158,8 @@ class PictureMissionController extends Controller
      * @return \Illuminate\Http\Response
      *
      * @SWG\Delete(
-     *     path="/api/v1/pictures/{id}",
-     *     tags={"picture"},
+     *     path="/api/v1/pictures/missions/{id}",
+     *     tags={"picture mission"},
      *     security={ {"passport": {} } },
      *     summary="Delete one picture by id",
      *     @SWG\Parameter(
