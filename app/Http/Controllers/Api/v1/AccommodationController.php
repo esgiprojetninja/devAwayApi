@@ -61,11 +61,13 @@ class AccommodationController extends Controller
      *     ),
      *     @SWG\Parameter(
      *       in="query",
+     *      name="country",
      *       required=true,
      *       type="string"
      *     ),
      *     @SWG\Parameter(
      *       in="query",
+     *     name="city"
      *       required=true,
      *       type="string"
      *     ),
