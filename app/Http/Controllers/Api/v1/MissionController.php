@@ -21,7 +21,7 @@ class MissionController extends Controller
      *
      * @return \Illuminate\Http\Response
      *
-     * @SWG\GET(
+     * @SWG\Get(
      *     path="/api/v1/missions",
      *     tags={"Mission"},
      *     security={ {"passport": {} } },
@@ -43,7 +43,7 @@ class MissionController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      *
-     * @SWG\POST(
+     * @SWG\Post(
      *     path="/api/v1/missions",
      *     tags={"Mission"},
      *     security={ {"passport": {} } },
@@ -162,7 +162,7 @@ class MissionController extends Controller
      * @param  int  $missionId
      * @return \Illuminate\Http\Response
      *
-     * @SWG\GET(
+     * @SWG\Get(
      *     path="/api/v1/missions/{id}",
      *     tags={"Mission"},
      *     security={ {"passport": {} } },
@@ -192,7 +192,7 @@ class MissionController extends Controller
      * @param  int  $missionId
      * @return \Illuminate\Http\Response
      *
-     * @SWG\PUT(
+     * @SWG\Put(
      *     path="/api/v1/missions/{id}",
      *     tags={"Mission"},
      *     security={ {"passport": {} } },
@@ -310,7 +310,7 @@ class MissionController extends Controller
      * @param  int  $missionId
      * @return \Illuminate\Http\Response
      *
-     * @SWG\DELETE(
+     * @SWG\Delete(
      *     path="/api/v1/missions/{id}",
      *     tags={"Mission"},
      *     security={ {"passport": {} } },

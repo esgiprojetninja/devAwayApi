@@ -18,7 +18,7 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      *
-     * @SWG\GET(
+     * @SWG\Get(
      *     path="/api/v1/users",
      *     tags={"User"},
      *     security={ {"passport": {} } },
@@ -38,7 +38,7 @@ class UserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      *
-     * @SWG\POST(
+     * @SWG\Post(
      *     path="/api/v1/users",
      *     tags={"User"},
      *     security={ {"passport": {} } },
@@ -138,7 +138,7 @@ class UserController extends Controller
      * @param  int  $userId
      * @return \Illuminate\Http\Response
      *
-     * @SWG\GET(
+     * @SWG\Get(
      *     path="/api/v1/users/{id}",
      *     tags={"User"},
      *     security={ {"passport": {} } },
@@ -292,7 +292,7 @@ class UserController extends Controller
      * @param  int  $userId
      * @return \Illuminate\Http\Response
      *
-     * @SWG\DELETE(
+     * @SWG\Delete(
      *     path="/api/v1/users/{id}",
      *     tags={"User"},
      *     security={ {"passport": {} } },
@@ -321,7 +321,7 @@ class UserController extends Controller
      * @param  int  $userId
      * @return \Illuminate\Http\Response
      *
-     * @SWG\GET(
+     * @SWG\Get(
      *     path="/api/v1/users/{id}/accommodations",
      *     tags={"User"},
      *     security={ {"passport": {} } },

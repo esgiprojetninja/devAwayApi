@@ -15,7 +15,7 @@ class CandidateController extends Controller
      *
      * @return \Illuminate\Http\Response
      *
-     * @SWG\GET(
+     * @SWG\Get(
      *     path="/api/v1/candidates",
      *     tags={"Candidate"},
      *     security={ {"passport": {} } },
@@ -40,7 +40,7 @@ class CandidateController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      *
-     * @SWG\POST(
+     * @SWG\Post(
      *     path="/api/v1/candidates",
      *     tags={"Candidate"},
      *     security={ {"passport": {} } },
@@ -87,7 +87,7 @@ class CandidateController extends Controller
      * @param  int  $candidateId
      * @return \Illuminate\Http\Response
      *
-     * @SWG\GET(
+     * @SWG\Get(
      *     path="/api/v1/candidates/{id}",
      *     tags={"Candidate"},
      *     security={ {"passport": {} } },
@@ -121,7 +121,7 @@ class CandidateController extends Controller
      * @param  int  $candidateId
      * @return \Illuminate\Http\Response
      *
-     * @SWG\PUT(
+     * @SWG\Put(
      *     path="/api/v1/candidates/{id}",
      *     tags={"Candidate"},
      *     security={ {"passport": {} } },
@@ -184,7 +184,7 @@ class CandidateController extends Controller
      * @param  int  $candidateId
      * @return \Illuminate\Http\Response
      *
-     * @SWG\DELETE(
+     * @SWG\Delete(
      *     path="/api/v1/candidates/{id}",
      *     tags={"Candidate"},
      *     security={ {"passport": {} } },

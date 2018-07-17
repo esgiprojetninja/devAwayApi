@@ -17,7 +17,7 @@ class MessageController extends Controller
      *
      * @return \Illuminate\Http\Response
      *
-     * @SWG\GET(
+     * @SWG\Get(
      *     path="/api/v1/messages",
      *     tags={"Message"},
      *     security={ {"passport": {} } },
@@ -37,7 +37,7 @@ class MessageController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      *
-     * @SWG\POST(
+     * @SWG\Post(
      *     path="/api/v1/messages",
      *     tags={"Message"},
      *     security={ {"passport": {} } },
@@ -85,7 +85,7 @@ class MessageController extends Controller
      * @param  int  $messageId
      * @return \Illuminate\Http\Response
      *
-     * @SWG\GET(
+     * @SWG\Get(
      *     path="/api/v1/messages/{id}",
      *     tags={"Message"},
      *     security={ {"passport": {} } },
@@ -113,7 +113,7 @@ class MessageController extends Controller
      * @param  int  $messageId
      * @return \Illuminate\Http\Response
      *
-     * @SWG\PUT(
+     * @SWG\Put(
      *     path="/api/v1/messages/{id}",
      *     tags={"Message"},
      *     security={ {"passport": {} } },
@@ -135,7 +135,7 @@ class MessageController extends Controller
      * @param  int  $messageId
      * @return \Illuminate\Http\Response
      *
-     * @SWG\DELETE(
+     * @SWG\Delete(
      *     path="/api/v1/messages/{id}",
      *     tags={"Message"},
      *     security={ {"passport": {} } },
@@ -163,7 +163,7 @@ class MessageController extends Controller
      *
      * @return \Illuminate\Http\Response
      *
-     * @SWG\GET(
+     * @SWG\Get(
      *     path="/api/v1/messages/me/latest",
      *     tags={"Message"},
      *     security={ {"passport": {} } },
@@ -193,7 +193,7 @@ class MessageController extends Controller
      *
      * @return \Illuminate\Http\Response
      *
-     * @SWG\GET(
+     * @SWG\Get(
      *     path="/api/v1/messages/me/with/{idUser]",
      *     tags={"Message"},
      *     security={ {"passport": {} } },

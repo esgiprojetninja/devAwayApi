@@ -240,7 +240,7 @@ class AccommodationController extends Controller
      * @param  int  $accommodationId
      * @return \Illuminate\Http\Response
      *
-     * @SWG\PUT(
+     * @SWG\Put(
      *     path="/api/v1/accommodations/{id}",
      *     tags={"Accommodation"},
      *     security={ {"passport": {} } },

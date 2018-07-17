@@ -15,7 +15,7 @@ class PictureMissionController extends Controller
      *
      * @return \Illuminate\Http\Response
      *
-     * @SWG\GET(
+     * @SWG\Get(
      *     path="/api/v1/pictures",
      *     tags={"picture"},
      *     security={ {"passport": {} } },
@@ -35,7 +35,7 @@ class PictureMissionController extends Controller
      * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      *
-     * @SWG\POST(
+     * @SWG\Post(
      *     path="/api/v1/pictures",
      *     tags={"picture"},
      *     security={ {"passport": {} } },
@@ -68,7 +68,7 @@ class PictureMissionController extends Controller
      * @param  int $pictureId
      * @return \Illuminate\Http\Response
      *
-     * @SWG\GET(
+     * @SWG\Get(
      *     path="/api/v1/pictures/{id}",
      *     tags={"picture"},
      *     security={ {"passport": {} } },
@@ -96,7 +96,7 @@ class PictureMissionController extends Controller
      * @param  int $pictureId
      * @return \Illuminate\Http\Response
      *
-     * @SWG\PUT(
+     * @SWG\Put(
      *     path="/api/v1/pictures/{id}",
      *     tags={"picture"},
      *     security={ {"passport": {} } },
@@ -157,7 +157,7 @@ class PictureMissionController extends Controller
      * @param  int $pictureId
      * @return \Illuminate\Http\Response
      *
-     * @SWG\DELETE(
+     * @SWG\Delete(
      *     path="/api/v1/pictures/{id}",
      *     tags={"picture"},
      *     security={ {"passport": {} } },
