@@ -39,6 +39,7 @@ Route::group(['middleware' => ['api', 'auth:api'], 'prefix' => '/v1'], function 
     Route::resource('messages', 'Api\v1\MessageController');
     Route::get('messages/me/latest', 'Api\v1\MessageController@getMyMessages');
     Route::get('messages/me/with/{idUser}', 'Api\v1\MessageController@getMyDiscutionWith');
+    Route::get('messages/me/with/{idUser}/latest', 'Api\v1\MessageController@getLastMessageInDiscution');
 
     //MISSIONS
     Route::post('missions', 'Api\v1\MissionController@store');

@@ -244,4 +244,25 @@ class MessageController extends Controller
         return $return;
     }
 
+    public function getLastMessageInDiscution($idUser)
+    {
+        $message = new Message;
+        $myId = Auth::user()->id;
+        $return = [];
+        $return['messages'] = $message->where(function($q) use ($myId, $idUser) {
+            $q->where('from', $myId)
+                ->where('to', $idUser);
+        })
+            ->orWhere(function($q) use ($myId, $idUser) {
+                $q->where('from', $idUser)
+                    ->where('to', $myId);
+            })
+            ->orderBy('created_at', 'DESC')
+            ->limit(1)
+            ->get();
+        $idUsers = [$myId, $idUser];
+        $return['users'] = User::whereIn('id', $idUsers)->get();
+        return $return;
+    }
+
 }
