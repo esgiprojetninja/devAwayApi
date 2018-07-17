@@ -4130,5 +4130,6 @@ MYmepbudxMysC5Tv8QqUMpeNzbrinFRDqIl+oEMJ5ZT1GJpRSGbgA0gPqNpXbP/Z
         factory(App\Message::class, 100)->create();
         factory(App\PictureAccommodation::class, 10)->create();
         factory(App\PictureMission::class, 10)->create();
+
     }
 }

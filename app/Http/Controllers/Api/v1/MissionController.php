@@ -520,4 +520,23 @@ class MissionController extends Controller
 
         return response()->json(null, 500);
     }
+
+    public function getMyMissions()
+    {
+        $idUser = Auth::user()->id;
+        $candidate = new Candidate();
+
+        $candidate = $candidate->where('user', '=', $idUser)->get();
+        $idMissionsImIn = [];
+
+        foreach($candidate as $oneCandidate){
+            $idMissionsImIn[] = $oneCandidate->mission_id;
+        }
+
+
+        return response()->json(Mission::with(['accommodation', 'travellers', 'travellers.user', 'accommodation.host', 'accommodation.pictures'=>function($query) {
+            return $query->limit(1);
+        }, 'pictures'])->whereIn('id', $idMissionsImIn)->get(), 200);
+    }
+
 }
