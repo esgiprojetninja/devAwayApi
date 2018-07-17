@@ -10,6 +10,8 @@ use App\Message;
 use Illuminate\Support\Facades\DB;
 use Validator;
 use App\User;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\EmailMessage;
 
 class MessageController extends Controller
 {
@@ -76,6 +78,11 @@ class MessageController extends Controller
         $input['from'] = $idUser;
 
         $message = Message::create($input);
+
+        $user = new User();
+        $user = $user->findOrFail($request->to);
+
+        Mail::to($user->getEmail())->send(new EmailMessage($user));
 
         return response()->json($this->getMyDiscutionWith($request->to), 200);
     }
@@ -200,7 +207,7 @@ class MessageController extends Controller
             ->orWhere('to', Auth::user()->id)
             ->with(['from', 'to'])
             ->groupBy(['from', 'to'])
-            ->orderBy('created_at')
+            ->orderBy('created_at', 'DESC')
             ->get();
     }
 

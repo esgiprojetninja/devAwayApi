@@ -53,6 +53,10 @@ class User extends Authenticatable
         return $this->roles;
     }
 
+    public function getEmail() {
+        return $this->email;
+    }
+
     public function setEmailVerified($bool)
     {
         $this->emailVerified = $bool;
