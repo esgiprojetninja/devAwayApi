@@ -156,12 +156,7 @@ class UserController extends Controller
     public function show($userId)
     {
         $user = new User;
-        if (Auth::user()->id == $userId || Auth::user()->roles == 1){
-            return  $user->findOrFail($userId);
-        } else {
-            return $user->select("userName")->where('id', $userId)->get();
-        }
-        return response()->json(null, 404);
+        return  $user->findOrFail($userId);
     }
 
     /**
