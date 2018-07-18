@@ -26,7 +26,7 @@ class CreateUserTable extends Migration
             $table->longText('skills')->nullable();
             $table->boolean('isActive')->default(1);
             $table->boolean('addressVerified')->default(0);
-            $table->boolean('emailVerified')->default(0);
+            $table->boolean('emailVerified')->default(1);
             $table->string('emailVerifiedToken');
             $table->tinyInteger('roles')->default(0);
             $table->longText('avatar');

@@ -72,13 +72,16 @@ class PassportController extends Controller
 
         $input = $request->all();
         $input['password'] = bcrypt($input['password']);
-        $input['emailVerifiedToken'] = str_random(60);
+       // $input['emailVerifiedToken'] = str_random(60);
 
         $user = User::create($input);
+
+        //Mail::to($input['email'])->send(new EmailValidation($user));
+        //Mail::to("lambot.rom@gmail.com")->send(new EmailValidation($user));
+
         $success['token'] =  $user->createToken('MyApp')->accessToken;
         $success['userName'] =  $user->userName;
 
-        Mail::to($input['email'])->send(new EmailValidation($user));
 
         return response()->json(['success'=>$success], 200);
     }

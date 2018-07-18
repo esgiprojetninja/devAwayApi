@@ -82,7 +82,7 @@ class MessageController extends Controller
         $user = new User();
         $user = $user->findOrFail($request->to);
 
-        Mail::to($user->getEmail())->send(new EmailMessage($user));
+//        Mail::to($user->getEmail())->send(new EmailMessage($user));
 
         return response()->json($this->getMyDiscutionWith($request->to), 200);
     }
@@ -196,9 +196,9 @@ class MessageController extends Controller
      */
     public function getMyMessages()
     {
-        $return= [];
-        $return['myId'] = Auth::user()->id;
-        $return['messages'] = $messages = Message::select()
+        //$return= [];
+        //$return['myId'] = Auth::user()->id;
+        return $messages = Message::select()
             ->from('message As S')
             ->whereRaw('Not Exists (
                     Select 1
@@ -211,7 +211,6 @@ class MessageController extends Controller
             ->groupBy(['from', 'to'])
             ->orderBy('created_at', 'ASC')
             ->get();
-        return $return;
     }
 
     /**
