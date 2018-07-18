@@ -196,7 +196,9 @@ class MessageController extends Controller
      */
     public function getMyMessages()
     {
-        return $messages = Message::select()
+        $return= [];
+        $return['myId'] = Auth::user()->id;
+        $return['messages'] = $messages = Message::select()
             ->from('message As S')
             ->whereRaw('Not Exists (
                     Select 1
@@ -209,6 +211,7 @@ class MessageController extends Controller
             ->groupBy(['from', 'to'])
             ->orderBy('created_at', 'ASC')
             ->get();
+        return $return;
     }
 
     /**
