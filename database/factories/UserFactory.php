@@ -15,16 +15,24 @@ use Carbon\Carbon;
 */
 
 $factory->define(App\User::class, function (Faker $faker) {
+    $imagedata = file_get_contents($faker->imageUrl());
+    $base64 = base64_encode($imagedata);
     return [
-        'username' => $faker->unique()->userName,
+        'userName' => $faker->unique()->userName,
         'email' => $faker->unique()->safeEmail,
         'password' => password_hash($faker->text, PASSWORD_BCRYPT),
         'firstName' => $faker->firstName,
         'lastName' => $faker->lastName,
-        'languages' => $faker->text,
-        'skills' => $faker->text,
+        'city' => $faker->city,
+        'country' => $faker->country,
+        'languages' => $faker->text(40),
+        'skills' => $faker->text(40),
         'isActive' => $faker->boolean,
+        'addressVerified' => $faker->boolean,
+        'emailVerified' => $faker->boolean,
         'remember_token' => str_random(10),
-        'created_at' => Carbon::now()->format('Y-m-d H:i:s')
+        'roles' => $faker->numberBetween(0,1),
+        'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+        'avatar' => $base64
     ];
 });

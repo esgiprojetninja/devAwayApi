@@ -16,8 +16,6 @@ class Mission extends Model
      */
     protected $fillable = [
         'id',
-        'accommodation',
-        'traveller',
         'checkinDate',
         'checkoutDate',
         'checkinHour',
@@ -28,11 +26,46 @@ class Mission extends Model
         'nbPersons',
         'isBooked',
         'description',
-        'isActive'
+        'isActive',
+        'title',
+        'accommodation_id'
     ];
 
     public function getId() {
         return $this->id;
+    }
+
+    public function getIsBooked() {
+        return $this->isBooked;
+    }
+
+    public function getIsActive() {
+        return $this->isActive;
+    }
+
+    public function setIsBooked($isBooked) {
+        $this->isBooked = $isBooked;
+    }
+    public function setIsActive($isActive) {
+        $this->isActive = $isActive;
+    }
+
+    public function travellers() {
+        return $this->hasMany('App\Candidate');
+    }
+
+    public function accommodation() {
+        return $this->belongsTo('App\Accommodation', 'accommodation_id', 'id');
+    }
+
+    public function candidate()
+    {
+        return $this->hasOne('App\Candidate');
+    }
+
+    public function pictures()
+    {
+        return $this->hasMany('App\PictureMission');
     }
 
 }

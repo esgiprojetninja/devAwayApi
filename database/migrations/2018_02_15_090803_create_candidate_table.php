@@ -17,7 +17,7 @@ class CreateCandidateTable extends Migration
             $table->increments('id');
             $table->dateTime('fromDate');
             $table->dateTime('toDate');
-            $table->tinyInteger('status');
+            $table->tinyInteger('status')->default(2);
             $table->timestamps();
         });
     }

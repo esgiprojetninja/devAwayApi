@@ -17,16 +17,13 @@ use Carbon\Carbon;
 $factory->define(App\Accommodation::class, function (Faker $faker) {
     $users = \App\User::all();
     $user = $users[rand(0, count($users)-1)]->getId();
-    $pictures = \App\Picture::all();
-    $picture = $pictures[rand(0, count($pictures)-1)]->getId();
     return [
         'title' => $faker->catchPhrase(),
         'description' => $faker->text,
         'city' => $faker->city,
-        'host' => $user,
-        'pictures' => $picture,
+        'user_id' => $user,
         'country' => $faker->country,
-        'region' => $faker->text,
+        'region' => $faker->text(40),
         'address' => $faker->address,
         'longitude' => $faker->longitude,
         'latitude' => $faker->latitude,
@@ -44,7 +41,7 @@ $factory->define(App\Accommodation::class, function (Faker $faker) {
         'floor' => $faker->numberBetween(1,5),
         'minStay' => $faker->numberBetween(1,7),
         'maxStay' => $faker->numberBetween(7,14),
-        'type' => $faker->text,
+        'type' => $faker->text(40),
         'checkinHour' => $faker->datetime,
         'checkoutHour' => $faker->datetime,
         'created_at' => Carbon::now()->format('Y-m-d H:i:s')

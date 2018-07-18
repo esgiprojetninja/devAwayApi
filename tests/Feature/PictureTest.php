@@ -4,11 +4,12 @@ namespace Tests\Feature;
 
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Foundation\Testing\WithoutMiddleware;
 
 class PictureTest extends TestCase
 {
 
-    use RefreshDatabase;
+    use WithoutMiddleware, RefreshDatabase;
 
     /**
      * Test if insert picture is working.
@@ -17,7 +18,10 @@ class PictureTest extends TestCase
      */
     public function testPictureInsertSuccess()
     {
-        $this->post("/api/v1/pictures", ['url' => 'testingUrl'])
+
+        $accommodation = factory(\App\Accommodation::class)->make();
+
+        $this->post("/api/v1/pictures", ['url' => 'testingUrl', "accommodation_id" => 1])
              ->assertStatus(201);
     }
 
@@ -39,7 +43,7 @@ class PictureTest extends TestCase
      */
     public function testPictureGetAllSuccess()
     {
-        factory(\App\Picture::class, 2)->create();
+        factory(\App\PictureAccommodation::class, 2)->create();
 
         $response = $this->json('GET', '/api/v1/pictures');
 
@@ -58,7 +62,7 @@ class PictureTest extends TestCase
      */
     public function testPictureGetByIdSuccess()
     {
-        factory(\App\Picture::class)->create();
+        factory(\App\PictureAccommodation::class)->create();
 
         $response = $this->json('GET', '/api/v1/pictures/4');
 
@@ -90,7 +94,7 @@ class PictureTest extends TestCase
      */
     public function testPictureDeleteSuccess()
     {
-        factory(\App\Picture::class)->create();
+        factory(\App\PictureAccommodation::class)->create();
 
         $this->delete("/api/v1/pictures/5")
             ->assertStatus(204);
@@ -103,7 +107,7 @@ class PictureTest extends TestCase
      */
     public function testPictureDeleteError()
     {
-        factory(\App\Picture::class)->create();
+        factory(\App\PictureAccommodation::class)->create();
 
         $this->delete("/api/v1/pictures/7")
             ->assertStatus(404);
@@ -116,7 +120,7 @@ class PictureTest extends TestCase
      */
     public function testPictureUpdateSuccess()
     {
-        factory(\App\Picture::class)->create();
+        factory(\App\PictureAccommodation::class)->create();
 
         $this->put("/api/v1/pictures/7", ["url" => "myNewUrl"])
              ->assertStatus(200)
@@ -135,7 +139,7 @@ class PictureTest extends TestCase
      */
     public function testPictureUpdateError()
     {
-        factory(\App\Picture::class)->create();
+        factory(\App\PictureAccommodation::class)->create();
 
         $this->put("/api/v1/pictures/9", ["url" => "myNewUrl"])
             ->assertStatus(404);

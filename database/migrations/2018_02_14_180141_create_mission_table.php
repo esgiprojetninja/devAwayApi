@@ -26,6 +26,7 @@ class CreateMissionTable extends Migration
             $table->boolean('isBooked');
             $table->text('description');
             $table->boolean('isActive');
+            $table->string('title');
             $table->timestamps();
         });
     }

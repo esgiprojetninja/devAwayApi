@@ -9,6 +9,7 @@ class Accommodation extends Model
 
     protected $table = "accommodation";
 
+
     /**
      * The attributes that are mass assignable.
      *
@@ -24,8 +25,6 @@ class Accommodation extends Model
         'address',
         'longitude',
         'latitude',
-        'pictures',
-        'host',
         'nbBedroom',
         'nbBathroom',
         'nbToilet',
@@ -42,11 +41,32 @@ class Accommodation extends Model
         'maxStay',
         'type',
         'checkinHour',
-        'checkoutHour'
+        'checkoutHour',
+        'user_id'
     ];
 
     public function getId() {
         return $this->id;
     }
 
+    public function getUserId() {
+        return $this->user_id;
+    }
+
+    /**
+     * Get all of the posts for the country.
+     */
+    public function pictures()
+    {
+        return $this->hasMany('App\PictureAccommodation');
+    }
+
+    public function host() {
+        return $this->belongsTo('App\User', 'user_id', 'id');
+    }
+
+    public function missions()
+    {
+        return $this->hasMany('App\Mission');
+    }
 }

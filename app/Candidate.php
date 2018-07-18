@@ -17,7 +17,7 @@ class Candidate extends Model
     protected $fillable = [
         'id',
         'user',
-        'accommodation',
+        'mission_id',
         'fromDate',
         'toDate',
         'status'
@@ -27,4 +27,41 @@ class Candidate extends Model
         return $this->id;
     }
 
+    public function setUser($user)
+    {
+        $this->user = $user;
+    }
+
+    public function setMissionId($mission)
+    {
+        $this->mission_id = $mission;
+    }
+
+    public function setStatus($status)
+    {
+        $this->status = $status;
+    }
+
+    public function getStatus()
+    {
+        return $this->status;
+    }
+
+    public function setFromDate($fromDate)
+    {
+        $this->fromDate = $fromDate;
+    }
+
+    public function setToDate($toDate)
+    {
+        $this->toDate = $toDate;
+    }
+
+    public function user() {
+        return $this->belongsTo('App\User', 'user', 'id');
+    }
+
+    public function missions() {
+        return $this->belongsTo('App\Mission', 'mission_id', 'id');
+    }
 }

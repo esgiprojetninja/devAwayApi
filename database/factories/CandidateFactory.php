@@ -17,13 +17,13 @@ use Carbon\Carbon;
 $factory->define(App\Candidate::class, function (Faker $faker) {
     $users = \App\User::all();
     $user = $users[rand(0, count($users)-1)]->getId();
-    $accommodations = \App\Accommodation::all();
-    $accommodation = $accommodations[rand(0, count($accommodations)-1)]->getId();
+    $missions = \App\Mission::all();
+    $mission = $missions[rand(0, count($missions)-1)]->getId();
     return [
         'status' => $faker->numberBetween(0,2),
         'fromDate' => $faker->dateTime,
         'toDate' => $faker->dateTime,
-        'accommodation' => $accommodation,
+        'mission_id' => $mission,
         'user' => $user,
         'created_at' => Carbon::now()->format('Y-m-d H:i:s')
     ];

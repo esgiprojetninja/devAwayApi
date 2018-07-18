@@ -21,8 +21,6 @@ $factory->define(App\Mission::class, function (Faker $faker) {
         $isActive = false;
         $isBooked = false;
     }
-    $users = \App\User::all();
-    $user = $users[rand(0, count($users)-1)]->getId();
     $accommodations = \App\Accommodation::all();
     $accommodation = $accommodations[rand(0, count($accommodations)-1)]->getId();
     return [
@@ -30,15 +28,15 @@ $factory->define(App\Mission::class, function (Faker $faker) {
         'checkinHour' => $faker->time,
         'checkinDate' => $faker->dateTime,
         'checkoutDate' => $faker->dateTime,
-        'checkinDetails' => $faker->text,
-        'checkoutDetails' => $faker->text,
+        'checkinDetails' => $faker->text(40),
+        'checkoutDetails' => $faker->text(40),
         'nbPersons' => $faker->numberBetween(1,10),
-        'description' => $faker->text,
+        'description' => $faker->text(40),
         'isActive' => $isActive,
         'isBooked' => $isBooked,
-        'traveller' => $user,
-        'accommodation' => $accommodation,
+        'accommodation_id' => $accommodation,
         'nbNights' => $faker->numberBetween(1,14),
+        'title' => $faker->catchPhrase(),
         'created_at' => Carbon::now()->format('Y-m-d H:i:s')
     ];
 });

@@ -14,11 +14,11 @@ class UpdateMessageTable extends Migration
     public function up()
     {
         Schema::table('message', function (Blueprint $table) {
-            $table->integer('candidate')->unsigned()->nullable();
-            $table->foreign('candidate')->references('id')->on('candidate')->onUpdate('cascade')->onDelete('cascade');
+            $table->integer('from')->unsigned()->nullable();
+            $table->foreign('from')->references('id')->on('user')->onUpdate('cascade')->onDelete('cascade');
 
-            $table->integer('accommodation')->unsigned()->nullable();
-            $table->foreign('accommodation')->references('id')->on('accommodation')->onUpdate('cascade')->onDelete('set null');
+            $table->integer('to')->unsigned()->nullable();
+            $table->foreign('to')->references('id')->on('user')->onUpdate('cascade')->onDelete('set null');
         });
     }
 
@@ -29,6 +29,9 @@ class UpdateMessageTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('message');
+        Schema::table('message', function (Blueprint $table) {
+            $table->dropForeign('message_from_foreign');
+            $table->dropForeign('message_to_foreign');
+        });
     }
 }
